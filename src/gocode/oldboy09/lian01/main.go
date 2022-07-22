@@ -27,4 +27,51 @@ func main() {
 	//功能1: 赋予某些普通符号以特殊功能
 	//功能2: 取消某些特殊符号的特殊功能
 
+	//go语言不支持类型暗转换(隐式转换)
+	//fmt.Println("100" > 20)
+
+	//var a int8
+	//a = 127
+	//fmt.Println(a, reflect.TypeOf(a))
+	//
+	//b := int64(a)
+	//fmt.Println(b, reflect.TypeOf(b))
+
+	//var age = 22
+	//fmt.Println(age, reflect.TypeOf(age))
+	////将int类型转为字符串的方法
+	//var ageStr = strconv.Itoa(age)
+	//fmt.Println(ageStr, reflect.TypeOf(ageStr))
+	//
+	////把字符串数字转为int类型
+	//var money = "100"
+	//moneyNum, err := strconv.Atoi(money)
+	//fmt.Println("err: ", err)
+	//fmt.Println("moneyNum: ", moneyNum)
+
+	////把浮点型字符串转为浮点型
+	//var f = "3.1415926"
+	//f2, _ := strconv.ParseFloat(f, 64)
+	//fmt.Println(f2, reflect.TypeOf(f2))
+
+	//取余%
+	//fmt.Println(5 % 3)
+	//
+	//var x = 67
+	//fmt.Println(x%2 == 0)
+
+	////重新赋值内存地址不变,存储的值会重新赋值
+	//var a = 10
+	//fmt.Println(a)
+	//fmt.Println(&a)
+	//a = 100
+	//fmt.Println(&a)
+	//fmt.Println(a)
+
+	////关系运算符
+	//fmt.Println(2 == 2)
+	//fmt.Println(2 <= 3)
+
+	//逻辑运算符
+
 }
