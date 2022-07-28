@@ -190,4 +190,37 @@ func main() {
 	////不包含返回false
 	//fmt.Println(strings.Contains(a2, "beo"))
 
+	//go语言不支持类型暗转换(隐式转换)
+	//fmt.Println("100" > 20)
+
+	//定义变量a 类型为int8
+	//	var a int8
+	//	a = 127
+	//	fmt.Println(a, reflect.TypeOf(a))
+	//	//类型转换type()  例如int64()  float32
+	//	fmt.Println(int64(a), reflect.TypeOf(int64(a)))
+	//	fmt.Println(float32(a), reflect.TypeOf(float32(a)))
+
+	//var a int8
+	//a = 100
+	////字节转为字符,不能直接转为字符串
+	//fmt.Println(string(a), reflect.TypeOf(string(a)))
+	//
+	////数字与字符串之间转换需要借助strconv库
+	////把数字转为字符串
+	//var age = 22
+	//fmt.Println(age, reflect.TypeOf(age))
+	////将int类型转为字符串
+	//var agestr = strconv.Itoa(age)
+	//fmt.Println(agestr, reflect.TypeOf(agestr))
+	////将字符串数字类型转为字符串
+	//var gao = "170"
+	//fmt.Println(gao, reflect.TypeOf(gao))
+	//var gao01, _ = strconv.Atoi(gao)
+	//fmt.Println(gao01, reflect.TypeOf(gao01))
+	//
+	////浮点型字符串转为浮点型
+	//x, _ := strconv.ParseFloat("3.14", 64)
+	//fmt.Println(x, reflect.TypeOf(x))
+
 }
