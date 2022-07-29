@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func main() {
 
 	//var a1 int8 = 128 //int8类型是有符号的,-128到127,会溢出
@@ -222,5 +224,159 @@ func main() {
 	////浮点型字符串转为浮点型
 	//x, _ := strconv.ParseFloat("3.14", 64)
 	//fmt.Println(x, reflect.TypeOf(x))
+
+	////运算符
+	//fmt.Println("取余操作: ", 5%3)
+	//
+	////判断一个整形数字是奇数还是偶数
+	//var x = 67
+	//fmt.Println("偶数为ture 奇数为false")
+	//fmt.Println("判断是奇数还是偶数: ", x%2 == 0)
+	//fmt.Println("判断是奇数还是偶数: ", 20%2 == 0)
+	//
+	////自加操作
+	////var a = 20
+	////a = a + 1
+	////fmt.Println(a)
+	//var a = 20
+	//a++
+	//fmt.Println(a)
+	//
+	//var a1 = 30
+	//a1 += 1
+	//fmt.Println(a1)
+	//
+	////注意:不能写成++a 或 --a 必须放在右边使用
+	//
+	////自减操作
+	////var b = 22
+	////b = b - 1
+	////fmt.Println(b)
+	//
+	//var b = 22
+	//b--
+	//fmt.Println(b)
+	//
+	//var b1 = 32
+	//b1 -= 1
+	//fmt.Println(b1)
+	//
+	////重新赋值内存地址不变,存储的值会重新赋值
+	////&取地址操作符
+	//var c = 10
+	//fmt.Println(c, &c) //10 0x140000aa008
+	//c = 100
+	//fmt.Println(c, &c) //100 0x140000aa008
+
+	////关系运算符  true false
+	//fmt.Println(2 == 2)
+	//fmt.Println(3 >= 1)
+	//fmt.Println(5 != 6)
+	//fmt.Println(7 <= 5)
+
+	////逻辑运算符
+	//fmt.Println(2 >= 1 && 1 == 1)
+	//fmt.Println(2 <= 1 && 1 == 1)
+	//
+	//fmt.Println(2 == 2 || 2 <= 1)
+	//fmt.Println(2 <= 1 || 1 != 1)
+	//
+	////用户名为jieke 或者大于18岁
+	//var name = "jieke"
+	//var age = 16
+	//var ret = name == "jieke" || !(age > 18)
+	//fmt.Println(ret)
+
+	////运算符优先级
+	//var a, b, c, d = 8, 6, 4, 2
+	////先算乘除再算加减
+	//ret := a + b*c/d
+	//fmt.Println(ret)
+	//
+	//x := 10
+	//y := 1
+	////先算括号里的,然后再乘除在加减 ,最后的值 x+= 就是X加上值 所以是26
+	//x += 5*(1+2) + y
+	//fmt.Println(x) //26
+	//
+	//z := 1+2 > 3 || 1 == 1*5
+	//fmt.Println(z)
+
+	//name := "jieke"
+	//age := 24
+	//fmt.Print(name)
+	//fmt.Print(age)
+	//fmt.Println("hello go\n")
+	//fmt.Println(name)
+	//fmt.Println(age)
+
+	//name := "jieke"
+	//age := 24
+	//isMarr := false
+	//salary := 30000.549
+	//fmt.Printf("姓名: %s  年龄: %d   婚否: %t  薪资: %.2f\n", name, age, isMarr, salary)
+	//fmt.Printf("姓名: %v  年龄: %v   婚否: %v  薪资: %v\n", name, age, isMarr, salary)
+	//fmt.Printf("姓名: %#v  年龄: %#v   婚否: %#v  薪资: %#v\n", name, age, isMarr, salary)
+
+	////整形和浮点型
+	//fmt.Printf("%b\n", 12)       //二进制表示:1100
+	//fmt.Printf("%d\n", 12)       //十进制表示:12
+	//fmt.Printf("%o\n", 12)       //八进制表示:14
+	//fmt.Printf("%x\n", 12)       //十六进制表示:c
+	//fmt.Printf("%X\n", 12)       //十六进制表示C
+	//fmt.Printf("%f\n", 3.1415)   //有小数点而无指数: 3.141500
+	//fmt.Printf("%.3f\n", 3.1415) //3.142
+	//fmt.Printf("%e\n", 1000.25)  //科学计数法1.000250e+03,默认精度为6
+	//
+	////设置宽度
+	//fmt.Printf("学号: %s 姓名: %-20s 平均成绩: %-4d\n", "1001", "jieke", 100)
+	//fmt.Printf("学号: %s 姓名: %-20s 平均成绩: %-4d\n", "1002", "dijiaaotemanjiekeaoteman", 98)
+	//fmt.Printf("学号: %s 姓名: %-20s 平均成绩: %-4d\n", "1003", "x", 78)
+
+	//name := "jieke"
+	//age := 22
+	//isMarr := false
+	//salary := 30000.549
+	//info := fmt.Sprintf("姓名: %s 年龄: %d 婚否: %t 薪资: %.2f\n", name, age, isMarr, salary)
+	//fmt.Println(info)
+
+	//Scan
+	//var (
+	//	name   string
+	//	age    int
+	//	isMarr bool
+	//)
+	//fmt.Scan(&name, &age, &isMarr) //输入的类型不一致,按默认值
+	//fmt.Printf("扫描结果 name:%s age:%d marride:%t\t", name, age, isMarr)
+
+	//Scanf
+	//var (10
+	//	name   string
+	//	age    int
+	//	isMarr bool
+	//)
+	//fmt.Scanf("姓名是: %s 年龄是: %d 婚否: %t", &name, &age, &isMarr) //输入的类型不一致,按默认值
+	//fmt.Printf("扫描结果 姓名:%s 年龄:%d 婚否:%t", name, age, isMarr)
+
+	//var a, b int
+	//fmt.Scanf("%d+%d", &a, &b)
+	//fmt.Println(a + b)
+
+	const (
+		n1 = iota //0
+		n2        //1
+		_         //跳过 匿名占位
+		n4        //3
+	)
+	fmt.Println(n1, n2, n4)
+
+	const (
+		a    = iota               //0
+		b                         //1
+		_                         //2  跳过匿名占位
+		c, d = iota + 1, iota + 2 //c =3+1 =4  d= 3+ 2 =5
+		e    = iota               //4
+	)
+	fmt.Println(a, b, c, d, e) //0 1 4 5 4
 
 }

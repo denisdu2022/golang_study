@@ -155,16 +155,25 @@ func main() { //main 主函数 程序的入口
 	//fmt.Println("TB :", TB)
 	//fmt.Println("PB :", PB)
 
-	const (
-		//当iota出现是为0
-		a, b = iota + 1, iota + 2 //1,2  iota为0+1 = 1  iota 为0 +2 =2
-		c, d                      //2,3  第二行,上一行iota已经是1了,所以c是2 ,d是iota 的当前值为+1
-		e, f                      //3,4 第三行,上一行iota已经是2了,所以e是3 ,f是iota 的当前值为+1
-	)
-	fmt.Println(a)
-	fmt.Println(b)
-	fmt.Println(c)
-	fmt.Println(d)
-	fmt.Println(e)
-	fmt.Println(f)
+	//const (
+	//	//当iota出现是为0
+	//	a, b = iota + 1, iota + 2 //1,2  iota为0+1 = 1  iota 为0 +2 =2
+	//	c, d                      //2,3  第二行,上一行iota已经是1了,所以c是2 ,d是iota 的当前值为+1
+	//	e, f                      //3,4 第三行,上一行iota已经是2了,所以e是3 ,f是iota 的当前值为+1
+	//)
+	//fmt.Println(a)
+	//fmt.Println(b)
+	//fmt.Println(c)
+	//fmt.Println(d)
+	//fmt.Println(e)
+	//fmt.Println(f)
+
+	var a = 10
+	var b = 20
+	var t = a
+	a = b
+	b = t
+
+	fmt.Println(a, b)
+
 }
