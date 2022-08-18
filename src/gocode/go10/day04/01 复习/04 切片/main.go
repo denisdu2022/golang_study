@@ -31,9 +31,9 @@ func main() {
 	//var s = []int{10, 11, 12, 13, 14} //底层会创建一个数组,能拿到的是切片
 	//fmt.Println(s)
 	//s1 := s[1:4]
-	//fmt.Println(s1, len(s1), cap(s1)) //3 4
+	//fmt.Println(s1, len(s1), cap(s1)) //[11 12 13]  3 4
 	//
 	//s2 := s1[1:]
-	//fmt.Println(len(s2), cap(s2)) // 2  3
+	//fmt.Println(s2, len(s2), cap(s2)) //[12 13]  2  3
 
 }
