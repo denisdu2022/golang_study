@@ -25,9 +25,9 @@ func main() {
 	////删除key-value
 	//delete(stus, "height")
 	//fmt.Println(stus)  //map[age:22 gender:male name:daernwen]
-
+	//
 	//2. 基于make函数声明初始化  ,make引用类型 ,存储的地址
-
+	//
 	//var stus1 map[string]string
 	//stus1{"name": "daerwen"} //会报错,引用类型,没有默认开辟key-value的空间,nli map
 	//var stu02 = make(map[string]string)
@@ -49,7 +49,7 @@ func main() {
 	//stu03["age"] = 18
 	//var sum = stu03["age"]
 	//fmt.Println(sum, reflect.TypeOf(sum)) //18 int
-
+	//
 	////遍历map
 	////切片的遍历
 	//var s2 = []int{10, 11, 12, 14, 14, 15}
@@ -67,7 +67,7 @@ func main() {
 	//	name daernwen
 	//	age 22
 	//*/
-
+	//
 	////for range 无序打印
 	//newMap := map[int]int{
 	//	1: 1,

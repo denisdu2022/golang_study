@@ -24,7 +24,7 @@ func main() {
 	////修改存的地址里的值
 	//*p = 100
 	//fmt.Println(x)
-
+	//
 	//思考题
 	//var a = 10
 	//var b = a //值拷贝
@@ -46,7 +46,7 @@ func main() {
 	//fmt.Println(a, *b)                  //100 /100
 	//fmt.Println(c)                      //0xc0000160a8
 	//fmt.Println(*c, reflect.TypeOf(*c)) //100 int
-
+	//
 	//指针应用1
 	//var x = 10
 	//var y = x //10
@@ -57,7 +57,7 @@ func main() {
 	//fmt.Println(*z) //20
 	//*z = 30
 	//fmt.Println(x) //30
-
+	//
 	////指针应用2
 	//var x = 10
 	//var y = &x //把x的内存地址赋值给了y ,y是一个指针变量 *int
@@ -69,7 +69,7 @@ func main() {
 	//fmt.Println(z)  //10
 	//*y = 30
 	//fmt.Println(z) //10
-
+	//
 	////指针应用3
 	//var a = 100                    // a int 100
 	//var b = &a                     //把a的内存地址赋值给b  b *int
@@ -79,7 +79,7 @@ func main() {
 	//fmt.Println(a)                 //200
 	//fmt.Println(b)                 //200
 	//fmt.Println(c)                 //200
-
+	//
 	////作业
 	//p1 := 1          //int类型
 	//p2 := &p1        //*int
