@@ -21,16 +21,16 @@ type Cms struct {
 
 var User []Cms
 
-////自增ID函数
-//func ConstId(id int) int {
-//	index := -1
-//	for i := 0; i < len(User); i++ {
-//		if User[i].Cid == id {
-//			index = i
-//		}
-//	}
-//	return index1
-//}
+//自增ID函数
+func ConstId(id int) int {
+	index := -1
+	for i := 0; i < len(User); i++ {
+		if User[i].Cid == id {
+			index = i
+		}
+	}
+	return index
+}
 
 //返回上一层函数
 func isBack() bool {
