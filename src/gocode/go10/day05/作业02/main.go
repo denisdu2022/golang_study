@@ -34,7 +34,7 @@ func isBack() bool {
 	}
 }
 
-//输入客户信息函数6
+//输入客户信息函数¬Œ
 func inputUser() (name, gender, age, email string) {
 	fmt.Println("请输入客户姓名: ")
 	fmt.Scan(&name)
