@@ -266,13 +266,13 @@ func (c *CmsData) cunCms() {
 func (c *CmsData) chaJsonCmsData() {
 	for true {
 		fmt.Println("-----------------查看已保存客户信息开始-----------------")
-		//cmsData1,err := ioutil.ReadFile("/Users/denis/code/golang_study/src/jsonCmsData.json")
-		//if err != nil {
-		//	fmt.Println("打开已保存客户信息失败xxx")
-		//} else {
-		//	fmt.Println("打开已保存客户信息成功****")
-		//}
-
+		cmsData1, err := ioutil.ReadFile("/Users/denis/code/golang_study/src/jsonCmsData.json")
+		if err != nil {
+			fmt.Println("打开已保存客户信息失败xxx")
+		} else {
+			fmt.Println("打开已保存客户信息成功****")
+		}
+		fmt.Println(string(cmsData1))
 		fmt.Println("-----------------查看已保存客户信息结束-----------------")
 		b := isBack()
 		if b {
