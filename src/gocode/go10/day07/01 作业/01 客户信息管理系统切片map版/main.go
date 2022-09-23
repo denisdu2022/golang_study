@@ -16,6 +16,25 @@ var customers = []map[string]string{}
 var customerID int
 
 func main() {
+	//初始化保存的客户信息json数据
+	//读取保存的json客户信息
+	readCustomerFile, _ := ioutil.ReadFile("/Users/denis/code/golang_study/src/jsonCustomerdata.json")
+	fmt.Println(string(readCustomerFile))
+	//定义接收读取json文件的数据结构
+	var infoCustomer []map[string]string
+	json.Unmarshal(readCustomerFile, &infoCustomer)
+	//反序列化解析json
+	//json.Unmarshal(readCustomerFile, &infoCustomer)
+	//for _, v := range infoCustomer {
+	//	fmt.Printf("客户信息编号:%-8s  姓名:%-8s 性别:%-8s 年龄:%-8s 邮箱:%-8s\n", v["cid"], v["name"], v["gender"], v["age"], v["email"])
+	//	//for i1, v1 := range v {
+	//	//	fmt.Println(i1, v1)
+	//	//}
+	//}
+	//fmt.Println(reflect.TypeOf(infoCustomer))
+	//
+	//fmt.Println("-----------------------------------------------------")
+
 	for true {
 		fmt.Printf("\033[1;30;42m%s\033[0m\n", `
 -----------------客户信息管理系统-----------------
@@ -61,6 +80,7 @@ func main() {
 					}
 					//将新增的客户信息追加到已经定义好的客户信息数据结构中
 					customers = append(customers, newCustomers)
+
 					//fmt.Println(customers)
 					fmt.Printf("\033[1;35;40m%s\033[0m\n", "-----------------添加客户信息结束-----------------")
 					fmt.Println()
@@ -209,11 +229,11 @@ func main() {
 				jsonData, err := json.Marshal(customers)
 				ioutil.WriteFile("jsonCustomerdata.json", jsonData, 0666)
 				if err != nil {
-					fmt.Println("文件保存成功***")
-				} else {
 					fmt.Println("文件保存失败xxx")
+				} else {
+					fmt.Println("文件保存成功***")
 				}
-
+				fmt.Println(string(jsonData))
 				fmt.Println("------------------保存客户信息结束------------------")
 
 			}
