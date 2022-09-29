@@ -2,18 +2,20 @@ package service
 
 import (
 	"customerSys/model"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"strings"
 )
 
-//客户信息管理系统数据结构Sys
+// 客户信息管理系统数据结构Sys
 type CustomersSys struct {
 	Customer   []model.Customer
 	CustomerID int
 }
 
-//返回上一层函数
+// 返回上一层函数
 func isBack() bool {
 	var back string
 	fmt.Println("请问是否返回上一层[Y/N]: ")
@@ -25,12 +27,12 @@ func isBack() bool {
 	}
 }
 
-//CustomerID函数
-func (cs *CustomersSys) customerID(id int) int {
+// 按照索引删除的获取获取索引函数
+func (cs *CustomersSys) delteCustomerID(cid int) int {
 	indexCustomer := -1
 	for i := 0; i < len(cs.Customer); i++ {
 		for _, customerValue := range cs.Customer {
-			if customerValue.Cid == id {
+			if customerValue.Cid == cid {
 				indexCustomer = i
 			}
 		}
@@ -38,7 +40,18 @@ func (cs *CustomersSys) customerID(id int) int {
 	return indexCustomer
 }
 
-//客户信息管理系统欢迎界面
+// 按照索引修改结构体里的cid的键值函数,获取cid
+func (cs *CustomersSys) handleCustomerID(cid int) int {
+	var handleIndex = -1
+	for indexCustomer, customerStructValue := range cs.Customer {
+		if customerStructValue.Cid == cid {
+			handleIndex = indexCustomer
+		}
+	}
+	return handleIndex
+}
+
+// 客户信息管理系统欢迎界面
 func Wel() {
 	wel := `
 -----------------------客户信息管理系统-----------------------
@@ -53,7 +66,7 @@ func Wel() {
 	fmt.Println(wel)
 }
 
-//客户信息管理系统选择功能函数
+// 客户信息管理系统选择功能函数
 func (cs *CustomersSys) Choice() {
 	var Choice int
 	fmt.Println("请输入您的选择[1-6]: ")
@@ -84,7 +97,7 @@ func (cs *CustomersSys) Choice() {
 	}
 }
 
-//用户输入信息函数
+// 用户输入信息函数
 func inputCustomer() (name, gender string, age int8, email string) {
 	fmt.Println("请输入客户姓名:")
 	fmt.Scan(&name)
@@ -97,7 +110,7 @@ func inputCustomer() (name, gender string, age int8, email string) {
 	return name, gender, age, email
 }
 
-//添加客户信息功能函数
+// 添加客户信息功能函数
 func (cs *CustomersSys) addCustomer() {
 	for true {
 		fmt.Println("--------------------添加客户开始--------------------")
@@ -126,7 +139,7 @@ func (cs *CustomersSys) addCustomer() {
 	}
 }
 
-//查询客户信息功能函数
+// 查询客户信息功能函数
 func (cs *CustomersSys) listCustomer() {
 	for true {
 		fmt.Println("--------------------查询客户信息开始--------------------")
@@ -144,14 +157,22 @@ func (cs *CustomersSys) listCustomer() {
 	}
 }
 
-//更新客户信息功能函数
-func (cs *CustomersSys) updateCustomer() {
+// 更新客户信息功能函数
+func (cs CustomersSys) updateCustomer() {
 	for true {
 		fmt.Println("--------------------更新客户信息开始--------------------")
 		var cid int
 		fmt.Println("请输入您要操作的客户信息编号: ")
 		fmt.Scan(&cid)
-		handleIndex := cs.customerID(cid)
+		//handleIndex := cs.customerID(cid)
+		//var handleIndex = -1
+		//for indexCustomer, customerStructValue := range cs.Customer {
+		//	if customerStructValue.Cid == cid {
+		//		handleIndex = indexCustomer
+		//	}
+		//}
+		handleIndex := cs.handleCustomerID(cid)
+
 		if handleIndex == -1 {
 			fmt.Println("您输入的客户信息编号不存在,请重新输入...")
 			continue
@@ -164,13 +185,13 @@ func (cs *CustomersSys) updateCustomer() {
 			age    int8
 			email  string
 		)
-		fmt.Printf("请输入要操作的客户姓名(%s): ", updateCustomer.Name)
+		fmt.Printf("请输入要操作的客户姓名(%s): \n", updateCustomer.Name)
 		fmt.Scanln(&name)
-		fmt.Printf("请输入要操作的客户性别(%s): ", updateCustomer.Gender)
+		fmt.Printf("请输入要操作的客户性别(%s): \n", updateCustomer.Gender)
 		fmt.Scanln(&gender)
-		fmt.Printf("请输入要操作的客户年龄(%d): ", updateCustomer.Age)
+		fmt.Printf("请输入要操作的客户年龄(%d): \n", updateCustomer.Age)
 		fmt.Scanln(&age)
-		fmt.Printf("请输入要操作的客户邮箱(%s): ", updateCustomer.Email)
+		fmt.Printf("请输入要操作的客户邮箱(%s): \n", updateCustomer.Email)
 		fmt.Scanln(&email)
 
 		if name != "" {
@@ -196,14 +217,14 @@ func (cs *CustomersSys) updateCustomer() {
 
 }
 
-//删除客户信息功能函数
+// 删除客户信息功能函数
 func (cs *CustomersSys) delteCustomer() {
 	for true {
 		fmt.Println("--------------------删除客户信息开始--------------------")
 		var cid int
 		fmt.Println("请输入您要操作的客户信息编号: ")
 		fmt.Scan(&cid)
-		handleIndex := cs.customerID(cid)
+		handleIndex := cs.delteCustomerID(cid)
 		if handleIndex == -1 {
 			fmt.Println("您输入的客户信息编号不存在,请重新输入...")
 			continue
@@ -219,9 +240,19 @@ func (cs *CustomersSys) delteCustomer() {
 	}
 }
 
-//保存客户信息功能函数
+// 保存客户信息功能函数
 func (cs *CustomersSys) saceCustomer() {
 	for true {
+		fmt.Println("--------------------保存客户信息开始--------------------")
+		//序列化客户信息管理系统数据
+		customerData, err := json.Marshal(cs.Customer)
+		if err != nil {
+			fmt.Println("客户信息保存失败,错误信息是: ", err)
+		} else {
+			fmt.Println("客户信息保存成功***")
+		}
+		ioutil.WriteFile("db/customerData.json", customerData, 0666)
+		fmt.Println("--------------------保存客户信息结束--------------------")
 		//判断用户是否返回上一层
 		b := isBack()
 		if b {
