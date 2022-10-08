@@ -32,8 +32,12 @@ func upload(conn net.Conn, params []string) {
 		//将每行数据写入到writer中
 		writer.WriteString(string(data[:n]))
 	}
+<<<<<<< HEAD
 
 	//
+=======
+	writer.Flush()
+>>>>>>> origin/dev
 	fmt.Println("文件上传成功")
 
 }
