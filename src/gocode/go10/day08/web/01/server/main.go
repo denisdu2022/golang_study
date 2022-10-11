@@ -28,5 +28,6 @@ func main() {
 		}
 		fmt.Println(conn.LocalAddr())
 	}
+	fmt.Println("test")
 
 }
