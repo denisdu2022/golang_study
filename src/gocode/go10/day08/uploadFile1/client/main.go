@@ -63,8 +63,56 @@ func upload(conn net.Conn, path string) {
 
 // 文件下载功能函数
 func download(conn net.Conn, path string) {
+
 	fmt.Println("------------------文件下载开始------------------")
 	//fmt.Println("path是: ", path)
+	//23.字符串拼接
+	getInfo := "get" + " " + path
+	fmt.Println(getInfo)
+	//发送给服务端:文件命令和文件路径
+	conn.Write([]byte(getInfo))
+	//接收服务端发来的文件信息
+	fileInfoBytes := make([]byte, 1024)
+	n, err := conn.Read(fileInfoBytes)
+	//错误信息处理
+	if err != nil {
+		fmt.Println("错误信息是: ", err)
+	}
+	//fmt.Println(string(fileInfoBytes[:n]))
+	//将接收的字节串转为字符串
+	fileInfoString := string(fileInfoBytes[:n])
+	f := strings.Split(fileInfoString, " ")
+
+	fileName := f[0]
+	fmt.Println(fileName)
+	//fmt.Println(f[1])
+	fileSize := f[1]
+	fmt.Println(fileSize)
+	fileSize1, _ := strconv.Atoi(fileSize)
+
+	//fmt.Println("fileName: ", fileName, reflect.TypeOf(fileName))
+	//fmt.Println("fileSize: ", fileSize, reflect.TypeOf(fileSize))
+	//28.创建文件句柄
+	file, err1 := os.OpenFile("imgs/"+fileName, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0666)
+	//错误信息处理
+	if err1 != nil {
+		fmt.Println("错误信息是: ", err1)
+	}
+	//获取write对象
+	writer := bufio.NewWriter(file)
+	//29.循环接收文件
+	var readsize = 0
+	for readsize < fileSize1 {
+		data := make([]byte, 1024)
+		n, err := conn.Read(data)
+		//错误信息处理
+		if err != nil {
+			fmt.Println("错误信息是: ", err)
+		}
+		readsize += n
+		writer.WriteString(string(data[:n]))
+		writer.Flush()
+	}
 
 }
 
