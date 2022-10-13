@@ -1,11 +1,7 @@
 package main
 
-import "fmt"
-
 func main() {
 	//基本数据类型
-
-	fmt.Println()
 
 	//const pi = 2.1315926
 	//const e = 3.234
