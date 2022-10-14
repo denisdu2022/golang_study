@@ -101,7 +101,7 @@ func handleDownload(conn net.Conn, params []string) {
 func main() {
 
 	//1.创建服务端套接字对象
-	sock, err := net.Listen("tcp", "192.168.0.3:8080")
+	sock, err := net.Listen("tcp", "127.0.0.1:8080")
 	//错误信息处理
 	if err != nil {
 		fmt.Println("错误信息是：", err)

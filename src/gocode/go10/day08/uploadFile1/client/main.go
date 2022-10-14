@@ -119,7 +119,7 @@ func download(conn net.Conn, path string) {
 func main() {
 
 	//6. 客户端拨号连接服务端
-	conn, err := net.Dial("tcp", "114.67.92.28:8080")
+	conn, err := net.Dial("tcp", "127.0.0.1:8080")
 	//错误信息处理
 	if err != nil {
 		fmt.Println("错误信息是: ", err)
