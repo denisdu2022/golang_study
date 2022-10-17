@@ -3,7 +3,10 @@ package main
 import (
 	"fmt"
 	"net"
+	"sync"
 )
+
+var wg sync.WaitGroup
 
 func main() {
 	fmt.Println("客户端准备开启...")
@@ -16,10 +19,9 @@ func main() {
 
 	}
 
-	//3. 延迟注册关闭conn
-	defer conn.Close()
-
 	for {
+		//3. 延迟注册关闭conn
+		defer conn.Close()
 		//5.发送信息给服务端  >>>>一发
 		conn.Write([]byte("Client to server...."))
 
@@ -33,13 +35,18 @@ func main() {
 		}
 		fmt.Println(string(seToCl[:n]))
 
+		//计数器
+		wg.Add(1)
+
 		//聊天室功能
 		go im(conn)
+		wg.Wait()
 	}
 
 }
 
 func im(conn net.Conn) {
+	defer wg.Done()
 	for {
 		//创建缓冲区
 		buf := make([]byte, 1024)
