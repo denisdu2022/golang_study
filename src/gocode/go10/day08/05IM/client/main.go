@@ -36,17 +36,18 @@ func main() {
 		fmt.Println(string(seToCl[:n]))
 
 		//计数器
-		wg.Add(1)
+		//wg.Add(1)
 
 		//聊天室功能
-		go im(conn)
-		wg.Wait()
+		//go im(conn)
+		//wg.Wait()
+		im(conn)
 	}
 
 }
 
 func im(conn net.Conn) {
-	defer wg.Done()
+	//defer wg.Done()
 	for {
 		//创建缓冲区
 		buf := make([]byte, 1024)

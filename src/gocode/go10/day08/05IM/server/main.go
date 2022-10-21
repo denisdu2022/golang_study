@@ -43,6 +43,7 @@ func main() {
 
 		//使用服务端处理函数
 		go ClientConn(conn)
+		//ClientConn(conn)
 
 	}
 
