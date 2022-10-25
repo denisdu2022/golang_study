@@ -48,30 +48,28 @@ func main() {
 
 func im(conn net.Conn) {
 	//defer wg.Done()
-	for {
-		//创建缓冲区
-		buf := make([]byte, 1024)
-		fmt.Print("请输入发送的内容: ")
-		fmt.Scan(&buf)
-		fmt.Printf("发送的内容是: %s\n", string(buf))
-		//发送数据
-		conn.Write(buf)
-		//如果输入的是exit就退出
-		if string(buf) == "exit" {
-			fmt.Println("您已退出聊天....")
-			break
-		}
-		//接收服务端的回复
-		res := make([]byte, 1024)
-		n, rerr := conn.Read(res)
-		//错误信息处理
-		if rerr != nil {
-			fmt.Println("错误信息是: ", rerr)
-			return
-		}
-		result := res[:n]
-		fmt.Printf("接收到数据:%s\n", string(result))
 
+	//创建缓冲区
+	buf := make([]byte, 1024)
+	fmt.Print("请输入发送的内容: ")
+	fmt.Scan(&buf)
+	fmt.Printf("发送的内容是: %s\n", string(buf))
+	//发送数据
+	conn.Write(buf)
+	//如果输入的是exit就退出
+	if string(buf) == "exit" {
+		fmt.Println("您已退出聊天....")
+		return
 	}
+	////接收服务端的回复
+	//res := make([]byte, 1024)
+	//n, rerr := conn.Read(res)
+	////错误信息处理
+	//if rerr != nil {
+	//	fmt.Println("错误信息是: ", rerr)
+	//	return
+	//}
+	//result := res[:n]
+	//fmt.Printf("接收到数据:%s\n", string(result))
 
 }
