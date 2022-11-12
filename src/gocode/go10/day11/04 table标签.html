@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格标签</title>
+    <!--   <style>
+    table{
+      border: 1px darkorchid;
+    }
+  </style>-->
+    <style>
+        table {
+            border: 1px darkorchid;
+            text-align: center;
+        }
+
+        table tr td {
+            width: 100px;
+            height: 50px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+<!--默认的写法 -->
+<table border="1">
+    <tr>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>薪资</th>
+    </tr>
+    <tr>
+        <td>张三</td>
+        <td>21</td>
+        <td>10000</td>
+    </tr>
+    <tr>
+        <td>李四</td>
+        <td>22</td>
+        <td>20000</td>
+    </tr>
+</table>
+
+<!--做分类 -->
+<table border="1">
+    <thead>
+    <tr>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>薪资</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td>张三</td>
+        <td>21</td>
+        <td>10000</td>
+    </tr>
+    <tr>
+        <td>李四</td>
+        <td>22</td>
+        <td>20000</td>
+    </tr>
+    </tbody>
+
+</table>
+
+<!-- 属性-->
+<table border="1" cellpadding="10" cellspacing="10" align="center">
+    <tr>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>薪资</th>
+    </tr>
+    <tr>
+        <td>张三</td>
+        <td>21</td>
+        <td>10000</td>
+    </tr>
+    <tr>
+        <td>李四</td>
+        <td>22</td>
+        <td>20000</td>
+    </tr>
+</table>
+
+<!-- 合并单元格-->
+<table border="1" cellpadding="10" cellspacing="10" align="center">
+    <tr>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>薪资</th>
+    </tr>
+    <tr>
+        <td>张三</td>
+        <td>21</td>
+        <td rowspan="2">20000</td>
+    </tr>
+    <tr>
+        <td>李四</td>
+        <td>22</td>
+    </tr>
+</table>
+
+
+</body>
+</html>
