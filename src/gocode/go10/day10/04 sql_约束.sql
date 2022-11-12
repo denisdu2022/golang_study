@@ -70,3 +70,5 @@ create table clas4
     id   int primary key auto_increment,
     name varchar(32) not null unique
 );
+
+####
