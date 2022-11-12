@@ -16,6 +16,6 @@ func main() {
 	http.ListenAndServe(":8000", nil)
 
 	//2.路由函数返回
-	http.HandleFunc("/", foo)
+	http.HandleFunc("/hi", foo)
 
 }
