@@ -5,7 +5,51 @@
     <title>from表单标签</title>
 </head>
 <body>
-<!-- -->
+<!-- 向服务器发送请求的方式
+    1. 浏览器的地址栏  GET
+    2. a 标签 GET
+    3. from表单的格式 GET/POST 携带数据发起请求
+
+    4. ajax请求 GET/POST 异步请求
+-->
+
+<!-- input是内联标签-->
+<h3>用户注册页面</h3>
+<from action="" method="post">
+    <p>姓名:<input type="text" name="user" placeholder="请输入登录用户名"></input></p>
+    <p>密码:<input type="password" name="pwd" placeholder="请输入登录密码"></input></p>
+    <p> <!-- 复选框-->
+        爱好:
+        羽毛球<input type="checkbox" name="hobby" value="羽毛球" checked>
+        篮球<input type="checkbox" name="hobby" value="篮球">
+    </p>
+    <p><!-- 单选框-->
+        性别:
+        <input type="radio" name="hobby" value="1" checked>男
+        <input type="radio" name="hobby" value="0">女
+    </p>
+    <p>
+        生日:
+        <input type="date" name="birth" value="2012-12-12">
+    </p>
+    <p> <!-- 事件 跟js相关-->
+        <input type="button" value="button" onclick="alert(123)">
+    </p>
+    <p><!--下拉菜单 -->
+        <!--属性名和属性值是一样的时候可以简写 multiple-->
+        <select name="province" multiple>
+            <option value="heibei" selected>河北省</option>
+            <option value="hubei">湖北省</option>
+            <option value="hunan">湖南省</option>
+            <option value="henan">河南省</option>
+        </select>
+    </p>
+    <p> <!-- 多行文本框-->
+        <textarea placeholder="个人简介" name="简介" cols="30" rows="10"></textarea>
+    </p>
+    <p><input type="submit"></p>
+</from>
+
 
 </body>
 </html>
