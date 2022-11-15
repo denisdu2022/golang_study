@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css 边框属性</title>
+    <style>
+        .c1 {
+            width: 300px;
+            height: 300px;
+            /*border: 1px solid red;  这是缩写写法*/
+            /*border-width: 1px;*/
+            /*border-color: rebeccapurple;*/
+            /*border-style: dashed;*/
+            /*单边边框*/
+            border-bottom: 1px solid red;
+        }
+
+        ul {
+            list-style: none;
+            /*去除内边距*/
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="c1">世界你好</div>
+
+<!--无序列表-->
+<!--ul 和 li是块级标签-->
+<ul>
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+</ul>
+
+<div>111</div>
+<div>222</div>
+<div>333</div>
+<!--不使用div而使用ul 和li是可读性强-->
+
+</body>
+</html>

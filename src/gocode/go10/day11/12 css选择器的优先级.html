@@ -3,8 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>css 选择器的优先级</title>
+    <!--    css选择器优先级:-->
+    <!--    id:100-->
+    <!--    class:10-->
+    <!--    标签名:1-->
+
+    <style>
+        /*div{*/
+        /*    color: red;*/
+        /*}*/
+
+        /*.c1{*/
+        /*    color: yellow;*/
+        /*}*/
+
+        /*#i1{*/
+        /*    color: blue;*/
+        /*}*/
+
+        /*!important强制使用,只用于测试*/
+        p {
+            color: red !important;
+        }
+
+        .c1 .c2 .c3 p {
+            color: blue;
+        }
+
+        /*.c1 .c2 .c3 .c4 p{*/
+        /*    color: lightblue;*/
+        /*}*/
+
+        /*优先级一致,下边的覆盖上边的*/
+        .c1 .c2 .c4 p {
+            color: darkgoldenrod;
+        }
+
+        /*p标签里边的style的样式的优先级为1000*/
+
+    </style>
 </head>
 <body>
+
+<!--<div class="c1" id="i1">世界你好</div>-->
+
+<div class="c1">
+    <div class="c2">
+        <div class="c3">
+            <div class="c4">
+                <p style="color: chartreuse">世界你好</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 </body>
