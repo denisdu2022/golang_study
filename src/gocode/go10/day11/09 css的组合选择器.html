@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css组合选择器</title>
+  <style>
+
+    /*<!--且选择器 -->*/
+    /*div.c1{*/
+    /*  color: green;*/
+    /*}*/
+
+    /*<!--或选择器 -->*/
+    /*  div.c1,.c2{*/
+    /*    color: blue;*/
+    /*    background-color: red;*/
+    /*  }*/
+
+    /*父级选择器*/
+    /*.c3 .c4{*/
+    /*  color: indigo;*/
+    /*  background-color: antiquewhite;*/
+    /*}*/
+    /*!*如果父级标签下的都需要样式使用通配符**!*/
+    /*.c3 *{*/
+    /*  color: indigo;*/
+    /*  background-color: antiquewhite;*/
+    /*}*/
+    /*!*子代*/
+    /*.c3 > .c4{*/
+    /*  color: indigo;*/
+    /*  background-color: antiquewhite;*/
+    /*}*/
+    /*!*后代*/
+    /*.c3 .c4{*/
+    /*  color: indigo;*/
+    /*  background-color: antiquewhite;*/
+    /*}*/
+
+    .c3 .c7 .c8{
+        color: indigo;
+        background-color: antiquewhite;
+    }
+
+  </style>
+</head>
+<body>
+
+
+<!-- -->
+<div>000</div>
+<div class="c1">1111</div>
+<p class="c1">2222</p>
+<p>3333</p>
+<p class="c2">44444</p>
+
+<div class="c3">
+  <div class="c4">555</div>
+  <div class="c5">777</div>
+  <div class="c6">
+    <div class="c4">888</div>
+  </div>
+  <div class="c7">
+    <div class="c8">
+      <div class="c9">
+        <div class="c4">9999</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="c4">666</div>
+
+</body>
+</html>

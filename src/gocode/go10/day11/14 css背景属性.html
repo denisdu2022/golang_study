@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css 背景属性</title>
+    <style>
+        .c1 {
+            background-color: lightgrey;
+        }
+
+        /*.c2{*/
+        /*    width: 50%;*/
+        /*    height: 600px;*/
+        /*    !*边框*!*/
+        /*    border: 1px solid red;*/
+        /*    !*不填充*!*/
+        /*    background-repeat: no-repeat;*/
+        /*    !*设置背景图片*!*/
+        /*    background-image:url("https://gd-hbimg.huaban.com/e6526f26e27e9ae1da9e42e31916fcc32b094296101c5-FKxiVd_fw658") ;*/
+        /*    !*左右边距*!*/
+        /*    !*background-position: 100px 200px;*!*/
+        /*    !*居中*!*/
+        /*    background-position: center;*/
+        /*}*/
+        .c2 {
+            width: 50%;
+            height: 600px;
+            /*边框*/
+            border: 1px solid red;
+
+            /*三合一写法,不分顺序*/
+            background: no-repeat, url("https://gd-hbimg.huaban.com/e6526f26e27e9ae1da9e42e31916fcc32b094296101c5-FKxiVd_fw658"), center;
+
+
+        }
+    </style>
+</head>
+<body>
+
+<div class="c1">世界你好</div>
+<div class="c2">你好世界</div>
+
+</body>
+</html>
