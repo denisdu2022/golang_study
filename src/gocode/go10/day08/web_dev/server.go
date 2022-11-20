@@ -21,7 +21,7 @@ func main() {
 
 	for true {
 		//2.等待用户连接,没有连接的客户端保持阻塞
-		fmt.Println("server is waiting...")
+		fmt.Println("01 基于net包的web应用 is waiting...")
 		conn, err := listen.Accept()
 		//错误信息处理
 		if err != nil {

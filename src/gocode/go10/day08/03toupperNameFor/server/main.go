@@ -35,7 +35,7 @@ func main() {
 
 		//(2). 收发消息: conn.read()收  conn.Write()发
 		//time.Sleep(time.Second * 10)
-		conn.Write([]byte("welcome to server!"))
+		conn.Write([]byte("welcome to 01 基于net包的web应用!"))
 
 		//2.服务端持续接收
 		for true {
