@@ -23,7 +23,7 @@ func main() {
 		//3. 延迟注册关闭conn
 		defer conn.Close()
 		//5.发送信息给服务端  >>>>一发
-		conn.Write([]byte("Client to server...."))
+		conn.Write([]byte("Client to 01 基于net包的web应用...."))
 
 		//8. 客户端接收服务端发来的消息
 		seToCl := make([]byte, 1024)
