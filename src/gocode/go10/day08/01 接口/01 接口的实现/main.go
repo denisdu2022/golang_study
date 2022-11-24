@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-//Animal接口
+// Animal接口
 type Animale interface {
 	sleep()
 }
@@ -15,7 +15,7 @@ type Dog struct {
 type Cat struct {
 }
 
-//Dog实现Animal接口
+// Dog实现Animal接口
 func (d Dog) sleep() {
 	fmt.Println("狗狗正在侧着睡觉...")
 

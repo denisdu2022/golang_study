@@ -2,34 +2,34 @@ package main
 
 import "fmt"
 
-//定义接口类
-//定义一个支付的接口类
+// 定义接口类
+// 定义一个支付的接口类
 type Pay interface {
 	//方法名  返回值
 	pay() string
 }
 
-//Alipay
+// Alipay
 type Alipay struct {
 }
 
-//Alipay的方法接收器
+// Alipay的方法接收器
 func (a Alipay) pay() string {
 	fmt.Println("Alipay支付...")
 	return "阿里支付"
 }
 
-//Weixinpay
+// Weixinpay
 type Weixinpay struct {
 }
 
-//Weixinpay的方法接收器
+// Weixinpay的方法接收器
 func (w Weixinpay) pay() string {
 	fmt.Println("Weixinpay支付...")
 	return "微信支付"
 }
 
-//订单类
+// 订单类
 func oder(p Pay) {
 	p.pay()
 }

@@ -83,7 +83,7 @@ package main
 //	return "daerwen", 18
 //}
 
-//返回值命名
+// 返回值命名
 func calc(x, y int) (sum, sub int) {
 	sum = x + y
 	sub = x - y

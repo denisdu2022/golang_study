@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-//高阶函数返回值
+// 高阶函数返回值
 func foo() func() int {
 	var inner = func() int {
 		fmt.Println("一个新的函数功能....")

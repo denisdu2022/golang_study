@@ -2,45 +2,45 @@ package main
 
 import "fmt"
 
-//Animal接口
+// Animal接口
 type Animal interface {
 	Run
 	Jump
 }
 
-//跑的接口
+// 跑的接口
 type Run interface {
 	run() string
 }
 
-//跳的接口
+// 跳的接口
 type Jump interface {
 	jump() string
 }
 
-//人这个类
+// 人这个类
 type Person struct {
 	name string
 }
 
-//汽车这个类
+// 汽车这个类
 type Car struct {
 	brand string
 }
 
-//汽车实现跑的方法接收器
+// 汽车实现跑的方法接收器
 func (c Car) run() string {
 	fmt.Printf("%s汽车正在飞速的行驶...\n", c.brand)
 	return "跑"
 }
 
-//跑的方法接收器
+// 跑的方法接收器
 func (p Person) run() string {
 	fmt.Printf("%s正在跑...\n", p.name)
 	return "Run"
 }
 
-//跳的方法接收器
+// 跳的方法接收器
 func (p Person) jump() string {
 	fmt.Printf("%s正在跳...\n", p.name)
 	return "Jump"

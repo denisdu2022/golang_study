@@ -2,27 +2,27 @@ package main
 
 import "fmt"
 
-//Animal接口
+// Animal接口
 type Animal interface {
 	sleep() //睡得方法
 }
 
-//Dog类
+// Dog类
 type Dog struct {
 	name string
 }
 
-//Dog的方法接收器
+// Dog的方法接收器
 func (d Dog) sleep() {
 	fmt.Printf("%s正在侧着睡...\n", d.name)
 }
 
-//Cat类
+// Cat类
 type Cat struct {
 	name string
 }
 
-//Cat的方法接收器
+// Cat的方法接收器
 func (c Cat) sleep() {
 	fmt.Printf("%s正在趴着睡....\n", c.name)
 }

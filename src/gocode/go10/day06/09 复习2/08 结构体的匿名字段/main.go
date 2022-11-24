@@ -7,14 +7,14 @@ import "fmt"
 //	int    //int  int
 //}
 
-//学生住址信息结构体
+// 学生住址信息结构体
 type Addr struct {
 	shen string
 	shi  string
 	xian string
 }
 
-//学生信息结构体
+// 学生信息结构体
 type Student struct {
 	name string
 	age  int

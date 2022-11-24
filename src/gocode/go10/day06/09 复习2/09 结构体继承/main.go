@@ -34,13 +34,13 @@ import "fmt"
 
 //--------------------------------------------------------
 
-//结构体的继承
-//动物类型结构体
+// 结构体的继承
+// 动物类型结构体
 type Animal struct {
 	Name string
 }
 
-//动物所有的方法
+// 动物所有的方法
 func (a *Animal) eat() {
 	fmt.Printf("%s正在吃... \n", a.Name)
 }
@@ -49,18 +49,18 @@ func (a Animal) sleep() {
 	fmt.Printf("%s正在睡... \n", a.Name)
 }
 
-//Dos类型结构体
+// Dos类型结构体
 type Dog struct {
 	Kind string
 	Animal
 }
 
-//属于Dog的方法
+// 属于Dog的方法
 func (d *Dog) bark() {
 	fmt.Printf("%s正在bark,品种:%s... \n", d.Name, d.Kind)
 }
 
-//Cat类型结构体
+// Cat类型结构体
 type Cat struct {
 	Kind string
 	Animal

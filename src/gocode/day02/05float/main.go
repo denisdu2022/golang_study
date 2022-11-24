@@ -15,12 +15,4 @@ func main() {
 	fmt.Printf("%T\n", f2)
 	//f1 = f2  float32类型的值不能直接赋值给float64
 
-
-
-
-
-
-
-
-	
 }

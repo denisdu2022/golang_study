@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-//声明结构体
+// 声明结构体
 type student struct {
 	sId    int
 	name   string

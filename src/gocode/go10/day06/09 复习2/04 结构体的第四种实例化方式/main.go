@@ -5,7 +5,7 @@ import (
 	"reflect"
 )
 
-//声明结构体
+// 声明结构体
 type Student struct {
 	sid    int
 	name   string

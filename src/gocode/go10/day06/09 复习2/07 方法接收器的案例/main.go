@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-//玩家信息结构体
+// 玩家信息结构体
 type Player struct {
 	Name        string
 	HealthPoint int
@@ -11,7 +11,7 @@ type Player struct {
 	Prop        []string
 }
 
-//玩家信息结构体模拟构造函数
+// 玩家信息结构体模拟构造函数
 func NewPlayer(name string, hp int, level int, np []int, prop []string) *Player {
 	return &Player{
 		Name:        name,
@@ -22,19 +22,19 @@ func NewPlayer(name string, hp int, level int, np []int, prop []string) *Player 
 	}
 }
 
-//发起攻击方法
+// 发起攻击方法
 func (p *Player) attack() {
 	fmt.Printf("%s发起攻击! \n", p.Name)
 
 }
 
-//被攻击方法
+// 被攻击方法
 func (p *Player) attacked() {
 	fmt.Printf("%s被攻击...\n", p.Name)
 	fmt.Printf("血量为: %d\n", p.HealthPoint-10)
 }
 
-//购买道具方法
+// 购买道具方法
 func (p *Player) buyProp(prop string) {
 	fmt.Printf("%s购买了%s道具", p.Name, prop)
 	p.Prop = append(p.Prop, prop)

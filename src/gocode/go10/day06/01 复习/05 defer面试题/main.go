@@ -56,7 +56,7 @@ package main
 //	return 5
 //}
 
-//案例7
+// 案例7
 func f7() (r int) { //0
 	defer func(x int) { //0
 		r = x + 1

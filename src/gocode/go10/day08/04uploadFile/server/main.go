@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-//处理文件上传
+// 处理文件上传
 func upload(conn net.Conn, params []string) {
 
 	//接收文件信息
@@ -37,7 +37,7 @@ func upload(conn net.Conn, params []string) {
 
 }
 
-//处理文件下载
+// 处理文件下载
 func download(conn net.Conn, params []string) {
 
 }

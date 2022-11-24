@@ -8,13 +8,13 @@ import (
 	"strings"
 )
 
-//客户信息管理系统service结构体
+// 客户信息管理系统service结构体
 type CustomerSys struct {
 	Customer   []model.Customer
 	CustomerId int
 }
 
-//返回上一层函数
+// 返回上一层函数
 func isBack() bool {
 	var back string
 	fmt.Print("请问是否返回上一层[Y/N]: ")
@@ -27,7 +27,7 @@ func isBack() bool {
 
 }
 
-//客户信息管理系统[]customer索引函数
+// 客户信息管理系统[]customer索引函数
 func (cs *CustomerSys) CustomerIndex(cid int) int {
 	var indexCustome = -1
 	for handleIndex, customerValue := range cs.Customer {
@@ -38,7 +38,7 @@ func (cs *CustomerSys) CustomerIndex(cid int) int {
 	return indexCustome
 }
 
-//添加客户信息功能函数
+// 添加客户信息功能函数
 func (cs *CustomerSys) AddCustome() {
 	for true {
 		fmt.Println("-------------------添加客户信息开始-------------------")
@@ -68,7 +68,7 @@ func (cs *CustomerSys) AddCustome() {
 
 }
 
-//查看客户信息功能函数
+// 查看客户信息功能函数
 func (cs *CustomerSys) ListCustome() {
 	for true {
 		fmt.Println("-------------------查询客户信息开始-------------------")
@@ -88,7 +88,7 @@ func (cs *CustomerSys) ListCustome() {
 
 }
 
-//更新客户信息功能函数
+// 更新客户信息功能函数
 func (cs *CustomerSys) UpdataCustome() {
 	for true {
 		var updataCid int
@@ -135,7 +135,7 @@ func (cs *CustomerSys) UpdataCustome() {
 
 }
 
-//删除客户信息功能函数
+// 删除客户信息功能函数
 func (cs *CustomerSys) DelCustome() {
 	for true {
 		var cid int
@@ -162,7 +162,7 @@ func (cs *CustomerSys) DelCustome() {
 
 }
 
-//保存客户信息功能函数
+// 保存客户信息功能函数
 func (cs *CustomerSys) SaveCustome() {
 	fmt.Println("-------------------保存客户信息开始-------------------")
 	//定义文件保存接收信息和err

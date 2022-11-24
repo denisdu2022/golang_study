@@ -16,8 +16,8 @@ import (
 //	fmt.Println(ret)
 //}
 
-//不限长参数
-//不限位数加法器函数
+// 不限长参数
+// 不限位数加法器函数
 func add2(num ...int) {
 	fmt.Println(num, reflect.TypeOf(num)) //参数类型是一个切片[]int
 	var ret = 0
