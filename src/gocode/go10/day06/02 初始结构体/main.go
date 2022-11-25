@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-//学生数据结构 结构体
+// 学生数据结构 结构体
 type Student struct {
 	sid    int
 	name   string
@@ -10,7 +10,7 @@ type Student struct {
 	couser []string
 }
 
-//客户关系管理系统数据结构
+// 客户关系管理系统数据结构
 type cms struct {
 	Sid, age            int
 	name, gender, email string

@@ -7,11 +7,11 @@ import (
 	"strings"
 )
 
-//构建客户信息管理系统数据结构
+// 构建客户信息管理系统数据结构
 var sId = 0
 var user []map[string]interface{}
 
-//自增ID的函数
+// 自增ID的函数
 func custID(id int) int {
 	index := -1
 	for i := 0; i < len(user); i++ {
@@ -22,7 +22,7 @@ func custID(id int) int {
 	return index
 }
 
-//返回上一层函数
+// 返回上一层函数
 func isBack() bool {
 	var xuanZe string
 	fmt.Println("请选择是否返回上一层 [Y/N]: ")
@@ -34,7 +34,7 @@ func isBack() bool {
 	}
 }
 
-//输入客户信息函数¬Œ
+// 输入客户信息函数¬Œ
 func inputUser() (name, gender, age, email string) {
 	fmt.Println("请输入客户姓名: ")
 	fmt.Scan(&name)
@@ -47,7 +47,7 @@ func inputUser() (name, gender, age, email string) {
 	return name, gender, age, email
 }
 
-//添加客户信息函数
+// 添加客户信息函数
 func userAdd() {
 	for true {
 		fmt.Println("-----------------添加客户信息开始-----------------")
@@ -71,7 +71,7 @@ func userAdd() {
 
 }
 
-//查看客户信息函数
+// 查看客户信息函数
 func chaUser() {
 	for true {
 		fmt.Println("-----------------查看客户信息开始-----------------")
@@ -87,7 +87,7 @@ func chaUser() {
 
 }
 
-//更新客户信息函数
+// 更新客户信息函数
 func updateUser() {
 	for true {
 		fmt.Println("-----------------修改客户信息开始-----------------")
@@ -114,7 +114,7 @@ func updateUser() {
 
 }
 
-//删除客户信息函数
+// 删除客户信息函数
 func deleUser() {
 	for true {
 		var delteId int
@@ -136,7 +136,7 @@ func deleUser() {
 
 }
 
-//保存客户信息函数
+// 保存客户信息函数
 func cunUser() {
 	for true {
 		fmt.Println("-----------------保存客户信息开始-----------------")
@@ -157,7 +157,7 @@ func cunUser() {
 
 }
 
-//查看已保存的客户信息函数
+// 查看已保存的客户信息函数
 func chaYicun() {
 	for true {
 		fmt.Println("-----------------查看已保存客户信息开始-----------------")

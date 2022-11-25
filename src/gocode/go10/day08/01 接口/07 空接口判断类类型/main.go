@@ -5,23 +5,23 @@ import (
 	"reflect"
 )
 
-//Person 接口
+// Person 接口
 type Person interface {
 	eat() //吃的方法
 }
 
-//学生类
+// 学生类
 type Stu struct {
 	name string
 	age  int
 }
 
-//实现吃的方法
+// 实现吃的方法
 func (s Stu) eat() {
 	fmt.Printf("%s正在吃饭,今年%d岁了...\n", s.name, s.age)
 }
 
-//Dog接口
+// Dog接口
 type Dog interface {
 	spark()
 }

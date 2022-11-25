@@ -15,21 +15,21 @@ import (
 //	f()            //调用形参函数  foor函数功能....
 //}
 
-//foo功能函数
+// foo功能函数
 func foo() {
 	fmt.Println("foo 功能开始.....")
 	time.Sleep(time.Second * 2)
 	fmt.Println("foo 功能结束.....")
 }
 
-//bar功能函数
+// bar功能函数
 func bar() {
 	fmt.Println("bar 功能开始.....")
 	time.Sleep(time.Second * 3)
 	fmt.Println("bar 功能结束.....")
 }
 
-//运行时间函数
+// 运行时间函数
 func timer(f func()) {
 	start := time.Now().Unix()
 	f()

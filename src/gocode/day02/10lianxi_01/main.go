@@ -26,7 +26,7 @@ import "fmt"
 // 	fmt.Println("dasdasd dasdsada") //打印完指定内容会增加换行符
 // }
 
-//go语言中推荐使用驼峰命名法
+// go语言中推荐使用驼峰命名法
 // var student_name string
 var studentNmae string //推荐使用小驼峰
 // var StudentName string
@@ -51,18 +51,18 @@ var studentNmae string //推荐使用小驼峰
 // 	fmt.Println(s3)
 // }
 
-//常量
-//常量定义之后不能修改,常量是不能变化的
-//在程序运行期间不会改变
+// 常量
+// 常量定义之后不能修改,常量是不能变化的
+// 在程序运行期间不会改变
 const pi = 3.1415926
 
-//批量声明常量
+// 批量声明常量
 const (
 	statusok = 200
 	notfound = 404
 )
 
-//批量声明常量时,如果某一行声明后没有赋值,默认就和上一行一致
+// 批量声明常量时,如果某一行声明后没有赋值,默认就和上一行一致
 const (
 	n1 = 100
 	n2

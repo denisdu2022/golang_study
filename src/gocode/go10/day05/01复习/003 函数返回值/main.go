@@ -10,7 +10,7 @@ import "fmt"
 //}
 
 ////多个返回值
-//func login(user, pwd string) (bool, string) {
+//func login.html(user, pwd string) (bool, string) {
 //	if user == "root" && pwd == "123" {
 //		//登录成功
 //		return true, user
@@ -20,7 +20,7 @@ import "fmt"
 //	}
 //}
 
-//返回值命名
+// 返回值命名
 func add(s ...int) (z int) {
 
 	for _, v := range s {
@@ -40,9 +40,9 @@ func main() {
 	//fmt.Println(ret)    //103
 
 	////调用多个返回值的函数
-	////login1, ok := login("root", "123")
+	////login1, ok := login.html("root", "123")
 	////fmt.Println(login1, ok)
-	//ok, user := login("root", "123")
+	//ok, user := login.html("root", "123")
 	//if ok {
 	//	fmt.Println("登录成功,用户名:", user)
 	//} else {

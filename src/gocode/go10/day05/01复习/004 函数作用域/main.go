@@ -16,7 +16,7 @@ func bar() {
 
 }
 
-//全局变量
+// 全局变量
 var x = 1
 
 func main() {

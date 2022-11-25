@@ -11,8 +11,8 @@ import (
 //结构体是用来定义数据类型
 //结构体是值类型
 
-//定义客户信息管理系统数据结构
-//var customers []map[string]string
+// 定义客户信息管理系统数据结构
+// var customers []map[string]string
 type Customer struct { //结构体名称建议大写
 	Cid    int
 	Name   string
@@ -23,7 +23,7 @@ type Customer struct { //结构体名称建议大写
 
 var customers []Customer
 
-//定义自增ID,新增一个用户的时候自加1
+// 定义自增ID,新增一个用户的时候自加1
 var customerID int
 
 func addCustomer() {

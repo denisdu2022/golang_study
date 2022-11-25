@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-//计算函数运行时间的函数
+// 计算函数运行时间的函数
 func countTimer(f func(t time.Duration)) func(t time.Duration) {
 	return func(t time.Duration) {
 		//时间戳开始
@@ -21,7 +21,7 @@ func countTimer(f func(t time.Duration)) func(t time.Duration) {
 
 }
 
-//测试函数
+// 测试函数
 func foo(t time.Duration) {
 	fmt.Println("foo 功能函数运行...")
 	time.Sleep(time.Second * t)

@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-//定义客户信息管理系统数据结构
+// 定义客户信息管理系统数据结构
 type Customer struct {
 	Cid    int
 	Name   string
@@ -19,9 +19,9 @@ type Customer struct {
 
 //var customers []Customer
 
-//定义自增ID,新增一个用户的时候自加1
-//var customerID int
-//定义客户信息管理Service
+// 定义自增ID,新增一个用户的时候自加1
+// var customerID int
+// 定义客户信息管理Service
 type CustomerService struct {
 	customers  []Customer
 	customerID int

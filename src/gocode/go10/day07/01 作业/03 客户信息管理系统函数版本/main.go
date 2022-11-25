@@ -9,10 +9,10 @@ import (
 	"strings"
 )
 
-//定义客户信息管理系统数据结构
+// 定义客户信息管理系统数据结构
 var customers []map[string]string
 
-//定义自增ID,新增一个用户的时候自加1
+// 定义自增ID,新增一个用户的时候自加1
 var customerID int
 
 func addCustomer() {

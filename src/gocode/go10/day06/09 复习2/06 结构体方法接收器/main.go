@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-//声明结构体
+// 声明结构体
 type Student struct {
 	sid    int
 	name   string
@@ -10,7 +10,7 @@ type Student struct {
 	course []string
 }
 
-//模拟构造函数
+// 模拟构造函数
 func NewStudent(sid int, name string, age int, course []string) Student {
 	return Student{
 		sid:    sid,
@@ -21,12 +21,12 @@ func NewStudent(sid int, name string, age int, course []string) Student {
 
 }
 
-//Student类型的方法接收器
+// Student类型的方法接收器
 func (s Student) read() {
 	fmt.Println("学生正在读书")
 }
 
-//Student类型的方法接收器带参数
+// Student类型的方法接收器带参数
 func (s Student) read1(book string) {
 	fmt.Printf("%s正在读%s\n", s.name, book)
 }

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-//计算n的阶乘功能函数
+// 计算n的阶乘功能函数
 func factorial(n int) int {
 	if n == 0 {
 		return 1

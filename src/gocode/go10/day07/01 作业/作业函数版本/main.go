@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-//客户信息管理系统欢迎界面函数
+// 客户信息管理系统欢迎界面函数
 func wel() {
 	wel := `
 ------------------客户信息管理系统------------------
@@ -22,7 +22,7 @@ func wel() {
 	fmt.Println(wel)
 }
 
-//客户信息管理系统选择功能函数
+// 客户信息管理系统选择功能函数
 func choice() {
 	for true {
 		var choice string
@@ -71,7 +71,7 @@ func choice() {
 
 }
 
-//返回上一层功能函数
+// 返回上一层功能函数
 func isBack() bool {
 	var back string
 	fmt.Println("是否选择返回上一层[Y/N]: ")
@@ -83,13 +83,13 @@ func isBack() bool {
 	}
 }
 
-//客户信息管理系统数据结构
+// 客户信息管理系统数据结构
 var user []map[string]interface{}
 
-//定义自增sId
+// 定义自增sId
 var sId int
 
-//自增id切片索引功能函数
+// 自增id切片索引功能函数
 func custId(id int) int {
 	var index = -1
 	for i := 0; i < len(user); i++ {
@@ -100,7 +100,7 @@ func custId(id int) int {
 	return index
 }
 
-//用户输入函数
+// 用户输入函数
 func inputUser() (name, gender string, age int8, email string) {
 	fmt.Println("请输入客户姓名: ")
 	fmt.Scan(&name)
@@ -113,7 +113,7 @@ func inputUser() (name, gender string, age int8, email string) {
 	return name, gender, age, email
 }
 
-//添加用户功能函数
+// 添加用户功能函数
 func userAdd() {
 	for true {
 		fmt.Println("------------------添加客户信息开始------------------")
@@ -142,7 +142,7 @@ func userAdd() {
 
 }
 
-//查询客户功能函数
+// 查询客户功能函数
 func queryUser() {
 	for true {
 		fmt.Println("------------------查询客户信息开始------------------")
@@ -160,7 +160,7 @@ func queryUser() {
 
 }
 
-//更新客户功能函数
+// 更新客户功能函数
 func updateUser() {
 	for true {
 		fmt.Println("------------------更新客户信息开始------------------")
@@ -190,7 +190,7 @@ func updateUser() {
 
 }
 
-//删除客户功能函数
+// 删除客户功能函数
 func delUser() {
 	for true {
 		fmt.Println("------------------删除客户信息开始------------------")
@@ -213,7 +213,7 @@ func delUser() {
 
 }
 
-//保存客户信息功能函数
+// 保存客户信息功能函数
 func saveUser() {
 	for true {
 		fmt.Println("------------------保存客户信息开始------------------")

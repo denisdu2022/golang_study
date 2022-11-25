@@ -5,11 +5,11 @@ import (
 	"reflect"
 )
 
-//定义一个空接口
+// 定义一个空接口
 type AnyKong interface {
 }
 
-//函数参数空接口
+// 函数参数空接口
 func foo(x interface{}) {
 	fmt.Println(x, reflect.TypeOf(x))
 }

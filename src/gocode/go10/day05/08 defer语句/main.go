@@ -4,12 +4,12 @@ import (
 	"fmt"
 )
 
-//foo函数功能
+// foo函数功能
 func foo() {
 	fmt.Println("执行fool 函数功能...")
 }
 
-//bar函数功能
+// bar函数功能
 func bar() {
 	fmt.Println("执行bar 函数功能***")
 }

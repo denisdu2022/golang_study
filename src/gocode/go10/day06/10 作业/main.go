@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-//客户关系管理系统欢迎界面函数
+// 客户关系管理系统欢迎界面函数
 func wel() {
 	wel := `
 ---------------------客户信息管理系统---------------------
@@ -23,7 +23,7 @@ func wel() {
 	fmt.Println(wel)
 }
 
-//客户信息管理系统Switch函数
+// 客户信息管理系统Switch函数
 func (c CmsData) choice() {
 	for true {
 		var choice string
@@ -87,7 +87,7 @@ func (c CmsData) choice() {
 	}
 }
 
-//返回上一层函数
+// 返回上一层函数
 func isBack() bool {
 	var back string
 	fmt.Println("请问是否返回上一层[Y/N]: ")
@@ -99,7 +99,7 @@ func isBack() bool {
 	}
 }
 
-//定义客户信息数据结构
+// 定义客户信息数据结构
 type CmsInfo struct {
 	Name   string `json:"name"`
 	Gender string `json:"gender"`
@@ -107,7 +107,7 @@ type CmsInfo struct {
 	Email  string `json:"email"`
 }
 
-//客户信息构造函数
+// 客户信息构造函数
 func NewCmsInfo(name string, gender string, age int8, email string) *CmsInfo {
 	return &CmsInfo{
 		Name:   name,
@@ -133,7 +133,7 @@ func (n *CmsData) CmsID() (int, *CmsInfo) {
 	return sid, idCMS
 }
 
-//输入客户信息函数
+// 输入客户信息函数
 func inputCms() (name, gender string, age int8, email string) {
 	fmt.Println("请输入客户姓名: ")
 	fmt.Scan(&name)
@@ -146,7 +146,7 @@ func inputCms() (name, gender string, age int8, email string) {
 	return name, gender, age, email
 }
 
-//添加客户信息功能函数
+// 添加客户信息功能函数
 func (c *CmsData) addCms() {
 	for true {
 		fmt.Println("-------------------添加客户信息开始-------------------")
@@ -162,7 +162,7 @@ func (c *CmsData) addCms() {
 	}
 }
 
-//查询客户信息函数
+// 查询客户信息函数
 func (c *CmsData) chaCms() {
 	for true {
 		fmt.Println("-------------------查询客户信息开始-------------------")
@@ -178,7 +178,7 @@ func (c *CmsData) chaCms() {
 
 }
 
-//客户信息编号函数
+// 客户信息编号函数
 func cmsID() int {
 	var Sid int
 	fmt.Println("请输入要操作的客户信息编号:")
@@ -186,7 +186,7 @@ func cmsID() int {
 	return Sid
 }
 
-//更新客户信息函数
+// 更新客户信息函数
 func (c *CmsData) modfCms(id int) {
 
 	fmt.Println("-------------------修改客户信息开始-------------------")
@@ -223,7 +223,7 @@ func (c *CmsData) deleteCms() {
 	}
 }*/
 
-//删除客户信息函数
+// 删除客户信息函数
 func (c *CmsData) deleteCms() {
 	for true {
 		fmt.Println("-------------------删除客户信息开始-------------------")
@@ -242,7 +242,7 @@ func (c *CmsData) deleteCms() {
 	}
 }
 
-//保存客户信息函数
+// 保存客户信息函数
 func (c *CmsData) cunCms() {
 	for true {
 		fmt.Println("-------------------保存客户信息开始-------------------")
@@ -262,7 +262,7 @@ func (c *CmsData) cunCms() {
 	}
 }
 
-//查询已保存的客户信息功能函数
+// 查询已保存的客户信息功能函数
 func (c *CmsData) chaJsonCmsData() {
 	for true {
 		fmt.Println("-----------------查看已保存客户信息开始-----------------")

@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-//定义客户信息管理Service
+// 定义客户信息管理Service
 type CustomerService struct {
 	Customers  []model.Customer
 	CustomerID int

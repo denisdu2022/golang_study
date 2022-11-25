@@ -12,7 +12,7 @@ type Customer struct {
 	Email  string `json:"email"`
 }
 
-//客户信息输入函数
+// 客户信息输入函数
 func InputCustomer() (name, gender string, age int, email string) {
 	fmt.Print("请输入客户姓名: ")
 	fmt.Scanln(&name)

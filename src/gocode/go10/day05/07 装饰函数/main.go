@@ -37,7 +37,7 @@ import (
 //	fmt.Println("执行bar函数的功能***")
 //}
 
-//计算函数运行时间的装饰函数
+// 计算函数运行时间的装饰函数
 func timer(f func(x, y int)) func(int, int) {
 
 	return func(x, y int) {
@@ -49,14 +49,14 @@ func timer(f func(x, y int)) func(int, int) {
 
 }
 
-//测试调用的函数
-//相加
+// 测试调用的函数
+// 相加
 func add(x, y int) {
 	time.Sleep(time.Second * 2)
 	fmt.Println(x + y)
 }
 
-//相乘
+// 相乘
 func call(x, y int) {
 	time.Sleep(time.Second * 3)
 	fmt.Println(x * y)

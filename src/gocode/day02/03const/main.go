@@ -8,20 +8,20 @@ import "fmt"
 
 const pi = 3.1415926
 
-//批量声明常量
+// 批量声明常量
 const (
 	statusOK = 200
 	botFound = 404
 )
 
-//批量声明常量,如果某一行声明后没有赋值,默认就和上一行一致
+// 批量声明常量,如果某一行声明后没有赋值,默认就和上一行一致
 const (
 	n1 = 100
 	n2
 	n3
 )
 
-//iota:
+// iota:
 const (
 	a1 = iota //0
 	a2 = iota //1
@@ -35,7 +35,7 @@ const (
 	b3        //3
 )
 
-//中间插队
+// 中间插队
 const (
 	c1 = iota //0
 	c2 = 100  //100   iota计数+1
@@ -48,7 +48,7 @@ const (
 	d3, d4 = iota + 1, iota + 2 //2   3
 )
 
-//定义数量级
+// 定义数量级
 const (
 	_  = iota
 	KB = 1 << (10 * iota) //1左移10位 1024

@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-//文件上传函数
+// 文件上传函数
 func upload(conn net.Conn, path string) {
 	fmt.Println("文件上传开始,path: ", path)
 
@@ -53,7 +53,7 @@ func upload(conn net.Conn, path string) {
 
 }
 
-//文件下载函数
+// 文件下载函数
 func download(path string) {
 
 }

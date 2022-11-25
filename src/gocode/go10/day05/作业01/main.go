@@ -20,7 +20,7 @@ func cmsId(id int) int {
 	return index
 }
 
-//返回上一层的函数
+// 返回上一层的函数
 func isBack() bool {
 	fmt.Println("请选择是否返回上一层[Y/N]: ")
 	var backCh string
@@ -32,7 +32,7 @@ func isBack() bool {
 	}
 }
 
-//用户输入的函数
+// 用户输入的函数
 func inputUser() (name, gender, age, email string) {
 
 	fmt.Println("请输入客户姓名: ")
@@ -47,7 +47,7 @@ func inputUser() (name, gender, age, email string) {
 	return name, gender, age, email
 }
 
-//添加用户的函数
+// 添加用户的函数
 func addUser() {
 	for true {
 		fmt.Println("---------------添加客户开始---------------")
@@ -72,7 +72,7 @@ func addUser() {
 	}
 }
 
-//查询用户信息的函数
+// 查询用户信息的函数
 func chaUser() {
 	for true {
 		fmt.Println("---------------客户列表开始---------------")
@@ -90,7 +90,7 @@ func chaUser() {
 
 }
 
-//修改用户信息的函数
+// 修改用户信息的函数
 func modUser() {
 	for true {
 		fmt.Println("---------------修改客户信息开始---------------")
@@ -117,7 +117,7 @@ func modUser() {
 
 }
 
-//删除用户信息的函数
+// 删除用户信息的函数
 func deleteUser() {
 	for true {
 		fmt.Println("---------------删除客户信息开始---------------")
@@ -139,7 +139,7 @@ func deleteUser() {
 
 }
 
-//存储用户信息的函数
+// 存储用户信息的函数
 func cunUser() {
 	fmt.Println("次功能暂未上线,敬请期待......")
 }

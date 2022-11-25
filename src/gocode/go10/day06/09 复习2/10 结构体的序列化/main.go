@@ -5,13 +5,13 @@ import (
 	"fmt"
 )
 
-//省份城市结构体
+// 省份城市结构体
 type Addr struct {
 	Sheng string
 	Shi   string
 }
 
-//学生数据结构体
+// 学生数据结构体
 type Stu struct {
 	Name string
 	Age  int

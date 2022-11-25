@@ -26,7 +26,7 @@ func bar() {
 	fmt.Println("bar函数功能执行结束***")
 }
 
-//统计运行时间的函数
+// 统计运行时间的函数
 func timer(f func()) func() {
 	return func() {
 		timeStart := time.Now().Unix()

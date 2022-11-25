@@ -9,10 +9,10 @@ import (
 	"strings"
 )
 
-//客户信息管理系统数据结构
+// 客户信息管理系统数据结构
 var customers = []map[string]string{}
 
-//定义自增ID
+// 定义自增ID
 var customerID int
 
 func main() {

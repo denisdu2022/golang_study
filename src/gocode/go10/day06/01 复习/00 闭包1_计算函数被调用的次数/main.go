@@ -6,7 +6,7 @@ import (
 	"runtime"
 )
 
-//统计函数调用次数的功能函数
+// 统计函数调用次数的功能函数
 func countFunc(f func()) func() {
 	//定义函数调用次数变量,初始值为0
 	var ciShu = 0
@@ -21,7 +21,7 @@ func countFunc(f func()) func() {
 
 }
 
-//测试函数
+// 测试函数
 func foo() {
 	fmt.Println("foo 函数功能开始...")
 	fmt.Println("foo 函数功能结束...")
