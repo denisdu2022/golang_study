@@ -1,10 +1,13 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+	"github.com/gin-gonic/gin"
+)
 
 type User struct {
-	User string `json:"user"`
-	Pwd  int    `json:"pwd"`
+	User string `form:"name" json:"name"`
+	Pwd  int    `form:"pwd" json:"pwd"`
 }
 
 func main() {
@@ -14,7 +17,7 @@ func main() {
 	//ShouldBind
 	r.POST("/shouldBind/data", func(context *gin.Context) {
 		//{
-		//    "user":"luobo",
+		//    "name":"luobo",
 		//    "pwd":"123",
 		//}  --->反序列化--->映射到结构体对象
 
@@ -25,11 +28,23 @@ func main() {
 		if err != nil {
 			return
 		}
-		//响应
-		context.JSON(200, gin.H{
-			//"ShouldBind": "ShouldBind data",
-			"User": user,
-		})
+		fmt.Println(context.ShouldBind(&user))
+
+		if user.User == "luobo" && user.Pwd == 123 {
+			//响应
+			context.JSON(200, gin.H{
+				"ShouldBind": "ShouldBind data",
+				"msg":        "登录成功用户名密码正确!!!",
+				"User":       user,
+			})
+		} else {
+			context.JSON(200, gin.H{
+				"ShouldBind": "ShouldBind data",
+				"msg":        "登录失败用户名密码不正确...",
+				"User":       user,
+			})
+		}
+
 	})
 
 	//
