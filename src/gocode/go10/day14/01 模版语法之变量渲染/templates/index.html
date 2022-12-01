@@ -6,5 +6,60 @@
 </head>
 <body>
 <h2>index</h2>
+<h2>首页</h2>
+
+<h3>变量渲染</h3>
+{{/*这是注释*/}}
+{{/*这是变量渲染*/}}
+<p>姓名: {{.name}}</p>
+<p>年龄: {{.age}}</p>
+<p>性别: {{.gender}}</p>
+<p>邮箱: {{.email}}</p>
+
+<h3>切片类型</h3>
+<h4>原生格式</h4>
+<p>{{.books}}</p>
+<p>
+   成人小说: {{.books18}}
+</p>
+<p>
+   儿童小说: {{.books1}}
+</p>
+
+<p>Map : {{.stuMap}}</p>
+
+<p>结构体 : {{.stuStruct}}</p>
+
+
+<!--<p>取第一本书: {{.books01}}</p>-->
+{{/*使用模版的索引函数*/}}
+{{/*使用模版的索引函数*/}}
+<p>取第一本书: {{index .books18 0}}</p>
+<p>取第二本书: {{index .books18 1}}</p>
+<p>取第三本书: {{index .books18 2}}</p>
+<p>取第四本书: {{index .books18 3}}</p>
+
+<p>取第一本书: {{index .books 0}}</p>
+<p>取第二本书: {{index .books 1}}</p>
+<p>取第三本书: {{index .books 2}}</p>
+
+<p>Map对象</p>
+<p>学生信息:</p>
+{{/*使用深度查询句点符 .*/}}
+<p>学生姓名: {{.stuMap.name}}</p>
+<p>学生年龄: {{.stuMap.age}}</p>
+<p>学生性别: {{.stuMap.gender}}</p>
+
+<p>Struct对象</p>
+<p>学生信息:</p>
+{{/*使用深度查询句点符 .*/}}
+{{/*结构体.后的成员变量要大写(公有)*/}}
+<p>学生姓名: {{.stuStruct.Name}}</p>
+<p>学生年龄: {{.stuStruct.Age}}</p>
+
+<p>查询students的三个学生的年龄</p>
+
+
+
 </body>
 </html>

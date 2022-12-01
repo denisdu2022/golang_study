@@ -11,8 +11,8 @@ type Student struct {
 func index(ctx *gin.Context) {
 	//构建Go语言下的各类数据
 	//变量
-	var name = "luobo"
-	var age = 23
+	var name = ""
+	var age = 22
 	var gender = "male"
 	var email = "qwqwq@qq.com"
 	//切片
