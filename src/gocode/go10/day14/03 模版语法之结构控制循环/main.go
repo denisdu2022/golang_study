@@ -35,7 +35,7 @@ func index(ctx *gin.Context) {
 	//结构体对象
 	stuStruct := Student{Name: "zhangsna", Age: 18}
 
-	var students = []Student{{"李四", 21, "male", "111@qq.com", "河北省张家口市"}, {"王五", 24, "male", "222@qq.com", "河北省承德市"}, {"赵六", 25, "male", "333@qq.com", "河北省石家庄"}}
+	var students = []Student{{"李四", 17, "male", "111@qq.com", "河北省张家口市"}, {"王五", 19, "male", "222@qq.com", "河北省承德市"}, {"赵六", 20, "male", "333@qq.com", "河北省石家庄市"}}
 
 	ctx.HTML(200, "index.html", gin.H{
 		"name":    name,
