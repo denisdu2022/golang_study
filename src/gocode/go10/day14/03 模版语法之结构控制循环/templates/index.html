@@ -97,18 +97,21 @@
 
 <h3>循环和分支嵌套</h3>
 
+<p>成年人展示区</p>
 {{if gt .age 18}}
 <ul>
     {{range $book := .books18}}
-
-
+    <li>$book</li>
     {{end}}
 </ul>
 
-
-
 {{else}}
-
+<p>未成年展示区</p>
+<ul>
+    {{range $book := .books1}}
+    <li>$book</li>
+    {{end}}
+</ul>
 {{end}}
 
 
