@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<body>
+<!--<h3>控制结构之分支</h3>-->
+<!--{{/* if */}}-->
+<!--&lt;!&ndash;大于18岁展示的书籍&ndash;&gt;-->
+<!--{{if gt .age 18}}-->
+<!--<p>成年书籍</p>-->
+<!--<p>取第一本书: {{index .books18 0}}</p>-->
+<!--<p>取第二本书: {{index .books18 1}}</p>-->
+<!--<p>取第三本书: {{index .books18 2}}</p>-->
+<!--<p>取第四本书: {{index .books18 3}}</p>-->
+<!--{{end}}-->
+
+<!--&lt;!&ndash;小于18岁展示的书籍&ndash;&gt;-->
+<!--{{if lt .age 18}}-->
+<!--<p>未成年书籍</p>-->
+<!--<p>取第一本书: {{index .books1 0}}</p>-->
+<!--<p>取第二本书: {{index .books1 1}}</p>-->
+<!--<p>取第三本书: {{index .books1 2}}</p>-->
+<!--{{end}}-->
+
+<!--{{/* if else */}}-->
+<!--&lt;!&ndash;大于18岁展示的书籍&ndash;&gt;-->
+<!--{{if gt .age 18}}-->
+<!--<p>成年书籍</p>-->
+<!--<p>取第一本书: {{index .books18 0}}</p>-->
+<!--<p>取第二本书: {{index .books18 1}}</p>-->
+<!--<p>取第三本书: {{index .books18 2}}</p>-->
+<!--<p>取第四本书: {{index .books18 3}}</p>-->
+<!--{{else}}-->
+<!--&lt;!&ndash;小于18岁展示的书籍&ndash;&gt;-->
+<!--<p>未成年书籍</p>-->
+<!--<p>取第一本书: {{index .books1 0}}</p>-->
+<!--<p>取第二本书: {{index .books1 1}}</p>-->
+<!--<p>取第三本书: {{index .books1 2}}</p>-->
+<!--{{end}}-->
+
+<!--<p>登录与否</p>-->
+<!--{{if eq .name ""}}-->
+<!--<p><button>登录</button></p>-->
+<!--{{else}}-->
+<!--<p>{{.name}} 登录成功!!!</p>-->
+<!--{{end}}-->
+
+<h3>循环控制</h3>
+<p>{{.books18}}</p>
+
+<!--无序列表展示-->
+<ul>
+    <li>{{index .books18 0}}</li>
+    <li>{{index .books18 1}}</li>
+    <li>{{index .books18 2}}</li>
+    <li>{{index .books18 3}}</li>
+</ul>
+
+<!--循环展示-->
+<ul>
+    {{ range $book := .books18}}
+    <li>{{$book}}</li>
+    {{end}}
+</ul>
+
+<!--展示所有的学生-->
+<div class="row">
+    <div class="col-md-8 col-md-offset-3 "  >
+        <table class="table table-hover">
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>邮箱</th>
+                <th>住址</th>
+            </tr>
+<!--            增加序号可以增加索引-->
+            {{range $index,$stu := .students }}
+            <tr>
+                <td>{{$index}}</td>
+                <td>{{$stu.Name}}</td>
+                <td>{{$stu.Age}}</td>
+                <td>{{$stu.Gender}}</td>
+                <td>{{$stu.Email}}</td>
+                <td>{{$stu.Addr}}</td>
+            </tr>
+            {{end}}
+        </table>
+    </div>
+
+</div>
+
+<h3>循环和分支嵌套</h3>
+
+<p>成年人展示区</p>
+{{if gt .age 18}}
+<ul>
+    {{range $book := .books18}}
+    <li>$book</li>
+    {{end}}
+</ul>
+
+{{else}}
+<p>未成年展示区</p>
+<ul>
+    {{range $book := .books1}}
+    <li>$book</li>
+    {{end}}
+</ul>
+{{end}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
