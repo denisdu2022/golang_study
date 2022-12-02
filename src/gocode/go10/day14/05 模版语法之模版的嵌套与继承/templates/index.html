@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<body>
+
+<!--<h3>循环控制</h3>-->
+<!--<p>{{.books18}}</p>-->
+
+<!--&lt;!&ndash;无序列表展示&ndash;&gt;-->
+<!--<ul>-->
+<!--    <li>{{index .books18 0}}</li>-->
+<!--    <li>{{index .books18 1}}</li>-->
+<!--    <li>{{index .books18 2}}</li>-->
+<!--    <li>{{index .books18 3}}</li>-->
+<!--</ul>-->
+
+<!--&lt;!&ndash;循环展示&ndash;&gt;-->
+<!--<ul>-->
+<!--    {{ range $book := .books18}}-->
+<!--    <li>{{$book}}</li>-->
+<!--    {{end}}-->
+<!--</ul>-->
+
+<!--展示所有的学生-->
+<div class="row">
+    <div class="col-md-8 col-md-offset-3 "  >
+        <table class="table table-hover">
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>邮箱</th>
+                <th>住址</th>
+            </tr>
+<!--            增加序号可以增加索引-->
+            {{range $index,$stu := .students }}
+            <tr>
+<!--                编号自加1-->
+                <td>{{add $index 1}}</td>
+                <td>{{$stu.Name}}</td>
+                <td>{{$stu.Age}}</td>
+                <td>{{$stu.Gender}}</td>
+                <td>{{$stu.Email}}</td>
+                <td>{{$stu.Addr}}</td>
+            </tr>
+            {{end}}
+        </table>
+    </div>
+
+</div>
+
+<!--<h3>循环和分支嵌套</h3>-->
+
+<!--{{/*分支里嵌套循环*/}}-->
+<!--{{/*-->
+<!--{{if gt .age 18}}-->
+<!--<p>成年人展示区</p>-->
+<!--<ul>-->
+<!--    {{range $book := .books18}}-->
+<!--    <li>{{$book}}</li>-->
+<!--    {{end}}-->
+<!--</ul>-->
+
+<!--{{else}}-->
+<!--<p>未成年展示区</p>-->
+<!--<ul>-->
+<!--    {{range $book := .books1}}-->
+<!--    <li>{{$book}}</li>-->
+<!--    {{end}}-->
+<!--</ul>-->
+<!--{{end}}-->
+<!--*/}}-->
+
+<!--{{/*循环里嵌套分支*/}}-->
+<!--&lt;!&ndash;展示所有的学生&ndash;&gt;-->
+<!--<div class="row">-->
+<!--    <div class="col-md-8 col-md-offset-3 "  >-->
+<!--        <table class="table table-hover">-->
+<!--            <tr>-->
+<!--                <th>编号</th>-->
+<!--                <th>姓名</th>-->
+<!--                <th>年龄</th>-->
+<!--                <th>性别</th>-->
+<!--                <th>邮箱</th>-->
+<!--                <th>住址</th>-->
+<!--            </tr>-->
+<!--            &lt;!&ndash;            增加序号可以增加索引&ndash;&gt;-->
+<!--            {{range $index,$stu := .students }}-->
+<!--            {{/*展示年龄大于18岁的学生*/}}-->
+<!--            {{if gt $stu.Age 18}}-->
+<!--            <tr>-->
+<!--                <td>{{$index}}</td>-->
+<!--                <td>{{$stu.Name}}</td>-->
+<!--                <td>{{$stu.Age}}</td>-->
+<!--                <td>{{$stu.Gender}}</td>-->
+<!--                <td>{{$stu.Email}}</td>-->
+<!--                <td>{{$stu.Addr}}</td>-->
+<!--            </tr>-->
+<!--            {{end}}-->
+<!--            {{end}}-->
+<!--        </table>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+<p>变量赋值</p>
+<!--展示所有的学生-->
+<p>全局点 . : {{.}}</p>
+<p>登录人年龄: {{.age}}</p>
+<p>展示年龄大于登录人年龄的学生</p>
+<div class="row">
+    <div class="col-md-8 col-md-offset-3 "  >
+        <table class="table table-hover">
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>邮箱</th>
+                <th>住址</th>
+            </tr>
+            {{/*局部点 变量赋值*/}}
+            {{$loginAge := .age}}
+            <!--增加序号可以增加索引-->
+            {{range $index,$stu := .students }}
+            {{/*展示年龄大于登录人年龄的学生*/}}
+            {{if gt $stu.Age $loginAge}}
+            <tr>
+                <td>{{add $index 1}}</td>
+                <td>{{$stu.Name}}</td>
+                <td>{{$stu.Age}}</td>
+                <td>{{$stu.Gender}}</td>
+                <td>{{$stu.Email}}</td>
+                <td>{{$stu.Addr}}</td>
+            </tr>
+            {{end}}
+            {{end}}
+        </table>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
