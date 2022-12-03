@@ -11,7 +11,10 @@
   <link rel="icon" href="https://cdn.jsdelivr.cn/npm/@bootcss/v3.bootcss.com@1.0.52/favicon.ico">
   <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/theme/">
 
+
+  {{block "title" .}}
   <title>学生信息管理系统</title>
+  {{end}}
   <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
@@ -37,13 +40,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">学生选课系统</a>
+      <a class="navbar-brand" href="/">学生选课系统</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">学生管理</a></li>
-        <li><a href="#">课程管理</a></li>
-        <li><a href="#">班级管理</a></li>
+        <li class="active"><a href="/student">学生管理</a></li>
+        <li><a href="/course">课程管理</a></li>
+        <li><a href="class">班级管理</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -75,7 +78,7 @@
           </div>
           <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
             <div class="panel-body">
-              <p>学生管理</p>
+              <p><a href="/student">学生管理</a></p>
             </div>
           </div>
         </div>
@@ -89,7 +92,7 @@
           </div>
           <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
             <div class="panel-body">
-                <p>课程管理</p>
+                <p><a href="/course">课程管理</a></p>
             </div>
           </div>
         </div>
@@ -103,7 +106,7 @@
           </div>
           <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
             <div class="panel-body">
-                 <p>班级管理</p>
+                 <p><a href="/class">班级管理</a></p>
             </div>
           </div>
         </div>
