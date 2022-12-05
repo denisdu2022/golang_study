@@ -14,6 +14,8 @@ type t1 struct {
 	Age  int
 }
 
+//创建模型类
+
 func main() {
 	//mysql连接信息
 	//dsn := "user:pwd@tcp(127.0.0.1:3306)/database?charset=utf8mb4&parseTime=True&loc=Local"
