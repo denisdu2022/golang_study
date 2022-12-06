@@ -1,0 +1,78 @@
+
+
+结构体 映射 table
+
+
+
+create table t1(
+        name varchar(255),unique
+        age int
+)
+
+type t1 struct{
+    Name string `gorm:"type:varchar(32);unique;notnull"`
+    Age int
+}
+
+--选课系统 基于SQL的结构设计
+
+--班级表: 班级名,班级人数,导员,创建时间,更新时间,删除时间
+
+--老师表: 姓名,年龄,手机号,创建时间,更新时间,删除时间
+
+--学生表:学号,姓名,年龄,性别,班级,创建时间,更新时间,删除时间
+
+--课程表:课程名,学分,教师,周期,老师,创建时间,更新时间,删除时间
+
+--关系表:主键 学生ID  课程ID
+
+create table teachers(
+    id int primary key,
+    name varchar(32)
+)
+
+create table courses(
+    id int primary key,
+    name varchar(32),
+    credit int, //学分
+    per int, //周期
+    addr varchar(32), //教室
+    teacher_id int,
+    FOREIGN KEY(teacher_id) REFERENCES teachers(id) ON DELETE CASCADE ON UPDATE CASCADE -- 建立外键约束 级联删除和更新
+)
+
+create table classes(
+    id int primary key,
+    name varchar(32),
+    tutor_id int //导员 ID
+    FOREIGN KEY(tutor_id) REFERENCES teachers(id) ON DELETE CASCADE ON UPDATE CASCADE -- 建立外键约束 级联删除和更新
+)
+
+create table students(
+    id int primary key,
+    name varchar(32),
+    class_id int,
+    FOREIGN KEY(class_id) REFERENCES classes(id) ON DELETE CASCADE ON UPDATE CASCADE -- 建立外键约束 级联删除和更新
+)
+
+create table StudentToCourse(
+    id int primary key,
+    student_id int,
+    FOREIGN KEY(student_id) REFERENCES students(id) ON DELETE CASCADE ON UPDATE CASCADE -- 建立外键约束 级联删除和更新
+    courses_id int,
+    FOREIGN KEY(courses_id) REFERENCES courses(id) ON DELETE CASCADE ON UPDATE CASCADE -- 建立外键约束 级联删除和更新
+    score int,
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
