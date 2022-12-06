@@ -33,6 +33,12 @@ type Teacher struct {
 	Remark string `gorm:"type:varchar(255);"`
 }
 
+// 自定义表名
+
+func (t Teacher) TableName() string {
+	return "css_teacher"
+}
+
 //班级表
 
 type Class struct {
