@@ -122,6 +122,5 @@ func main() {
 
 	r.POST("/add", add)
 
-	//启动
 	r.Run()
 }
