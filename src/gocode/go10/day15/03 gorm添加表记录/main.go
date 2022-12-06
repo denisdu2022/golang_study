@@ -112,6 +112,7 @@ func add(ctx *gin.Context) {
 
 func main() {
 
+	//创建路由对象
 	r := gin.Default()
 
 	//数据库初始化
@@ -121,5 +122,6 @@ func main() {
 
 	r.POST("/add", add)
 
+	//启动
 	r.Run()
 }
