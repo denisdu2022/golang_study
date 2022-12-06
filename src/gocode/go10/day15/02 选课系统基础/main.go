@@ -10,9 +10,7 @@ import (
 	"time"
 )
 
-//创建选课系统的模型类
-
-//基本的模型类
+//公共的模型表
 
 type BaseModel struct {
 	ID         int        `gorm:"primaryKey"`
@@ -33,29 +31,53 @@ type Teacher struct {
 	Remark string `gorm:"type:varchar(255);"`
 }
 
-// 自定义表名
+//课程表
+//Teacher 就是TeacherID
 
-func (t Teacher) TableName() string {
-	return "css_teacher"
+type Course struct {
+	BaseModel
+	Credit int //学分
+	Period int //周期
+	//一对多
+	TeacherID int
+	//写全
+	//Teacher Teacher
+	//缩写
+	Teacher
 }
 
 //班级表
 
 type Class struct {
-	//继承基本模型
-	//隐藏字段  下边是不写的字段名与字段类型一致就是:BaseModel BaseModel
 	BaseModel
-	Num int
+	Num     int //班级人数
+	TutorID int
+	Tutor   Teacher
 }
 
-// 课程表
+//学生表
 
-type Course struct {
+type Student struct {
+	BaseModel
+	Sno    int
+	Pwd    string `gorm:"type:varchar(100);not null"`
+	Tel    string `gorm:"type:char(11);"`
+	Gender byte   `gorm:"default:1"`
+	Birth  *time.Time
+	Remark string `gorm:"type:varchar(255);"`
+	//建立一对多的关联关系
+	ClassID int
+	//用那张表的主键去关联那个字段  外键约束
+	Class Class `gorm:"foreignKey:ClassID"`
+
+	//建立多对多的关联关系:通过创建第三张表 courses 只是orm层 结构体的成员变量,在sql层没有这个字段,会有一张多对多的关系表
+	Courses []Course `gorm:"many2many:student2course;constraint:OnDelete:CASCADE;"`
 }
 
 func main() {
+
 	//数据库连接信息
-	dsn := "root:******@tcp(127.0.0.1:3306)/css?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:go20222023@tcp(127.0.0.1:3306)/css?charset=utf8mb4&parseTime=True&loc=Local"
 
 	//创建日志对象
 	newLogger := logger.New(
@@ -75,5 +97,9 @@ func main() {
 	fmt.Println(db, err)
 
 	//迁移模型类: 将模型类转换为SQL表
-	db.AutoMigrate(&Teacher{})
+	//db.AutoMigrate(&Teacher{})
+	db.AutoMigrate(&Course{})
+	db.AutoMigrate(&Class{})
+	db.AutoMigrate(&Student{})
+
 }

@@ -19,7 +19,7 @@ type t1 struct {
 func main() {
 	//mysql连接信息
 	//dsn := "user:pwd@tcp(127.0.0.1:3306)/database?charset=utf8mb4&parseTime=True&loc=Local"
-	dsn := "denis:CIAy2k0308@tcp(mysql-internet-cn-north-1-72d891cb573c48c8.rds.jdcloud.com:3306)/css?charset=utf8mb4"
+	dsn := "denis:*******@tcp(mysql-internet-cn-north-1-72d891cb573c48c8.rds.jdcloud.com:3306)/css?charset=utf8mb4"
 
 	// 创建日志对象
 	newLogger := logger.New(

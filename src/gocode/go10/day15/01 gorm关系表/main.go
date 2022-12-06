@@ -55,7 +55,7 @@ type Course struct {
 
 func main() {
 	//数据库连接信息
-	dsn := "root:******@tcp(127.0.0.1:3306)/css?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:go20222023@tcp(127.0.0.1:3306)/css?charset=utf8mb4&parseTime=True&loc=Local"
 
 	//创建日志对象
 	newLogger := logger.New(
