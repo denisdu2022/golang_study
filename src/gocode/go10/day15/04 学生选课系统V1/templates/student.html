@@ -1,0 +1,36 @@
+{{/*调用模版文件*/}}
+{{template "base.html" .}}
+
+{{define "title" }}
+<title>学生管理首页</title>
+{{end}}
+
+{{/*覆盖(重写content盒子)*/}}
+{{define "content"}}
+<h3>学生管理</h3>
+<p><a class="btn btn-primary" href="/student/add">添加学生</a></p>
+
+
+
+
+<table class="table table-hover">
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>性别</th>
+        <th>邮箱</th>
+        <th>住址</th>
+    </tr>
+<!--    {{range $stu := .students }}-->
+<!--    <tr>-->
+<!--        <td>{{$stu.Sid}}</td>-->
+<!--        <td>{{$stu.Name}}</td>-->
+<!--        <td>{{$stu.Age}}</td>-->
+<!--        <td>{{$stu.Gender}}</td>-->
+<!--        <td>{{$stu.Email}}</td>-->
+<!--        <td>{{$stu.Addr}}</td>-->
+<!--    </tr>-->
+<!--    {{end}}-->
+</table>
+{{end}}
