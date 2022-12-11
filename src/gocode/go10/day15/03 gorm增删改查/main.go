@@ -179,6 +179,60 @@ func add(ctx *gin.Context) {
 	})
 }
 
+//查询
+
+func selects(ctx *gin.Context) {
+	////查询所有的老师
+	//var teachers []Teacher
+	//db.Find(&teachers)
+	//fmt.Println(teachers)
+	///*
+	//	解析过程:
+	//			select * from teachers;
+	//
+	//		7,luobo,2022-12-08 13:30:58.554,2022-12-08 13:30:58.554,2022-12-08 13:30:58.554,1001,luobo,13456767890,,高级讲师
+	//		8,jack,2022-12-08 13:30:58.554,2022-12-08 13:30:58.554,2022-12-08 13:30:58.554,1002,jack,13456763450,,中级讲师
+	//		9,hah,2022-12-08 13:30:58.554,2022-12-08 13:30:58.554,2022-12-08 13:30:58.554,1003,hah,13678767890,,初级讲师
+	//
+	//		t1 := Teacher{Name:"luobo",Tno:1001,.......}
+	//		t2 := Teacher{Name:"jack",Tno:1001,.......}
+	//		t3 := Teacher{Name:"hah",Tno:1001,.......}
+	//
+	//		Teachers := []Teacher{t1,t2,t3}
+	//*/
+
+	//查询单条记录
+	//案例1
+	////实例化对象
+	//s := Student{}
+	////数据库查询单条记录
+	//db.Find(&s)
+	//fmt.Println("s:::", s)
+
+	//案例2
+	////实例化对象
+	//s := Student{}
+	////数据库查询单条记录 取第一条
+	//db.First(&s)
+	//fmt.Println("s:::", s)
+
+	////实例化对象
+	//s := Student{}
+	////数据库查询单条记录 取最后第一条
+	//db.Last(&s)
+	//fmt.Println("s:::", s)
+
+	//Where查询
+	var student Student
+
+	db.Where("id = ?", 3).Find(&student)
+
+	ctx.JSON(200, gin.H{
+		//"teachers": teachers,
+		"student": student,
+	})
+}
+
 func main() {
 
 	//创建路由对象
@@ -189,7 +243,13 @@ func main() {
 
 	fmt.Println(r)
 
+	//添加
 	r.POST("/add", add)
+
+	////查询
+	//r.GET("/select", listStu)
+	//查询
+	r.GET("/selects", selects)
 
 	//启动
 	r.Run()

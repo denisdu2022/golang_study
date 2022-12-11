@@ -17,20 +17,18 @@
     <tr>
         <th>学号</th>
         <th>姓名</th>
-        <th>年龄</th>
         <th>性别</th>
-        <th>邮箱</th>
-        <th>住址</th>
+        <th>手机号</th>
+        <th>备注</th>
     </tr>
-<!--    {{range $stu := .students }}-->
-<!--    <tr>-->
-<!--        <td>{{$stu.Sid}}</td>-->
-<!--        <td>{{$stu.Name}}</td>-->
-<!--        <td>{{$stu.Age}}</td>-->
-<!--        <td>{{$stu.Gender}}</td>-->
-<!--        <td>{{$stu.Email}}</td>-->
-<!--        <td>{{$stu.Addr}}</td>-->
-<!--    </tr>-->
-<!--    {{end}}-->
+    {{range $stu := .students }}
+    <tr>
+        <td>{{$stu.Sno}}</td>
+        <td>{{$stu.Name}}</td>
+        <td>{{$stu.Gender}}</td>
+        <td>{{$stu.Tel}}</td>
+        <td>{{$stu.Remark}}</td>
+    </tr>
+    {{end}}
 </table>
 {{end}}
