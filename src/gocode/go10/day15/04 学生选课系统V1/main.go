@@ -137,8 +137,14 @@ func student(ctx *gin.Context) {
 	//ctx.HTML(200, "student.html", gin.H{
 	//	"students": students,
 	//})
+
+	//查询student表中的记录
+	var students []Student
+
+	db.Find(&students)
+
 	ctx.HTML(200, "student.html", gin.H{
-		"students": "学生管理",
+		"students": students,
 	})
 }
 
