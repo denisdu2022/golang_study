@@ -222,14 +222,18 @@ func selects(ctx *gin.Context) {
 	//db.Last(&s)
 	//fmt.Println("s:::", s)
 
-	//Where查询
-	var student Student
+	////Where查询
+	//var student Student
+	////查询ID为3的学生  查单条
+	//db.Where("id = ?", 3).Find(&student)
 
-	db.Where("id = ?", 3).Find(&student)
+	var students []Student
+	db.Where("gender = ?", 1).Find(&students)
 
 	ctx.JSON(200, gin.H{
 		//"teachers": teachers,
-		"student": student,
+		//"student":  student,
+		"students": students,
 	})
 }
 

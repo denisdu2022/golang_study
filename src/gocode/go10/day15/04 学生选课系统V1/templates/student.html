@@ -9,6 +9,13 @@
 {{define "content"}}
 <h3>学生管理</h3>
 <p><a class="btn btn-primary" href="/student/add">添加学生</a></p>
+<form action="" class="form-inline pull-right" >
+    <div class="form-group">
+        <input name="user" type="text" class="form-control" id="exampleInputName2" placeholder="姓名">
+    </div>
+    <button type="submit" class="btn btn-danger">Search</button>
+</form>
+
 
 
 
@@ -32,3 +39,5 @@
     {{end}}
 </table>
 {{end}}
+
+
