@@ -129,19 +129,18 @@ func index(ctx *gin.Context) {
 }
 
 func student(ctx *gin.Context) {
-	//模拟从数据库取出的数据
-	//实例化结构体对象
-	//students := []Student{
-	//	{1000, "张三", 22, "male", "111@qq.com", "河北省承德市"}, {1001, "李四", 21, "male", "222@qq.com", "河北省石家庄"}, {1002, "王五", 23, "male", "333@qq.com", "河北省廊坊"}, {1003, "赵六", 20, "male", "555@qq.com", "河北省承德市"},
-	//}
-	//ctx.HTML(200, "student.html", gin.H{
-	//	"students": students,
-	//})
+	//获取过滤参数
+	user := ctx.Query("user")
+	fmt.Println("user:::", user)
 
 	//查询student表中的记录
 	var students []Student
-
-	db.Find(&students)
+	//判断是否携带参数
+	if user == "" {
+		db.Find(&students)
+	} else {
+		db.Where("name like ?", "%"+user+"%").Find(&students)
+	}
 
 	ctx.HTML(200, "student.html", gin.H{
 		"students": students,
@@ -167,6 +166,8 @@ func createMyRender() multitemplate.Renderer {
 }
 
 //添加学生
+
+//
 
 //Get请求
 

@@ -1,4 +1,4 @@
-module gormconnect
+module gormmx
 
 go 1.19
 
