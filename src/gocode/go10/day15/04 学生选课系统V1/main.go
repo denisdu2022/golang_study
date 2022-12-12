@@ -167,6 +167,8 @@ func createMyRender() multitemplate.Renderer {
 
 //添加学生
 
+//
+
 //Get请求
 
 func GetStuAdd(ctx *gin.Context) {
