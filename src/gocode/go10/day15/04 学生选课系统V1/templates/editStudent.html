@@ -1,0 +1,71 @@
+{{/*调用模版文件*/}}
+{{template "base.html" .}}
+
+{{define "title"}}
+<title>添加学生</title>
+{{end}}
+
+{{define "content"}}
+<h3>编辑学生</h3>
+
+  <form action="" method="post">
+    <div class="form-group">
+      <label for="sid">学号</label>
+      <input id="sid" type="text" class="form-control" placeholder="学号" name="sid" value="{{.editStu.Sno}}">
+    </div>
+    <div class="form-group">
+      <label for="user">姓名</label>
+      <input id="user" type="text" class="form-control" placeholder="姓名" name="user" value="{{.editStu.Name}}">
+    </div>
+    <div class="form-group">
+      <label for="pwd">密码</label>
+      <input id="pwd" type="password" class="form-control" placeholder="密码" name="pwd" value="{{.editStu.Pwd}}">
+    </div>
+    <div class="form-group">
+      <label for="tel">手机号</label>
+      <input id="tel" type="text" class="form-control" placeholder="手机号" name="tel" value="{{.editStu.Tel}}">
+    </div>
+    <div class="form-group">
+      <label for="gender">性别</label>
+      <!--    <input id="gender" type="text" class="form-control" placeholder="性别" name="gender">-->
+      <select name="gender" id="gender" class="form-control">
+        {{if eq .editStu.Gender 1}}
+        <option value="0">女</option>
+        <option selected value="1">男</option>
+        <option value="2">其他</option>
+        {{else if eq .editStu.Gender 0}}
+        <option selected value="0">女</option>
+        <option value="1">男</option>
+        <option value="2">其他</option>
+        {{else}}
+        <option value="0">女</option>
+        <option value="1">男</option>
+        <option selected value="2">其他</option>
+        {{end}}
+
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="class">班级</label>
+      <select name="class" id="class" class="form-control">
+        {{$editStuClassID := .editStu.ClassID}}
+        {{range $class := .classes}}
+        {{if eq $class.ID $editStuClassID}}
+        <option selected value="{{$class.ID}}">{{$class.Name}}</option>
+        {{else}}
+        <option value="{{$class.ID}}">{{$class.Name}}</option>
+        {{end}}
+        {{end}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="remark">备注</label>
+      <input id="remark" type="text" class="form-control" placeholder="备注" name="remark" value="{{.editStu.Remark}}">
+    </div>
+    <div class="form-group">
+      <input type="submit" value="提交" class="btn-group-lg btn-info pull-right">
+    </div>
+  </form>
+  {{end}}
+
+

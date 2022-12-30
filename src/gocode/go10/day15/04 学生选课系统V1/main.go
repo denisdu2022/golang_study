@@ -158,7 +158,10 @@ func createMyRender() multitemplate.Renderer {
 	render := multitemplate.NewRenderer()
 	render.AddFromFiles("index.html", "templates/base.html", "templates/index.html")
 	render.AddFromFiles("student.html", "templates/base.html", "templates/student.html")
+	//添加学生
 	render.AddFromFiles("getStuAdd", "templates/base.html", "templates/getStuAdd.html")
+	//修改(更新)学生
+	render.AddFromFiles("editStudent.html", "templates/base.html", "templates/editStudent.html")
 	render.AddFromFiles("class", "templates/base.html", "templates/class.html")
 	render.AddFromFiles("course", "templates/base.html", "templates/course.html")
 
@@ -185,17 +188,18 @@ func GetStuAdd(ctx *gin.Context) {
 
 func PostStuAdd(ctx *gin.Context) {
 	//1.获取前端请求数据
-	var sid, genderInt, classID int
 	//转换为int
-	sid, _ = strconv.Atoi(ctx.PostForm("sid"))
+	sid, _ := strconv.Atoi(ctx.PostForm("sid"))
 	name := ctx.PostForm("user")
 	pwd := ctx.PostForm("pwd")
 	tel := ctx.PostForm("tel")
-	genderInt, _ = strconv.Atoi(ctx.PostForm("gender"))
+	genderInt, _ := strconv.Atoi(ctx.PostForm("gender"))
+	//fmt.Println(genderInt)
 	//强转为uint8
 	gender := uint8(genderInt)
+	//fmt.Println(gender)
 	//班级
-	classID, _ = strconv.Atoi(ctx.PostForm("class"))
+	classID, _ := strconv.Atoi(ctx.PostForm("class"))
 	remark := ctx.PostForm("remark")
 	fmt.Println("--------------------", sid, name, pwd, tel, genderInt, gender, classID, remark)
 	//2.数据验证
@@ -213,6 +217,42 @@ func PostStuAdd(ctx *gin.Context) {
 		"msg": "学生添加成功!!!",
 	})
 
+}
+
+//删除学生
+
+func DeleteStu(ctx *gin.Context) {
+
+	//获取delID
+	delID := ctx.Param("delID")
+	//删除符合条件的学生
+	db.Where("sno = ?", delID).Delete(Student{})
+
+	//响应
+	ctx.JSON(200, gin.H{
+		"msg": "删除成功",
+	})
+}
+
+//编辑学生
+
+func GetStuEditHtml(ctx *gin.Context) {
+	//获取editID 获取路径参数,即学号
+	editID := ctx.Param("editID")
+	//查询符合条件的学生对象
+	var editStu Student
+	db.Where("sno = ?", editID).Find(&editStu)
+	fmt.Println("editStu: ", editStu)
+
+	//查询所有的班级记录
+	var classes []Class
+	db.Find(&classes)
+
+	//响应
+	ctx.HTML(200, "editStudent.html", gin.H{
+		"editStu": editStu,
+		"classes": classes,
+	})
 }
 
 func main() {
@@ -237,6 +277,10 @@ func main() {
 	//添加学生
 	r.GET("/student/add", GetStuAdd)
 	r.POST("/student/add", PostStuAdd)
+	//删除学生
+	r.GET("/student/delete/:delID", DeleteStu)
+	//编辑学生
+	r.GET("/student/edit/:editID", GetStuEditHtml)
 
 	//班级页面
 	r.GET("/class", class)

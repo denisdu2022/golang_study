@@ -272,11 +272,18 @@ func delete(ctx *gin.Context) {
 	////实例化删除对象
 	//var s = Student{BaseModel: BaseModel{ID: 2}}
 	////删除表记录
-	//db.Delete(s)
+	//db.Delete(&s)
+
+	////按照ID删除
+	//var s = Student{BaseModel: BaseModel{ID: 3}}
+	////删除表记录
+	//db.Delete(&s)
 
 	//删除多条记录
 	//按条件删除,删除gender=1的记录
-	db.Where("gender = ?", 1).Delete(Student{})
+	//db.Where("gender = ?", 1).Delete(Student{})
+
+	db.Where("gender = ?", 2).Delete(Student{})
 
 	ctx.JSON(200, gin.H{
 		"msg": "删除成功!",
