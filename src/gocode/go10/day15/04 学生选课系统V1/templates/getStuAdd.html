@@ -37,10 +37,13 @@
   <div class="form-group">
     <label for="class">班级</label>
     <select name="class" id="class" class="form-control">
-      <option value="2">软件一班</option>
-      <option value="3">软件二班</option>
-      <option value="4">计算机科学一班</option>
-      <option value="5">计算机科学二班</option>
+<!--      <option value="2">软件一班</option>-->
+<!--      <option value="3">软件二班</option>-->
+<!--      <option value="4">计算机科学一班</option>-->
+<!--      <option value="5">计算机科学二班</option>-->
+      {{range $class := .classes}}
+      <option value="{{$class.ID}}">{{$class.Name}}</option>
+      {{end}}
     </select>
   </div>
   <div class="form-group">
