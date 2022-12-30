@@ -172,7 +172,13 @@ func createMyRender() multitemplate.Renderer {
 //Get请求
 
 func GetStuAdd(ctx *gin.Context) {
-	ctx.HTML(200, "getStuAdd", nil)
+	//查询所有的班级记录
+	var classes []Class
+	db.Find(&classes)
+	fmt.Println(classes)
+	ctx.HTML(200, "getStuAdd", gin.H{
+		"classes": classes,
+	})
 }
 
 //Post请求
@@ -191,12 +197,13 @@ func PostStuAdd(ctx *gin.Context) {
 	//班级
 	classID, _ = strconv.Atoi(ctx.PostForm("class"))
 	remark := ctx.PostForm("remark")
-	fmt.Println(sid, name, pwd, tel, genderInt, gender, classID, remark)
+	fmt.Println("--------------------", sid, name, pwd, tel, genderInt, gender, classID, remark)
 	//2.数据验证
 
 	//3.添加数据到数据库存储
 	//实例化结构体对象
 	addStudent := Student{BaseModel: BaseModel{Name: name}, Sno: sid, Pwd: pwd, Tel: tel, Gender: gender, ClassID: classID, Remark: remark}
+	fmt.Println(addStudent)
 	//插入到数据库
 	db.Create(&addStudent)
 
@@ -238,5 +245,7 @@ func main() {
 
 	//启动
 	r.Run(":8090")
+
+	//test
 
 }
