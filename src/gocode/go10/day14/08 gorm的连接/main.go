@@ -11,8 +11,7 @@ import (
 
 func main() {
 	//mysql连接信息
-	//dsn := "user:pwd@tcp(127.0.0.1:3306)/database?charset=utf8mb4&parseTime=True&loc=Local"
-	dsn := "denis:*****@tcp(mysql-internet-cn-north-1-72d891cb573c48c8.rds.jdcloud.com:3306)/css?charset=utf8mb4"
+	dsn := "user:pwd@tcp(127.0.0.1:3306)/database?charset=utf8mb4&parseTime=True&loc=Local"
 
 	// 创建日志对象
 	newLogger := logger.New(
