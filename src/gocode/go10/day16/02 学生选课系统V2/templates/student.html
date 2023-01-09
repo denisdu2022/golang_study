@@ -1,0 +1,52 @@
+{{/*调用模版文件*/}}
+{{template "base.html" .}}
+
+{{define "title" }}
+<title>学生管理首页</title>
+{{end}}
+
+<!--  居中的盒子-->
+<!--  {{block "css" .}}-->
+<!--  <style>-->
+<!--    tr th,tr td{-->
+<!--        text-align: center;-->
+<!--    }-->
+<!--  </style>-->
+<!--  {{end}}-->
+
+{{/*覆盖(重写content盒子)*/}}
+{{define "content"}}
+<h3>学生管理</h3>
+<p><a class="btn btn-primary" href="/student/add">添加学生</a></p>
+<form action="" class="form-inline pull-right" >
+    <div class="form-group">
+        <input name="user" type="text" class="form-control" id="exampleInputName2" placeholder="姓名">
+    </div>
+    <button type="submit" class="btn btn-danger">Search</button>
+</form>
+
+<table class="table table-hover">
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>手机号</th>
+        <th>备注</th>
+        <th>编辑</th>
+        <th>删除</th>
+    </tr>
+    {{range $stu := .students }}
+    <tr>
+        <td>{{$stu.Sno}}</td>
+        <td>{{$stu.Name}}</td>
+        <td>{{$stu.Gender}}</td>
+        <td>{{$stu.Tel}}</td>
+        <td>{{$stu.Remark}}</td>
+        <td><a href="/student/edit/{{$stu.Sno}}"><span class="glyphicon glyphicon-edit"></span></a></td>
+        <td><a href="/student/delete/{{$stu.Sno}}"><span class="glyphicon glyphicon-trash"></span></a></td>
+    </tr>
+    {{end}}
+</table>
+{{end}}
+
+

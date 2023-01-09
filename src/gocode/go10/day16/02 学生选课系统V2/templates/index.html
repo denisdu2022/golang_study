@@ -1,0 +1,15 @@
+{{/*调用模版文件*/}}
+{{template "base.html" .}}
+
+{{define "title"}}
+<title>首页页面</title>
+{{end}}
+
+{{/*覆盖(重写content盒子)*/}}
+{{define "content"}}
+<div class="jumbotron">
+    <h1>学生选课系统</h1>
+    <p>...</p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+</div>
+{{end}}
