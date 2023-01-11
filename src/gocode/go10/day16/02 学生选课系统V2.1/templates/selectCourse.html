@@ -1,0 +1,60 @@
+{{/*调用模版文件*/}}
+{{template "base.html" .}}
+
+{{define "title" }}
+<title>{{.student.Name}}选课系统</title>
+{{end}}
+
+<!--header盒子-->
+{{define "header"}}
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">学生选课系统</a>
+    </div>
+  </div>
+</nav>
+{{end}}
+<!--菜单盒子-->
+{{define "menu"}}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">您好: 学生{{.student.Name}}</h3>
+  </div>
+  <div class="panel-body">
+    <p><a href="/student/{{.student.Sno}}/">个人信息</a></p>
+    <p><a href="/student/{{.student.Sno}}/selectCourse/">选课系统</a></p>
+  </div>
+</div>
+{{end}}
+
+{{define "content"}}
+<p>选课表格</p>
+<form action="" method="post">
+  <table class="table table-hover">
+    <tr>
+      <th>选择</th>
+      <th>课程名</th>
+      <th>周期</th>
+      <th>学分</th>
+      <th>任教老师</th>
+    </tr>
+    {{range $course := .courses}}
+    <tr>
+      <td><input type="checkbox" name="course_id" value="{{$course.ID}}"></td>
+      <td>{{$course.Name}}</td>
+      <td>{{$course.Period}}</td>
+      <td>{{$course.Credit}}</td>
+      <td>{{$course.TeacherID}}</td>
+    </tr>
+    {{end}}
+  </table>
+  <input type="submit" class="btn btn-primary pull-right">
+</form>
+{{end}}
