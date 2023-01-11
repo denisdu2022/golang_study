@@ -1,0 +1,64 @@
+{{/*调用模版文件*/}}
+{{template "base.html" .}}
+
+{{define "title" }}
+<title>{{.student.Name}}的个人信息</title>
+{{end}}
+
+<!--header盒子-->
+{{define "header"}}
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">学生选课系统</a>
+        </div>
+    </div>
+</nav>
+{{end}}
+<!--菜单盒子-->
+{{define "menu"}}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">您好: 学生{{.student.Name}}</h3>
+    </div>
+    <div class="panel-body">
+        <p><a href="/student/{{.student.Sno}}/">个人信息</a></p>
+        <p><a href="/student/{{.student.Sno}}/selectCourse/">选课系统</a></p>
+    </div>
+</div>
+{{end}}
+
+{{/*覆盖(重写content盒子)*/}}
+{{define "content"}}
+<p>{{.student.Name}}的个人信息</p>
+
+<table class="table table-hover">
+    <tr>
+        <th>姓名</th>
+        <th>学号</th>
+        <th>性别</th>
+        <th>电话</th>
+        <th>生日</th>
+        <th>班级</th>
+    </tr>
+    <tr>
+        <td>{{.student.Name}}</td>
+        <td>{{.student.Sno}}</td>
+        <td>{{.student.Gender}}</td>
+        <td>{{.student.Tel}}</td>
+        <td>{{.student.Birth}}</td>
+        <td>{{.student.Class.Name}}</td>
+    </tr>
+</table>
+
+<p>课程选择表</p>
+
+
+{{end}}
+

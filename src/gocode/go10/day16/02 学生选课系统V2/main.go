@@ -8,6 +8,7 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"log"
+	"net/http"
 	"os"
 	"strconv"
 	"time"
@@ -211,6 +212,10 @@ func PostStuAdd(ctx *gin.Context) {
 	//插入到数据库
 	db.Create(&addStudent)
 
+	//6.添加完学生后,班级人数自增1 使用gorm表达式
+	//如果是翻译成SQL语句则是 update Class set num = num + 1 where......
+	db.Model(&Class{}).Where("id = ?", classID).Update("num", gorm.Expr("num + 1"))
+
 	//4.响应
 	//ctx.JSON(200, gin.H{
 	//	"stu": addStudent,
@@ -221,14 +226,14 @@ func PostStuAdd(ctx *gin.Context) {
 	//站外重定向
 	//ctx.Redirect(http.StatusMovedPermanently, "https://www.cdn-vod.com")
 	//站内重定向
-	//ctx.Redirect(http.StatusMovedPermanently, "/student")
+	ctx.Redirect(http.StatusMovedPermanently, "/student")
 
-	//如果不重定向,就想看到新的学生页面
-	//查询student表中的记录
-	var students []Student
-	ctx.HTML(200, "student.html", gin.H{
-		"students": students,
-	})
+	////如果不重定向,就想看到新的学生页面
+	////查询student表中的记录
+	//var students []Student
+	//ctx.HTML(200, "student.html", gin.H{
+	//	"students": students,
+	//})
 
 }
 
