@@ -47,7 +47,7 @@ type Course struct {
 	//写全
 	//Teacher Teacher
 	//缩写
-	Teacher
+	Teacher Teacher
 }
 
 //班级表
@@ -78,6 +78,11 @@ type Student struct {
 	Courses []Course `gorm:"many2many:student2course;constraint:OnDelete:CASCADE;"`
 }
 
+type User struct {
+	account string
+	pwd     string
+}
+
 //数据库初始化函数
 
 // 数据库初始化
@@ -87,7 +92,7 @@ func DBInit() *gorm.DB {
 	//数据库初始化
 	//数据库连接信息
 	//dsn := "root:go20222023@tcp(127.0.0.1:3306)/css?charset=utf8mb4&parseTime=True&loc=Local"
-	dsn := "dev:CIAy2k0308@tcp(mysql-internet-cn-north-1-3156338edfb24ab1.rds.jdcloud.com)/css?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "dev:xxxxx@tcp(xxxxxxx)/css?charset=utf8mb4&parseTime=True&loc=Local"
 
 	//创建日志对象
 	newLogger := logger.New(
@@ -158,8 +163,14 @@ func getOneStudent(ctx *gin.Context) {
 	var student Student
 	//单条查询,并预加载班级表,以获得班级名称
 	db.Where("sno = ? ", sno).Preload("Class").Take(&student)
+	//获取当前学生的所选课程
+	var selectCourse []Course
+	//预加载teacher表
+	db.Preload("Teacher").Model(&student).Association("Courses").Find(&selectCourse)
+
 	ctx.HTML(200, "detailOneStudent.html", gin.H{
-		"student": student,
+		"student":      student,
+		"selectCourse": selectCourse,
 	})
 }
 
@@ -174,7 +185,7 @@ func getSelectCourse(ctx *gin.Context) {
 	//获取所有课程
 	var courses []Course
 	//查询课程
-	db.Find(&courses)
+	db.Preload("Teacher").Find(&courses)
 
 	ctx.HTML(200, "selectCourse.html", gin.H{
 		"student": student,
@@ -182,29 +193,36 @@ func getSelectCourse(ctx *gin.Context) {
 	})
 }
 
+// 学生个人选课
+
+func SelectCourse(ctx *gin.Context) {
+	//获取学生学号
+	sno := ctx.Param("sno")
+	//获取学生对象
+	var student Student
+	//单条查询,并预加载班级表,以获得班级名称
+	db.Where("sno = ? ", sno).Preload("Class").Take(&student)
+	//获取前端的course_id
+	courseIDSlice := ctx.PostFormArray("course_id")
+	//获取所有课程
+	var courses []Course
+	//查询课程
+	db.Where("id in ?", courseIDSlice).Find(&courses)
+	//为学号为sno的学生对象,绑定课程courses
+	db.Model(&student).Association("Courses").Append(&courses)
+
+	//ctx.HTML(200, "selectCourse.html", gin.H{
+	//	"student": student,
+	//	"courses": courses,
+	//})
+	ctx.Redirect(301, "/student/"+sno)
+}
+
 func class(ctx *gin.Context) {
 	ctx.HTML(200, "class", nil)
 }
 func course(ctx *gin.Context) {
 	ctx.HTML(200, "course", nil)
-}
-
-func createMyRender() multitemplate.Renderer {
-	render := multitemplate.NewRenderer()
-	render.AddFromFiles("index.html", "templates/base.html", "templates/index.html")
-	render.AddFromFiles("student.html", "templates/base.html", "templates/student.html")
-	//某一个学生的详情页
-	render.AddFromFiles("detailOneStudent.html", "templates/base.html", "templates/detailOneStudent.html")
-	//获取选课页面
-	render.AddFromFiles("selectCourse.html", "templates/base.html", "templates/selectCourse.html")
-	//添加学生
-	render.AddFromFiles("getStuAdd", "templates/base.html", "templates/getStuAdd.html")
-	//修改(更新)学生
-	render.AddFromFiles("editStudent.html", "templates/base.html", "templates/editStudent.html")
-	render.AddFromFiles("class", "templates/base.html", "templates/class.html")
-	render.AddFromFiles("course", "templates/base.html", "templates/course.html")
-
-	return render
 }
 
 //添加学生
@@ -311,6 +329,47 @@ func GetStuEditHtml(ctx *gin.Context) {
 	})
 }
 
+//登录
+
+func GetLoginHtml(ctx *gin.Context) {
+	ctx.HTML(200, "login.html", nil)
+}
+
+func Login(ctx *gin.Context) {
+
+	//获取登录的用户名密码
+	//userName := ctx.PostForm("userName")
+	//passWord := ctx.PostForm("passWord")
+	//数据校验
+
+	ctx.JSON(200, gin.H{
+		"msg": "ok",
+	})
+
+}
+
+func createMyRender() multitemplate.Renderer {
+	render := multitemplate.NewRenderer()
+	//登录页面
+	//render.AddFromFiles("loginText.html", "templates/loginText.html")
+	render.AddFromFiles("login.html", "templates/login.html")
+	//首页
+	render.AddFromFiles("index.html", "templates/base.html", "templates/index.html")
+	render.AddFromFiles("student.html", "templates/base.html", "templates/student.html")
+	//某一个学生的详情页
+	render.AddFromFiles("detailOneStudent.html", "templates/base.html", "templates/detailOneStudent.html")
+	//获取选课页面
+	render.AddFromFiles("selectCourse.html", "templates/base.html", "templates/selectCourse.html")
+	//添加学生
+	render.AddFromFiles("getStuAdd", "templates/base.html", "templates/getStuAdd.html")
+	//修改(更新)学生
+	render.AddFromFiles("editStudent.html", "templates/base.html", "templates/editStudent.html")
+	render.AddFromFiles("class", "templates/base.html", "templates/class.html")
+	render.AddFromFiles("course", "templates/base.html", "templates/course.html")
+
+	return render
+}
+
 func main() {
 	//获取路由对象
 	r := gin.Default()
@@ -325,7 +384,9 @@ func main() {
 
 	//设置静态文件资源窗口
 	r.Static("/static", "./static")
-
+	//登录
+	r.GET("/login", GetLoginHtml)
+	r.POST("/login", Login)
 	//首页
 	r.GET("/", index)
 	//学生首页页面
@@ -334,6 +395,7 @@ func main() {
 	r.GET("/student/:sno/", getOneStudent)
 	//学生个人选课系统
 	r.GET("/student/:sno/selectCourse/", getSelectCourse)
+	r.POST("/student/:sno/selectCourse/", SelectCourse)
 	//添加学生
 	r.GET("/student/add", GetStuAdd)
 	r.POST("/student/add", PostStuAdd)
