@@ -4,11 +4,13 @@ import (
 	. "css/databse"
 	. "css/model"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 //登录
 
 func GetLoginHtml(ctx *gin.Context) {
+
 	ctx.HTML(200, "login.html", nil)
 }
 
@@ -24,16 +26,22 @@ func Login(ctx *gin.Context) {
 	DB.Where("account = ? and password = ?", userName, passWord).Take(&userinfo)
 	//判断
 	if userinfo.ID == 0 {
-		ctx.String(200, "登录失败!")
+		//登录失败重定向到登录页面
+		ctx.Redirect(http.StatusMovedPermanently, "/login")
 	} else {
-		ctx.JSON(200, gin.H{
-			"msg":      "登录成功",
-			"userinfo": userinfo.Account,
-		})
+		//ctx.JSON(200, gin.H{
+		//	"msg":      "登录成功",
+		//	"userinfo": userinfo.Account,
+		//})
+		//1. 设置cookie  注意:要在特殊事件上设置cookie键值对
+		ctx.SetCookie("isLogin", "true", 200000, "/", "127.0.0.1", false, true)
+
+		//登录成功重定向到首页
+		ctx.Redirect(http.StatusMovedPermanently, "/")
 	}
 
-	ctx.JSON(200, gin.H{
-		"msg": "ok",
-	})
+	//ctx.JSON(200, gin.H{
+	//	"msg": "ok",
+	//})
 
 }
