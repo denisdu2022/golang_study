@@ -17,5 +17,8 @@ func InitRoute(r *gin.Engine) {
 	//班级页面
 	r.GET("/class", GetClass)
 	//课程管理
-	r.GET("/course", GetCourse)
+	//r.GET("/course", GetCourse)
+	//课程路由组
+	course := r.Group("/course")
+	InitCourseRoute(course)
 }

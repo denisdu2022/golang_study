@@ -8,4 +8,20 @@
 {{/*覆盖(重写content盒子)*/}}
 {{define "content"}}
 <h3>课程管理</h3>
+<table class="table-hover">
+    <tr>
+        <th>课程名</th>
+        <th>学分</th>
+        <th>周期</th>
+        <th>任课老师</th>
+    </tr>
+    {{range $course := .course}}
+    <tr>
+        <td>{{$course.Name}}</td>
+        <td>{{$course.Credit}}</td>
+        <td>{{$course.Period}}</td>
+        <td>{{$course.Teacher.Name}}</td>
+    </tr>
+    {{end}}
+</table>
 {{end}}
