@@ -10,7 +10,7 @@ func main() {
 	fmt.Println("服务器准备就绪...")
 
 	//1.开启服务端监听 端口:8000
-	sock, err := net.Listen("tcp", "127.0.0.1:8000")
+	sock, err := net.Listen("tcp", "127.0.0.1:8080")
 	//错误信息处理
 	if err != nil {
 		fmt.Println("错误信息是: ", err)
