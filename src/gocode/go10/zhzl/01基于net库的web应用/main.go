@@ -36,5 +36,6 @@ func main() {
 		//4.写入客户端信息
 		conn.Write([]byte(`HTTP/1.1 200 OK \r\n\r\n hello Web!`))
 		fmt.Println("-------")
+		//test
 	}
 }
