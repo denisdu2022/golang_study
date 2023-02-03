@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变量渲染</title>
+</head>
+<body>
+<h2>变量渲染</h2>
+<p>gin.H对象中的所有字段: {{.}}</p>
+<p>姓名: {{.user}}</p>
+<p>状态: {{.state}}</p>
+<h2>书籍列表 Slice</h2>
+<p>所有的书籍对象: {{.bookSlice}}</p>
+<p>使用索引index展示每一本书籍</p>
+<p>{{index .bookSlice 0}}</p>
+<p>{{index .bookSlice 1}}</p>
+<p>{{index .bookSlice 2}}</p>
+<h2>学生 map</h2>
+<p>学生信息: {{.stuMap}}</p>
+<p>{{.stuMap.name}}</p>
+<p>{{.stuMap.age}}</p>
+<p>{{.stuMap.hobby}}</p>
+<h1>切片的深度查询依靠内置函数index . map对象以及结构体对象的深度查询通过句点符 . 实现!</h1>
+<p>{{index .stuMap.hobby 0}}</p>
+<h2>学生 struct</h2>
+<p>学生信息</p>
+<p>{{.stuStruct}}</p>
+<p>{{.stuStruct.Name}}</p>
+<p>{{.stuStruct.Age}}</p>
+
+</body>
+</html>
