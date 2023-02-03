@@ -21,7 +21,7 @@ func main() {
 	r.GET("/timer", func(context *gin.Context) {
 		now := now.EndOfMinute()
 		fmt.Println(now)
-		context.HTML(200, "timer.html", gin.H{
+		context.HTML(200, "index.html", gin.H{
 			"now": now,
 		})
 	})

@@ -21,7 +21,7 @@ func main() {
 		//打印当前时间
 		fmt.Println("当前时间是: ", now)
 		//响应返回一个页面
-		ctx.HTML(http.StatusOK, "timer.html", gin.H{
+		ctx.HTML(http.StatusOK, "index.html", gin.H{
 			"now": now,
 		})
 	})
