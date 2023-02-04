@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板文件之控制结构</title>
+</head>
+<body>
+
+<p>{{.name}}</p>
+
+<p>{{.age}}</p>
+
+<h3>成年书籍展示区</h3>
+<h3>如果年龄大于18  展示每一本书籍(if)</h3>
+{{if gt .age 18}}
+<p>{{index .books 0}}</p>
+<p>{{index .books 1}}</p>
+<p>{{index .books 2}}</p>
+<p>{{index .books 3}}</p>
+{{end}}
+
+<h3>未成年书籍展示区</h3>
+<p>{{.name17}}</p>
+<p>{{.age17}}</p>
+<h3>如果年龄小于18 展示每一本书籍</h3>
+{{if lt .age17 18}}
+<p>{{index .book17 0}}</p>
+<p>{{index .book17 1}}</p>
+<p>{{index .book17 2}}</p>
+<p>{{index .book17 3}}</p>
+{{end}}
+
+
+<h3>成年书籍展示区</h3>
+<h3>如果年龄大于18  展示成年人书籍,否则展示未成年书籍(if else)</h3>
+{{if gt .age 18}}
+<p>{{index .books 0}}</p>
+<p>{{index .books 1}}</p>
+<p>{{index .books 2}}</p>
+<p>{{index .books 3}}</p>
+{{else}}
+<p>{{index .book17 0}}</p>
+<p>{{index .book17 1}}</p>
+<p>{{index .book17 2}}</p>
+<p>{{index .book17 3}}</p>
+{{end}}
+
+<p>扩展:是否登录</p>
+{{if eq .name ""}}
+<p><input type="submit" value="登录" ></p>
+{{else}}
+<p><button>{{.name}}</button>已登录</p>
+{{end}}
+</body>
+</html>

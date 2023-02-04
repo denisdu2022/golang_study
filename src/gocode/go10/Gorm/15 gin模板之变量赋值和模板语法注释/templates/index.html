@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板文件之变量渲染</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+</head>
+<body>
+
+<h3>模板语法注释</h3>
+{{/*这里写注释*/}}
+
+<h3>变量赋值</h3>
+<p>这是变量: {{.name}}</p>
+<p>模板语法变量赋值: {{$user := .name}}</p>
+<p>赋值后的变量: {{$user}}</p>
+
+<h3>变量赋值案例</h3>
+<p>登录人年龄:{{.age}}</p>
+<p>展示年龄大于登录人年龄的学生失败,局部.作用域局部,拿不到登录人的年龄做判断</p>
+<table class="table table-hover">
+    <tr>
+        <th>序号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>循环中的点(局部点)</th>
+    </tr>
+    {{/*index索引,value*/}}
+    {{range $index,$stu := .students}}
+    {{/*展示年龄大于登录人年龄的学生*/}}
+    {{/*if gt $stu.Age .age 这样写是错误的,因为作用域的问题,下边输出局部.的值*/}}
+    {{if gt $stu.Age 18}}
+    <tr>
+        <td>{{$index}}</td>
+        <td>{{$stu.Name}}</td>
+        <td>{{$stu.Age}}</td>
+        <td>{{.}}</td>
+    </tr>
+    {{end}}
+
+    {{end}}
+</table>
+<p>解决</p>
+<p>展示年龄大于登录人年龄的学生成功,变量赋值,在循环外做变量赋值</p>
+<p>登录人年龄变量赋值:{{$loginAge := .age}}</p>
+<table class="table table-hover">
+    <tr>
+        <th>序号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>循环中的点(局部点)</th>
+    </tr>
+    {{/*index索引,value*/}}
+    {{range $index,$stu := .students}}
+    {{/*展示年龄大于登录人年龄的学生*/}}
+    {{/*if gt $stu.Age .age 这样写是错误的,因为作用域的问题,下边输出局部.的值*/}}
+    {{if gt $stu.Age $loginAge}}
+    <tr>
+        <td>{{$index}}</td>
+        <td>{{$stu.Name}}</td>
+        <td>{{$stu.Age}}</td>
+        <td>{{.}}</td>
+    </tr>
+    {{end}}
+
+    {{end}}
+</table>
+
+</body>
+</html>

@@ -18,7 +18,7 @@ func getIndex(ctx *gin.Context) {
 	//变量
 	var name string
 	name = "haha"
-	var age = 23
+	var age = 21
 	//切片
 	var books = []string{"三国演义", "红楼梦", " 哪吒闹海", "王小虎捉妖"}
 	//map
@@ -60,5 +60,5 @@ func main() {
 	r.GET("/", getIndex)
 
 	//启动
-	r.Run()
+	r.Run(":8060")
 }

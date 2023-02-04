@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板文件之控制结构</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<body>
+
+<h3>分支嵌套循环</h3>
+<p>姓名:{{.name}}</p>
+<p>年龄:{{.age}}</p>
+
+{{/*如果登录人年龄大于18岁,循环展示成人书籍,如果小于18岁,循环展示未成年书籍*/}}
+{{if gt .age 18}}
+<p>年龄大于18可以查看的书籍</p>
+<table class="table table-hover">
+    <tr>
+        <th>序号</th>
+        <th>书籍名</th>
+    </tr>
+    {{range $index,$book := .books}}
+    <tr>
+        <td>{{$index}}</td>
+        <td>{{$book}}</td>
+    </tr>
+    {{end}}
+</table>
+{{else}}
+<p>年龄小于18可以查看的书籍</p>
+<table class="table table-hover">
+    <tr>
+        <th>序号</th>
+        <th>书籍名</th>
+    </tr>
+    {{range $index,$book := .book17}}
+    <tr>
+        <td>{{$index}}</td>
+        <td>{{$book}}</td>
+    </tr>
+    {{end}}
+</table>
+{{end}}
+
+<h3>循环嵌套分支</h3>
+<p>展示年龄大于18的学生</p>
+<table class="table table-hover">
+    <tr>
+        <th>序号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+    </tr>
+    {{/*index索引,value*/}}
+    {{range $index,$stu := .students}}
+    {{/*展示年龄大于18的学生*/}}
+    {{if gt $stu.Age 18}}
+    <tr>
+        <td>{{$index}}</td>
+        <td>{{$stu.Name}}</td>
+        <td>{{$stu.Age}}</td>
+    </tr>
+    {{end}}
+
+    {{end}}
+</table>
+
+
+
+</body>
+</html>
