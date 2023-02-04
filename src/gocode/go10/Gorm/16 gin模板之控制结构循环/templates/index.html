@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板文件之控制结构</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<body>
+<h3>循环控制</h3>
+<p>{{.books}}</p>
+
+<ul>
+    <li>{{index .books 0}}</li>
+    <li>{{index .books 1}}</li>
+    <li>{{index .books 2}}</li>
+    <li>{{index .books 3}}</li>
+</ul>
+
+<p>循环</p>
+
+<ul>
+    {{range $book := .books}}
+    <li>{{$book}}</li>
+    {{end}}
+</ul>
+
+<p>学生信息</p>
+<table class="table table-hover">
+    <tr>
+        <th>姓名</th>
+        <th>年龄</th>
+    </tr>
+    {{/*循环取value*/}}
+    {{range $stu := .students}}
+    <tr>
+        <td>{{$stu.Name}}</td>
+        <td>{{$stu.Age}}</td>
+    </tr>
+    {{end}}
+</table>
+
+<p>学生信息</p>
+<table class="table table-hover">
+    <tr>
+        <th>序号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+    </tr>
+    {{/*index索引,value*/}}
+    {{range $index,$stu := .students}}
+    <tr>
+        <td>{{$index}}</td>
+        <td>{{$stu.Name}}</td>
+        <td>{{$stu.Age}}</td>
+    </tr>
+    {{end}}
+</table>
+
+</body>
+</html>
