@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板文件之自定义函数</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<body>
+
+<h3>自定义函数</h3>
+<p>展示所有书籍</p>
+<table class="table table-hover">
+    <tr>
+        <th>序号</th>
+        <th>书籍名称</th>
+    </tr>
+    {{/*index索引,value*/}}
+    {{range $index,$book := .books}}
+    <tr>
+        {{/*使用匿名函数add,让索引序号自加1*/}}
+        <td>{{add $index 1}}</td>
+        <td>{{$book}}</td>
+    </tr>
+
+    {{end}}
+</table>
+
+
+
+</body>
+</html>
