@@ -1,13 +1,36 @@
 package main
 
 import (
-	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"log"
 	"os"
+	"time"
 )
+
+//创建选课系统的模型类
+
+//基本模型
+
+type BaseModel struct {
+	ID         int        `gorm:"primaryKey"`
+	Name       string     `gorm:"type:varchar(32);unique;not null"`
+	CreateTime *time.Time `gorm:"autoCreateTime"`
+	UpdateTime *time.Time `gorm:"autoCreateTime"`
+	DeleteTime *time.Time `gorm:"autoCreateTime"`
+}
+
+//教师表
+
+type Teacher struct {
+	BaseModel
+	Tno    int
+	Pwd    string `gorm:"type:varchar(100);not null"`
+	Tel    string `gorm:"type:char(11);"`
+	Birth  *time.Time
+	Remark string `gorm:"type:varchar(255);"`
+}
 
 func main() {
 
@@ -17,7 +40,7 @@ func main() {
 
 	//创建日志对象
 	newLogger := logger.New(
-		log.New(os.Stdin, "\r\n", log.LstdFlags), //io write
+		log.New(os.Stdout, "\r\n", log.LstdFlags), //io write
 		logger.Config{
 			//SlowThreshold: time.Second, //慢 SQL阈值
 			LogLevel: logger.Info, //Log level(日志级别)
@@ -30,8 +53,9 @@ func main() {
 	})
 	if err != nil {
 		panic("Connect database to failed!!!")
-	} else {
-		fmt.Println("数据库连接成功: ", db)
 	}
+
+	//迁移模型类:将模型类转为sql表
+	db.AutoMigrate(&Teacher{})
 
 }
