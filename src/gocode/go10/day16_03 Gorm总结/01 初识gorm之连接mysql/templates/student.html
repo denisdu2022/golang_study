@@ -1,0 +1,30 @@
+{{/*继承base*/}}
+{{template "base.html" .}}
+
+{{/*重写盒子*/}}
+{{ define "title"}}
+<title>学生管理</title>
+{{end}}
+
+{{define "content"}}
+<div>
+  <div>
+    <table class="table table-hover">
+      <tr>
+        <th>学生ID</th>
+        <th>学生姓名</th>
+        <th>学生年龄</th>
+        <th>学生性别</th>
+      </tr>
+      {{range $stu := .students}}
+      <tr>
+        <td>{{$stu.Sid}}</td>
+        <td>{{$stu.Name}}</td>
+        <td>{{$stu.Age}}</td>
+        <td>{{$stu.Gender}}</td>
+      </tr>
+      {{end}}
+    </table>
+  </div>
+</div>
+{{end}}
