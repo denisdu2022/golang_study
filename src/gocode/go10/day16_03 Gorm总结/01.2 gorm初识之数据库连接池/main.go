@@ -39,8 +39,6 @@ func dbInit() {
 
 	if err != nil {
 		panic("连接数据库失败,error=" + err.Error())
-	} else {
-		panic("连接数据库成功!!!")
 	}
 
 	//设置数据库连接池参数
