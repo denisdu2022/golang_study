@@ -52,7 +52,7 @@ func main() {
 		Logger: newLogger, //日志配置
 	})
 	if err != nil {
-		panic("Connect database to failed!!!")
+		panic("Failed to connect to database ...")
 	}
 
 	//迁移模型类:将模型类转为sql表

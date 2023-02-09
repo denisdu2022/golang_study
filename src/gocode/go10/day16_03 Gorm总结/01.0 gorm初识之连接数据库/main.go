@@ -8,6 +8,7 @@ import (
 
 func main() {
 
+	// 参考 https://github.com/go-sql-driver/mysql#dsn-data-source-name 获取详情
 	//定义dsn数据库连接信息
 	//用户名:密码@协议(ip+端口)/库名?设置字符集&解析时间&local
 	dsn := "root:12345678@tcp(127.0.0.1:3306)/css?charset=utf8mb4&parseTime=True&loc=Local"

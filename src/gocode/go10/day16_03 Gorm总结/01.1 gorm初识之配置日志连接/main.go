@@ -30,8 +30,7 @@ func main() {
 	})
 	if err != nil {
 		panic("Connect database to failed!!!")
-	} else {
-		fmt.Println("数据库连接成功: ", db)
 	}
+	fmt.Println("数据库连接成功: ", db)
 
 }
