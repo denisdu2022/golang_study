@@ -10,26 +10,28 @@ import (
 	"time"
 )
 
+//下边的Teacher表继承gorm.model 等效于
 //自定义基本模型类
-
-type BaseModel struct {
-	//ID 主键
-	ID int `gorm:"primaryKey"`
-	//姓名 string类型
-	Name string `gorm:"type:varchar(32);unique;not null"`
-	//创建时间
-	CreateTime *time.Time `gorm:"autoCreateTime"`
-	//修改时间
-	UpdateTime *time.Time `gorm:"autoCreateTime"`
-	//删除时间
-	DeleteTime *time.Time `gorm:"autoCreateTime"`
-}
+//type BaseModel struct {
+//	//ID 主键
+//	ID int `gorm:"primaryKey"`
+//	//姓名 string类型
+//	Name string `gorm:"type:varchar(32);unique;not null"`
+//	//创建时间
+//	CreateAt *time.Time `gorm:"autoCreateTime"`
+//	//修改时间
+//	UpdateAt *time.Time `gorm:"autoCreateTime"`
+//	//删除时间
+//	DeleteAt *time.Time `gorm:"index"`
+//}
 
 //Teacher  教师表
 
 type Teacher struct {
-	//继承基本模型表
-	BaseModel
+	//继承gorm.Model
+	gorm.Model
+	//姓名
+	Name string
 	//教师编号
 	Tno int
 	//密码
@@ -42,12 +44,6 @@ type Teacher struct {
 	Birth *time.Time
 	//备注 (初级讲师  中级讲师  高级讲师)
 	Remark string `gorm:"type:varchar(255);"`
-}
-
-//单独设置表名称(自定义表名称使用结构体方法)
-
-func (t Teacher) TableName() string {
-	return "teacher"
 }
 
 func main() {
