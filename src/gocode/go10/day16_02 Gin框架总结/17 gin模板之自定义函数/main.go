@@ -27,7 +27,7 @@ func main() {
 	//获取路由对象
 	r := gin.Default()
 	//加载自定义函数 需要放在加载模板文件之前
-	//模板自定义函数 需要引入"html/template"包
+	//模板自定义函数 需要引入"html/templates"包
 	r.SetFuncMap(template.FuncMap{
 		//add 是自定义函数名称 匿名函数是函数体
 		"add": func(x, y int) int {
