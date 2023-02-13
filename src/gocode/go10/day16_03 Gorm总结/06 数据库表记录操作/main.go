@@ -86,7 +86,7 @@ type Student struct {
 	//手机号
 	Tel string `gorm:"type:char(11);"`
 	//性别
-	Gender byte `gorm:"default:1"`
+	Gender byte `gorm:"default:0"`
 	//生日
 	Birth *time.Time
 	//备注
@@ -129,32 +129,28 @@ func main() {
 	fmt.Println("数据库连接成功!!!", db)
 
 	//自动迁移
-	//db.AutoMigrate(&Teacher{})
-	//db.AutoMigrate(&Class{})
-	//db.AutoMigrate(&Course{})
-	//db.AutoMigrate(&Student{})
+	db.AutoMigrate(&Teacher{})
+	db.AutoMigrate(&Class{})
+	db.AutoMigrate(&Course{})
+	db.AutoMigrate(&Student{})
 
-	//删除teacher结构体对应的表结构
-	//db.Migrator().DropTable(&Teacher{})
+	//添加单表记录
+	//实例化结构体对象
+	t1 := Teacher{BaseModel: BaseModel{Name: "liu"}, Tno: 1001, Pwd: "123", Tel: "12345678901", Gender: 0, Remark: "初级讲师"}
+	//添加表记录
+	db.Create(&t1)
+	//GORM将生成一条SQL语句来插入数据并回填主键值
+	//db.Debug() //会打印SQL日志
 
-	//根据表名称删除
-	//db.Migrator().DropTable("teachers")
+	t2 := Teacher{BaseModel: BaseModel{Name: "han"}, Tno: 1002, Pwd: "123", Tel: "12345678901", Gender: 1, Remark: "初级讲师"}
+	//添加表记录
+	db.Create(&t2)
 
-	//删除字段
-	//db.Migrator().DropColumn(&Teacher{}, "Name")
+	t4 := Teacher{BaseModel: BaseModel{Name: "xu"}, Tno: 1004, Pwd: "123", Tel: "12345678901", Gender: 0, Remark: "初级讲师"}
+	//添加表记录
+	db.Create(&t4)
+	t5 := Teacher{BaseModel: BaseModel{Name: "xuxi"}, Tno: 1004, Pwd: "123", Tel: "12345678901", Gender: 1, Remark: "初级讲师"}
+	//添加表记录
+	db.Create(&t5)
 
-	//添加字段
-	//db.Migrator().AddColumn(&Teacher{}, "Name")
-
-	//为字段添加索引
-	//db.Migrator().CreateIndex(&Teacher{}, "Name")
-
-	//修改字段索引名称
-	//db.Migrator().RenameIndex(&Teacher{}, "Name", "Name1")
-
-	//为字段删除索引
-	//db.Migrator().DropIndex(&Teacher{}, "Name1")
-
-	//检查索引是否存在
-	db.Migrator().HasIndex(&Teacher{}, "Name")
 }
