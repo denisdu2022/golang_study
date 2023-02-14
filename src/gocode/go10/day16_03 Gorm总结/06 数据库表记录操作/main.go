@@ -37,7 +37,7 @@ type Teacher struct {
 	//手机号
 	Tel string `gorm:"type:char(11);"`
 	//性别
-	Gender byte `gorm:"default:1"`
+	Gender byte `gorm:"default:0"`
 	//生日
 	Birth *time.Time
 	//备注 (初级讲师  中级讲师  高级讲师)
@@ -105,7 +105,7 @@ type Student struct {
 func main() {
 
 	//定义dsn 数据库连接信息
-	dsn := "dev:111111111@tcp(127.0.0.1:3306)/css?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:12345678@tcp(127.0.0.1:3306)/css?charset=utf8mb4&parseTime=True&loc=Local"
 
 	//创建日志对象
 	newLogger := logger.New(
@@ -136,21 +136,21 @@ func main() {
 
 	//添加单表记录
 	//实例化结构体对象
-	t1 := Teacher{BaseModel: BaseModel{Name: "liu"}, Tno: 1001, Pwd: "123", Tel: "12345678901", Gender: 0, Remark: "初级讲师"}
+	t1 := Teacher{BaseModel: BaseModel{Name: "liu"}, Tno: 1001, Pwd: "123", Tel: "12345678901", Gender: 1, Remark: "初级讲师"}
 	//添加表记录
 	db.Create(&t1)
 	//GORM将生成一条SQL语句来插入数据并回填主键值
 	//db.Debug() //会打印SQL日志
 
-	t2 := Teacher{BaseModel: BaseModel{Name: "han"}, Tno: 1002, Pwd: "123", Tel: "12345678901", Gender: 1, Remark: "初级讲师"}
+	t2 := Teacher{BaseModel: BaseModel{Name: "han"}, Tno: 1002, Pwd: "123", Tel: "12345678901", Gender: 0, Remark: "初级讲师"}
 	//添加表记录
 	db.Create(&t2)
 
-	t4 := Teacher{BaseModel: BaseModel{Name: "xu"}, Tno: 1004, Pwd: "123", Tel: "12345678901", Gender: 0, Remark: "初级讲师"}
+	t3 := Teacher{BaseModel: BaseModel{Name: "xu"}, Tno: 1004, Pwd: "123", Tel: "12345678901", Gender: 1, Remark: "初级讲师"}
+	//添加表记录
+	db.Create(&t3)
+	t4 := Teacher{BaseModel: BaseModel{Name: "xuxi"}, Tno: 1004, Pwd: "123", Tel: "12345678901", Gender: 1, Remark: "初级讲师"}
 	//添加表记录
 	db.Create(&t4)
-	t5 := Teacher{BaseModel: BaseModel{Name: "xuxi"}, Tno: 1004, Pwd: "123", Tel: "12345678901", Gender: 1, Remark: "初级讲师"}
-	//添加表记录
-	db.Create(&t5)
 
 }
