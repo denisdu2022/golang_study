@@ -9,7 +9,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strconv"
 	"time"
 )
 
@@ -157,34 +156,74 @@ func Add(ctx *gin.Context) {
 	//fmt.Println(t1.Name)
 	//fmt.Println(t1.ID)
 
-	//补充
-	//通过前端的内容设置数据库
-	//获取前端form表单数据
-	//获取name
-	name := ctx.PostForm("name")
-	//获取tno
-	tno := ctx.PostForm("tno")
-	//结构体的成员变量类型是int   强转为int
-	iTno, _ := strconv.Atoi(tno)
-	//获取密码
-	pwd := ctx.PostForm("pwd")
-	//获取tel
-	tel := ctx.PostForm("tel")
-	//获取性别
-	gender := ctx.PostForm("gender")
-	//强转为int
-	iGender, _ := strconv.Atoi(gender)
-	//Gender 结构体的成员变量类型是byte()    使用byte(iGender)
-	t1 := Teacher{BaseModel: BaseModel{Name: name}, Tno: iTno, Pwd: pwd, Tel: tel, Gender: byte(iGender)}
+	////补充
+	////通过前端的内容设置数据库
+	////获取前端form表单数据
+	////获取name
+	//name := ctx.PostForm("name")
+	////获取tno
+	//tno := ctx.PostForm("tno")
+	////结构体的成员变量类型是int   强转为int
+	//iTno, _ := strconv.Atoi(tno)
+	////获取密码
+	//pwd := ctx.PostForm("pwd")
+	////获取tel
+	//tel := ctx.PostForm("tel")
+	////获取性别
+	//gender := ctx.PostForm("gender")
+	////强转为int
+	//iGender, _ := strconv.Atoi(gender)
+	////Gender 结构体的成员变量类型是byte()    使用byte(iGender)
+	//t1 := Teacher{BaseModel: BaseModel{Name: name}, Tno: iTno, Pwd: pwd, Tel: tel, Gender: byte(iGender)}
+	//
+	////添加到数据库记录
+	//db.Create(&t1)
 
+	////2.创建多条记录
+	//t1 := Teacher{BaseModel: BaseModel{Name: "sun"}, Tno: 1003, Pwd: "123", Tel: "111", Gender: 0, Remark: "初级讲师"}
+	//t2 := Teacher{BaseModel: BaseModel{Name: "zhao"}, Tno: 1004, Pwd: "123", Tel: "111", Gender: 0, Remark: "初级讲师"}
+	//t3 := Teacher{BaseModel: BaseModel{Name: "qian"}, Tno: 1005, Pwd: "123", Tel: "111", Gender: 0, Remark: "初级讲师"}
+	//t4 := Teacher{BaseModel: BaseModel{Name: "li"}, Tno: 1006, Pwd: "123", Tel: "111", Gender: 0, Remark: "初级讲师"}
+	//
+	////批量添加记录时创建一个切片
+	//teachers := []Teacher{t1, t2, t3, t4}
+	////添加到数据库记录
+	//db.Create(&teachers)
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"teachers": teachers,
+	//	"msg":      "添加成功",
+	//})
+
+	////3.创建一对多的记录
+	//cl1 := Class{BaseModel: BaseModel{Name: "软件一班"}, Num: 36, TutorID: 2}
+	//
+	////添加到数据库记录
+	//db.Create(&cl1)
+
+	//批量创建一对多的记录
+	cl1 := Class{BaseModel: BaseModel{Name: "软件一班"}, Num: 36, TutorID: 2}
+	cl2 := Class{BaseModel: BaseModel{Name: "软件二班"}, Num: 38, TutorID: 8}
+	cl3 := Class{BaseModel: BaseModel{Name: "计算机科学与技术一班"}, Num: 38, TutorID: 3}
+	cl4 := Class{BaseModel: BaseModel{Name: "计算机科学与技术二班"}, Num: 38, TutorID: 9}
+	//批量添加创建切片
+	classes := []Class{cl1, cl2, cl3, cl4}
 	//添加到数据库记录
-	db.Create(&t1)
+	db.Create(&classes)
 
+	//打印班级ID
+	for _, class := range classes {
+		fmt.Println(class.ID) //班级ID 3,4,5,6
+	}
+
+	////指定批量添加的大小
+	//db.CreateInBatches(classes,100)
 	//响应
 	ctx.JSON(http.StatusOK, gin.H{
-		"t1":  t1,
-		"msg": "添加成功",
+		"msg": "添加成功!",
+		"cl":  classes,
 	})
+
 }
 
 func main() {
