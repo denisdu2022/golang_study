@@ -8,7 +8,23 @@
 
 {{define "content"}}
 <h3>学生管理</h3>
-<p><a class="btn btn-primary" href="/student/add">添加学生</a></p>
+<div class="row">
+  <div class="col-md-3 pull-left" >
+    <p><a class="btn btn-primary " href="/student/add">添加学生</a></p>
+  </div>
+  <div class="pull-right col-md-3">
+    <!--基于模糊查询的搜索框实现-->
+<!--    不加method="get"默认就是get-->
+    <form  action="" class="form-inline"  >
+      <div class="form-group">
+        <input type="text" class="form-control" id="name" placeholder="输入学生姓名查询" name="name">
+      </div>
+      <button type="submit" class="btn btn-default">搜索</button>
+    </form>
+  </div>
+</div>
+
+
 <div>
   <div>
     <table class="table table-hover">

@@ -40,16 +40,25 @@
         <input type="text" id="tel" class="form-control" placeholder="手机号" name="tel">
     </div>
 
+<!--    <div class="form-group">-->
+<!--        <label for="clId">班级</label>-->
+<!--&lt;!&ndash;        <input type="text" id="clId" class="form-control" placeholder="班级" name="clId">&ndash;&gt;-->
+<!--&lt;!&ndash;        以下的班级信息是写死的,不是从数据库中查询的&ndash;&gt;-->
+<!--        <select name="clId" id="clId" class="form-control">-->
+<!--            <option value="3">软件一班</option>-->
+<!--            <option value="4">软件二班</option>-->
+<!--            <option value="5">计算机科学与技术一班</option>-->
+<!--            <option value="6">计算机科学与技术二班</option>-->
+<!--        </select>-->
+<!--    </div>-->
     <div class="form-group">
         <label for="clId">班级</label>
-<!--        <input type="text" id="clId" class="form-control" placeholder="班级" name="clId">-->
-<!--        以下的班级信息是写死的,不是从数据库中查询的-->
         <select name="clId" id="clId" class="form-control">
-            <option value="3">软件一班</option>
-            <option value="4">软件二班</option>
-            <option value="5">计算机科学与技术一班</option>
-            <option value="6">计算机科学与技术二班</option>
+        {{range $classes := .classes}}
+            <option value="{{$classes.ID}}">{{$classes.Name}}</option>
+        {{end}}
         </select>
+
     </div>
 
     <div class="form-group">
