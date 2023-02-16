@@ -231,26 +231,39 @@ func Add(ctx *gin.Context) {
 //查询
 
 func QueryDB(ctx *gin.Context) {
-	//查询所有的老师
-	//定义[]Teacher
-	var teachers []Teacher
-	//查询所有Teacher表中数据写入teachers
-	db.Find(&teachers)
-	/*db.Find 相当于 对应的原生SQL
-	先查: select * from teachers;
-	2,liu,2023-02-14 21:49:32.453,2023-02-14 21:49:32.453,2023-02-14 21:49:32.453,1,1001,123,12345678901,,初级讲师
-	3,han,2023-02-14 22:12:29.537,2023-02-14 22:12:29.537,2023-02-14 22:12:29.537,0,1002,123,10987654321,,""
-	在实例化
-	t1 := Teacher{Name:"liu",Tno:1001....}
-	t2 := Teacher{Name:"han",Tno:1002....}
-	放到切片中
-	teachers := []Teacher{t1,t2,t3}
-	*/
-	fmt.Println("teachers: ", teachers)
+	////查询所有的老师
+	////定义[]Teacher
+	//var teachers []Teacher
+	////查询所有Teacher表中数据写入teachers
+	//db.Find(&teachers)
+	///*db.Find 相当于 对应的原生SQL
+	//先查: select * from teachers;
+	//2,liu,2023-02-14 21:49:32.453,2023-02-14 21:49:32.453,2023-02-14 21:49:32.453,1,1001,123,12345678901,,初级讲师
+	//3,han,2023-02-14 22:12:29.537,2023-02-14 22:12:29.537,2023-02-14 22:12:29.537,0,1002,123,10987654321,,""
+	//在实例化
+	//t1 := Teacher{Name:"liu",Tno:1001....}
+	//t2 := Teacher{Name:"han",Tno:1002....}
+	//放到切片中
+	//teachers := []Teacher{t1,t2,t3}
+	//*/
+	//fmt.Println("teachers: ", teachers)
+	//
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"teachers": teachers,
+	//})
+
+	//查询单条记录
+	//查询单条就不用定义切片了
+	var stu Student
+	//按照默认排序取第一条
+	db.Find(&stu)
+
+	fmt.Println("stu: ", stu)
 
 	//响应
 	ctx.JSON(http.StatusOK, gin.H{
-		"teachers": teachers,
+		"stu": stu,
 	})
 }
 
