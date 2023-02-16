@@ -1,0 +1,36 @@
+{{/*继承base*/}}
+{{template "base.html" .}}
+
+{{/*重写盒子*/}}
+{{ define "title"}}
+<title>学生管理</title>
+{{end}}
+
+{{define "content"}}
+<h3>学生管理</h3>
+<p><a class="btn btn-primary" href="/student/add">添加学生</a></p>
+<div>
+  <div>
+    <table class="table table-hover">
+      <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>电话</th>
+        <th>生日</th>
+        <th>备注</th>
+      </tr>
+      {{range $stu := .student}}
+      <tr>
+        <td>{{$stu.Sno}}</td>
+        <td>{{$stu.Name}}</td>
+        <td>{{$stu.Gender}}</td>
+        <td>{{$stu.Tel}}</td>
+        <td>{{$stu.Birth}}</td>
+        <td>{{$stu.Remark}}</td>
+      </tr>
+      {{end}}
+    </table>
+  </div>
+</div>
+{{end}}

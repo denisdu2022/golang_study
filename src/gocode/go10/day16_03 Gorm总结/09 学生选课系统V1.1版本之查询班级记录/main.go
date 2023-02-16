@@ -153,9 +153,17 @@ func getIndex(ctx *gin.Context) {
 
 // 学生路由函数
 func getStudent(ctx *gin.Context) {
+	//查询数据库中student表中的数据
+	//查询所有学生
+	//定义student
+	var student []Student
+	//从数据库查询并写入student
+	db.Find(&student)
 
 	//响应学生页面
-	ctx.HTML(http.StatusOK, "student.html", gin.H{})
+	ctx.HTML(http.StatusOK, "student.html", gin.H{
+		"student": student,
+	})
 }
 
 //添加学生路由函数
@@ -167,27 +175,39 @@ func GetStudentAddHtml(ctx *gin.Context) {
 
 func PostStudentAdd(ctx *gin.Context) {
 	//(1). 获取前端页面传入的数据
+	//PostForm接收的数据是string类型
+	//学号
 	strSid := ctx.PostForm("sid")
+	//结构体对象中的成员变量是int类型,需要做类型转换
 	intSid, _ := strconv.Atoi(strSid)
+	//学生姓名
 	name := ctx.PostForm("name")
+	//学生性别
 	strGender := ctx.PostForm("gender")
+	//类型转换
 	intGender, _ := strconv.Atoi(strGender)
+	//学生密码
 	pwd := ctx.PostForm("pwd")
+	//学生手机号
 	tel := ctx.PostForm("tel")
+	//所在班级ID
 	strClId := ctx.PostForm("clId")
+	//类型转换
 	intClId, _ := strconv.Atoi(strClId)
+	//备注
 	remark := ctx.PostForm("remark")
 	//(2). 数据验证
 
 	//(3). 添加到数据库
-	//实例化结构体对象
+	//实例化结构体对象  性别由int转为byte,使用byte()
 	stu := Student{BaseModel: BaseModel{Name: name}, Sno: intSid, Gender: byte(intGender), Pwd: pwd, Tel: tel, ClassID: intClId, Remark: remark}
 	//添加到数据库
 	db.Create(&stu)
 
 	//响应
 	//添加成功后重定向到学生管理页面
-	ctx.Redirect(302, "/student")
+	//http.StatusMovedPermanently 301 永久重定向 ,302临时重定向,这里使用永久重定向
+	ctx.Redirect(http.StatusMovedPermanently, "/student")
 
 }
 
