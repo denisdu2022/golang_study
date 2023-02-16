@@ -153,24 +153,51 @@ func getIndex(ctx *gin.Context) {
 
 // 学生路由函数
 func getStudent(ctx *gin.Context) {
-	//查询数据库中student表中的数据
-	//查询所有学生
+	//基于模糊查询的搜索框实现
+	//获取get请求参数
+	name := ctx.Query("name")
+	//打印获取到的参数
+	fmt.Println("name>>> ", name) //name>>>  顾
+
 	//定义student
 	var student []Student
-	//从数据库查询并写入student
-	db.Find(&student)
 
-	//响应学生页面
-	ctx.HTML(http.StatusOK, "student.html", gin.H{
-		"student": student,
-	})
+	//数据库查询
+	//如果没有输入搜索的参数则向前端展示所有的数据
+	if name == "" {
+		//查询数据库中student表中的数据
+		//查询所有学生
+		//从数据库查询并写入student
+		db.Find(&student)
+		//响应学生页面
+		ctx.HTML(http.StatusOK, "student.html", gin.H{
+			"student": student,
+		})
+	} else {
+		//数据库查询
+		//模糊查询 "name like ?", "%"+name+"%"  包含name参数的
+		db.Where("name like ?", "%"+name+"%").Find(&student)
+		//响应学生页面
+		ctx.HTML(http.StatusOK, "student.html", gin.H{
+			"student": student,
+		})
+	}
+
 }
 
 //添加学生路由函数
 
 func GetStudentAddHtml(ctx *gin.Context) {
+	//查询班级信息
+	var classes []Class
+	//数据库查询
+	db.Find(&classes)
+	//打印查询出来的数据
+	fmt.Println("class>>> ", classes)
 	//响应添加学生页面
-	ctx.HTML(http.StatusOK, "getStuAdd.html", nil)
+	ctx.HTML(http.StatusOK, "getStuAdd.html", gin.H{
+		"classes": classes,
+	})
 }
 
 func PostStudentAdd(ctx *gin.Context) {

@@ -254,16 +254,112 @@ func QueryDB(ctx *gin.Context) {
 	//})
 
 	//查询单条记录
-	//查询单条就不用定义切片了
-	var stu Student
-	//按照默认排序取第一条
-	db.Find(&stu)
+	////1. 查询单条就不用定义切片了
+	//var stu Student
+	////先把所有查询出来,然后 按照默认排序取第一条,如果表里的数据量大,就会产生性能问题
+	///*[1.061ms] [rows:1] SELECT * FROM `students`
+	//stu:  {{1 顾水云 2023-02-15 19:37:26.752 +0800 CST 2023-02-15 19:37:26.752 +0800 CST 2023-02-15 19:37:26.752 +0800 CST} 2001 123 18762531646 0 <nil> 2001级新生 3 {{0  <nil> <nil> <nil>} 0 0 {{0  <nil> <nil> <nil>} 0   0 <nil> }} []}
+	//[GIN] 2023/02/17 - 01:24:42 | 200 |    1.823833ms |       127.0.0.1 | GET      "/queryDB"
+	//*/
+	//db.Find(&stu)
+	//
+	//fmt.Println("stu: ", stu)
+	//
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"stu": stu,
+	//})
 
-	fmt.Println("stu: ", stu)
+	////2.查询第一条记录
+	//var stu Student
+	////数据库查询第一条
+	////[0.635ms] [rows:1] SELECT * FROM `students` ORDER BY `students`.`id` LIMIT 1
+	//db.First(&stu)
+	//
+	////打印取出的数据
+	//fmt.Println(stu)
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"stu": stu,
+	//})
+
+	////3.查询最后一条记录
+	//var stu Student
+	////数据库查询最后一条
+	////[1.019ms] [rows:1] SELECT * FROM `students` ORDER BY `students`.`id` DESC LIMIT 1
+	//db.Last(&stu)
+	//
+	////打印取出的数据
+	//fmt.Println(stu)
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"stu": stu,
+	//})
+
+	////4.Take一条记录
+	//var stu Student
+	//
+	////[0.770ms] [rows:1] SELECT * FROM `students` LIMIT 1
+	//db.Take(&stu)
+	//
+	////打印取出的数据
+	//fmt.Println(stu)
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"stu": stu,
+	//})
+
+	////5.条件查询
+	//var stu Student
+	////where
+	////1.查询id为3的学生
+	////db.Where("id = ?", 3).Find(&stu)
+	////查询学号为200101的学生
+	//db.Where("sno = ?", 200103).Find(&stu)
+	//
+	////打印取出的数据
+	//fmt.Println(stu)
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"stu": stu,
+	//})
+
+	//6.条件查询
+	//单个使用Teacher  多个使用[]Teacher
+	var students []Student
+	//where string
+	//查询性别为女的学生
+	//db.Where("gender = ?", 0).Find(&students)
+	//查询性别为男的学生
+	db.Where("gender = ?", 1).Find(&students)
+
+	//打印取出的数据
+	fmt.Println(students)
+	//响应
+	ctx.JSON(http.StatusOK, gin.H{
+		"stu": students,
+	})
+}
+
+//更新
+
+func Update(ctx *gin.Context) {
+	//1.不常用 更新所有字段
+	//定义学生变量
+	var student Student
+	//更新id为3的名字改为乔治
+	//先查询
+	db.Where("id = ?", 3).Find(&student)
+	fmt.Println("id为3的学生姓名>>> ", student.Name)
+	//重新赋值
+	student.Name = "乔治"
+	//保存到数据库中
+	db.Save(&student) //所有字段全部更新
+	fmt.Println("id为3的学生姓名>>> ", student.Name)
 
 	//响应
 	ctx.JSON(http.StatusOK, gin.H{
-		"stu": stu,
+		"msg": "更新成功",
 	})
 }
 
@@ -278,6 +374,9 @@ func main() {
 
 	//查询
 	r.GET("/queryDB", QueryDB)
+
+	//更新
+	r.GET("/update", Update)
 
 	//启动
 	r.Run()
