@@ -345,21 +345,84 @@ func QueryDB(ctx *gin.Context) {
 
 func Update(ctx *gin.Context) {
 	//1.不常用 更新所有字段
+	////定义学生变量
+	//var student Student
+	////更新id为3的名字改为乔治
+	////先查询
+	//db.Where("id = ?", 3).Find(&student)
+	//fmt.Println("id为3的学生姓名>>> ", student.Name)
+	////重新赋值
+	//student.Name = "乔治"
+	////保存到数据库中
+	//db.Save(&student) //所有字段全部更新
+	//fmt.Println("id为3的学生姓名>>> ", student.Name)
+	//
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"msg": "更新成功",
+	//})
+
+	////1.不常用 更新所有字段
+	////更新第一个学生的名字
+	////定义学生变量
+	//var student Student
+	////先查询
+	//db.Find(&student)
+	////打印学生姓名
+	//fmt.Println("姓名: ", student.Name)
+	////再更新
+	//student.Name = "顾水云"
+	////保存到数据库
+	//db.Save(&student)
+	////打印学生姓名
+	//fmt.Println("姓名: ", student.Name)
+	//
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"student": student,
+	//})
+
+	//2.针对字段的更新 update更新
 	//定义学生变量
-	var student Student
-	//更新id为3的名字改为乔治
-	//先查询
-	db.Where("id = ?", 3).Find(&student)
-	fmt.Println("id为3的学生姓名>>> ", student.Name)
-	//重新赋值
-	student.Name = "乔治"
-	//保存到数据库中
-	db.Save(&student) //所有字段全部更新
-	fmt.Println("id为3的学生姓名>>> ", student.Name)
+	//var stu Student //声明未赋值 条件是必须的,这样是不行的 WHERE conditions required
+	//var stu = Student{BaseModel: BaseModel{Name: "乔治"}} //还是不行,会提示 WHERE conditions required
+	//db.Model 必须是主键信息  乔治的主键ID是3
+	var stu = Student{BaseModel: BaseModel{ID: 3}}
+
+	//数据库更新
+	//修改乔治的名字变成佩奇
+	//UPDATE `students` SET `name`='佩奇' WHERE `id` = 3
+	//更新单个字段
+	//db.Model(&stu).Update("name", "佩奇")
+	//更新多个字段 使用db.Model(&stu).Updates()
+	db.Model(&stu).Updates(Student{BaseModel: BaseModel{Name: "查理"}, Remark: "小猪查理烤肉"})
 
 	//响应
 	ctx.JSON(http.StatusOK, gin.H{
-		"msg": "更新成功",
+		"stu": stu,
+	})
+
+}
+
+//删除
+
+func Delete(ctx *gin.Context) {
+	//1.删除单条记录
+	////也是先查询,在删除  安装主键删除
+	////删除ID为3的查理
+	////DELETE FROM `students` WHERE `students`.`id` = 3
+	//var stu = Student{BaseModel: BaseModel{ID: 3}}
+	////数据库删除
+	//db.Delete(&stu)
+
+	//2.删除多条记录
+	//按条件删除 删除student表里性别为男的学生
+	//DELETE FROM `students` WHERE gender = 1
+	db.Where("gender = ?", 1).Delete(&Student{})
+
+	//响应
+	ctx.JSON(http.StatusOK, gin.H{
+		"msg": "删除成功!",
 	})
 }
 
@@ -377,6 +440,9 @@ func main() {
 
 	//更新
 	r.GET("/update", Update)
+
+	//删除
+	r.GET("/delete", Delete)
 
 	//启动
 	r.Run()
