@@ -35,6 +35,7 @@
         <th>电话</th>
         <th>生日</th>
         <th>备注</th>
+        <th>删除</th>
       </tr>
       {{range $stu := .student}}
       <tr>
@@ -44,6 +45,9 @@
         <td>{{$stu.Tel}}</td>
         <td>{{$stu.Birth}}</td>
         <td>{{$stu.Remark}}</td>
+        <td><a href="/student/delete/{{$stu.Sno}}">
+            <span class="glyphicon glyphicon-trash btn btn-danger" aria-hidden="true"></span>
+        </a></td>
       </tr>
       {{end}}
     </table>

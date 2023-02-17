@@ -238,6 +238,19 @@ func PostStudentAdd(ctx *gin.Context) {
 
 }
 
+//删除学生
+
+func PostDeleteStudent(ctx *gin.Context) {
+	//获取delID
+	delID := ctx.Param("delID")
+	//删除符合条件的学生
+	db.Where("sno = ?", delID).Delete(&Student{})
+
+	//响应,重定向到学生管理页面
+	ctx.Redirect(http.StatusMovedPermanently, "/student")
+
+}
+
 // 课程路由函数
 func getCourse(ctx *gin.Context) {
 	ctx.HTML(http.StatusOK, "course.html", nil)
@@ -283,6 +296,8 @@ func main() {
 	r.GET("/student/add", GetStudentAddHtml)
 	//添加学生
 	r.POST("/student/add", PostStudentAdd)
+	//删除学生
+	r.GET("/student/delete/:delID", PostDeleteStudent)
 	//课程路由
 	r.GET("/course", getCourse)
 	//班级路由
