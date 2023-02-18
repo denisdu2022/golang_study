@@ -240,7 +240,7 @@ func PostStudentAdd(ctx *gin.Context) {
 
 //删除学生
 
-func PostDeleteStudent(ctx *gin.Context) {
+func GetDeleteStudent(ctx *gin.Context) {
 	//获取delID
 	delID := ctx.Param("delID")
 	//删除符合条件的学生
@@ -251,9 +251,126 @@ func PostDeleteStudent(ctx *gin.Context) {
 
 }
 
+//编辑学生
+
+func GetEditStudent(ctx *gin.Context) {
+	//获取前端传过来的主键ID
+	editID := ctx.Param("editID")
+	//从数据库查询这个学生的信息
+	var editStu Student
+	db.Where("sno = ?", editID).Find(&editStu)
+
+	//从数据库查询班级信息
+	var classes []Class
+	db.Find(&classes)
+	//响应
+	ctx.HTML(http.StatusOK, "getEditStu.html", gin.H{
+		"classes": classes,
+		"editStu": editStu,
+	})
+}
+
 // 课程路由函数
 func getCourse(ctx *gin.Context) {
-	ctx.HTML(http.StatusOK, "course.html", nil)
+	//获取课程名
+	coName := ctx.Query("coName")
+	//从数据库查询所有课程
+	var courses []Course
+
+	//基于模糊查询的搜索框
+	if coName == "" {
+		//查询
+		db.Find(&courses)
+
+		//响应 查出的数据传给前端
+		ctx.HTML(http.StatusOK, "course.html", gin.H{
+			"courses": courses,
+		})
+	} else {
+		//查询
+		db.Where("name like ?", "%"+coName+"%").Find(&courses)
+		fmt.Println(courses)
+
+		//响应 查出的数据传给前端
+		ctx.HTML(http.StatusOK, "course.html", gin.H{
+			"courses": courses,
+		})
+	}
+
+}
+
+//添加课程
+//GET拿页面
+
+func GetCourseAddHtml(ctx *gin.Context) {
+	//查询教师信息
+	var teachers []Teacher
+	//数据库查询
+	db.Find(&teachers)
+	//响应添加课程页面
+	ctx.HTML(http.StatusOK, "getCourseAdd.html", gin.H{
+		"teachers": teachers,
+	})
+}
+
+//post提交
+
+func PostCourseAdd(ctx *gin.Context) {
+	//获取前端传来的参数
+	//课程名
+	coName := ctx.PostForm("coName")
+	//学分  获取到的是string类型,需要类型转换
+	strCredit := ctx.PostForm("credit")
+	intCredit, _ := strconv.Atoi(strCredit)
+	//周期
+	strPeriod := ctx.PostForm("period")
+	intPeriod, _ := strconv.Atoi(strPeriod)
+	//任课老师ID
+	strTID := ctx.PostForm("tID")
+	intTID, _ := strconv.Atoi(strTID)
+
+	//实例化课程对象并赋值
+	course := Course{BaseModel: BaseModel{Name: coName}, Credit: intCredit, Period: intPeriod, TeacherID: intTID}
+	//添加到数据库
+	db.Create(&course)
+
+	//响应,重定向到课程管理页面
+	ctx.Redirect(http.StatusMovedPermanently, "/course")
+
+}
+
+//删除课程
+
+func GetDeleteCourse(ctx *gin.Context) {
+	//获取delID
+	delID := ctx.Param("delID")
+	//先查询,在删除
+	db.Where("ID = ?", delID).Delete(&Course{})
+
+	//响应
+	//重定向到课程管理页面
+	ctx.Redirect(http.StatusMovedPermanently, "/course")
+}
+
+//编辑课程
+
+func GetEditCourseHtml(ctx *gin.Context) {
+	//获取editID
+	editID := ctx.Param("editID")
+	//数据库查询
+	var course Course
+	db.Where("ID = ?", editID).Find(&course)
+
+	//查询teacher表
+	var teachers []Teacher
+	db.Find(&teachers)
+
+	//响应编辑页面
+	ctx.HTML(http.StatusOK, "editCourse.html", gin.H{
+		"course":   course,
+		"teachers": teachers,
+	})
+
 }
 
 // 班级路由函数
@@ -270,8 +387,14 @@ func createMyRender() multitemplate.Renderer {
 	render.AddFromFiles("student.html", "templates/base.html", "templates/student.html")
 	//添加学生
 	render.AddFromFiles("getStuAdd.html", "templates/base.html", "templates/getStuAdd.html")
+	//编辑学生
+	render.AddFromFiles("getEditStu.html", "templates/base.html", "templates/getEditStu.html")
 	//课程页面
 	render.AddFromFiles("course.html", "templates/base.html", "templates/course.html")
+	//添加课程
+	render.AddFromFiles("getCourseAdd.html", "templates/base.html", "templates/getCourseAdd.html")
+	//编辑课程
+	render.AddFromFiles("editCourse.html", "templates/base.html", "templates/editCourse.html")
 	//班级页面
 	render.AddFromFiles("class.html", "templates/base.html", "templates/class.html")
 	return render
@@ -290,6 +413,7 @@ func main() {
 
 	//路由
 	r.GET("/", getIndex)
+
 	//学生管理
 	r.GET("/student", getStudent)
 	//获取添加学生页面
@@ -297,9 +421,22 @@ func main() {
 	//添加学生
 	r.POST("/student/add", PostStudentAdd)
 	//删除学生
-	r.GET("/student/delete/:delID", PostDeleteStudent)
+	r.GET("/student/delete/:delID", GetDeleteStudent)
+	//编辑学生
+	r.GET("/student/edit/:editID", GetEditStudent)
+
 	//课程路由
 	r.GET("/course", getCourse)
+	//添加课程页面 Get 拿页面  Post提交课程
+	r.GET("/course/add", GetCourseAddHtml)
+	//添加课程
+	r.POST("/course/add", PostCourseAdd)
+	//删除课程
+	r.GET("/course/delete/:delID", GetDeleteCourse)
+	//编辑课程
+	r.GET("/course/edit/:editID", GetEditCourseHtml)
+	//提交课程
+
 	//班级路由
 	r.GET("/class", getClass)
 

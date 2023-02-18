@@ -1,0 +1,73 @@
+<!--继承base-->
+{{template "base.html" .}}
+
+<!--重写盒子-->
+{{define "title"}}
+<title>编辑学生</title>
+{{end}}
+
+{{define "content"}}
+<h3>编辑学生</h3>
+
+<!--自定义变量-->
+{{$stu := .editStu}}
+<form action="" method="post">
+  <div class="form-group">
+    <label for="sid">学号</label>
+    <input type="text" id="sid" class="form-control" placeholder="学号" name="sid" value="{{$stu.Sno}}">
+  </div>
+
+  <div class="form-group">
+    <label for="name">姓名</label>
+    <input type="text" id="name" class="form-control" placeholder="姓名" name="name" value="{{$stu.Name}}">
+  </div>
+
+  <div class="form-group">
+    <label for="gender">性别</label>
+    <select name="gender" id="gender" class="form-control">
+<!--      通过if语句判断性别,使用selected设置选择的默认值-->
+      {{if eq $stu.Gender 1}}
+      <option selected value="1">男</option>
+      <option value="0">女</option>
+      {{else}}
+      <option selected value="0">女</option>
+      <option value="1">男</option>
+      {{end}}
+    </select>
+
+  </div>
+
+  <div class="form-group">
+    <label for="pwd">密码</label>
+    <input type="password" id="pwd" class="form-control" placeholder="密码" name="pwd" value="{{$stu.Pwd}}">
+  </div>
+
+  <div class="form-group">
+    <label for="tel">手机号</label>
+    <input type="text" id="tel" class="form-control" placeholder="手机号" name="tel" value="{{$stu.Tel}}">
+  </div>
+
+  <div class="form-group">
+    <label for="clId">班级</label>
+    <select name="clId" id="clId" class="form-control">
+      {{range $classes := .classes}}
+<!--      如果正在循环的班级ID和查出来的学生的班级ID相等,设置为默认值-->
+      {{if eq $classes.ID $stu.ClassID}}
+      <option selected value="{{$classes.ID}}">{{$classes.Name}}</option>
+      {{else}}
+      <option value="{{$classes.ID}}">{{$classes.Name}}</option>
+      {{end}}
+      {{end}}
+    </select>
+
+  </div>
+
+  <div class="form-group">
+    <label for="remark">备注</label>
+    <input type="text" id="remark" class="form-control" placeholder="备注" name="remark" value="{{$stu.Remark}}">
+  </div>
+
+  <input type="submit" value="提交" class="btn btn-primary btn-lg pull-right " >
+</form>
+{{end}}
+
