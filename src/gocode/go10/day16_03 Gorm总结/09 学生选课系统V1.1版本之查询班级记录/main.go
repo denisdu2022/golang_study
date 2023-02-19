@@ -231,6 +231,10 @@ func PostStudentAdd(ctx *gin.Context) {
 	//添加到数据库
 	db.Create(&stu)
 
+	//添加完学生后,相应的班级人数也应该加1
+	//使用gorm表达式实现
+	//先找表,Class{} 这个表,条件Class{}表里的ID等于intClId,然后再写 Class{} 这个表的Num字段再写更新表达式加1
+	db.Model(&Class{}).Where("id = ?", intClId).Update("num", gorm.Expr("num+1"))
 	//响应
 	//添加成功后重定向到学生管理页面
 	//http.StatusMovedPermanently 301 永久重定向 ,302临时重定向,这里使用永久重定向
