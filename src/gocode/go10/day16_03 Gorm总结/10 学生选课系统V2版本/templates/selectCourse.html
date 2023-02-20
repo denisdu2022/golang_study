@@ -1,0 +1,86 @@
+<!--继承base-->
+{{template "base.html" .}}
+
+<!--重写盒子-->
+<!--title-->
+{{define "title"}}
+<title>选课页面</title>
+{{end}}
+
+<!--head-->
+{{define "navbar"}}
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">学生选课系统</a>
+        </div>
+    </div>
+</nav>
+{{end}}
+
+<!--menu-->
+{{define "menu"}}
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    您好,{{.stu.Name}}
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                <p><a href="/student/{{.stu.Sno}}">{{.stu.Name}}的个人信息</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    选课管理
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                <p><a href="/student/selectCourse/{{.stu.Sno}}">{{.stu.Name}}的课程管理</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}
+
+
+{{define "content"}}
+<h3>{{.stu.Name}}的选课表</h3>
+
+<form action="" method="post">
+    <table class="table table-bordered">
+        <tr>
+            <th>选择</th>
+            <th>课程名</th>
+            <th>学分</th>
+            <th>周期</th>
+            <th>任课教师</th>
+        </tr>
+        {{range $courses := .courses}}
+        <tr>
+            <td><input type="checkbox" name="course_id" value="{{$courses.ID}}"></td>
+            <td>{{$courses.Name}}</td>
+            <td>{{$courses.Credit}}</td>
+            <td>{{$courses.Period}}</td>
+            <td>{{$courses.Teacher.Name}}</td>
+        </tr>
+        {{end}}
+    </table>
+    <input type="submit" class="btn btn-primary pull-right">
+</form>
+{{end}}

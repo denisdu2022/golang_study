@@ -213,6 +213,42 @@ func getOneStuHTml(ctx *gin.Context) {
 
 }
 
+// 学生选课
+//获取选课页面
+
+func getSelectCourseHtml(ctx *gin.Context) {
+	//获取学生学号
+	strSno := ctx.Param("sno")
+	intSno, _ := strconv.Atoi(strSno)
+
+	//数据库查询
+	var stu Student
+	db.Where("sno = ?", intSno).Preload("Class").Take(&stu)
+
+	//获取所有课程
+	var courses []Course
+	db.Preload("Teacher").Find(&courses)
+
+	//响应选课页面
+	ctx.HTML(http.StatusOK, "selectCourse.html", gin.H{
+		"stu":     stu,
+		"courses": courses,
+	})
+}
+
+//提交选课
+
+func postSelectCourse(ctx *gin.Context) {
+	//获取前端传来的数据 获取多个值,键值对使用PostFormArray
+	courseID := ctx.PostFormArray("course_id")
+	fmt.Println(courseID)
+
+	//响应
+	ctx.JSON(http.StatusOK, gin.H{
+		"courseID": courseID,
+	})
+}
+
 //添加学生路由函数
 
 func GetStudentAddHtml(ctx *gin.Context) {
@@ -419,6 +455,8 @@ func createMyRender() multitemplate.Renderer {
 	render.AddFromFiles("student.html", "templates/base.html", "templates/student.html")
 	//学生个人详情
 	render.AddFromFiles("detailStudent.html", "templates/base.html", "templates/detailStudent.html")
+	//学生选课页面
+	render.AddFromFiles("selectCourse.html", "templates/base.html", "templates/selectCourse.html")
 	//添加学生
 	render.AddFromFiles("getStuAdd.html", "templates/base.html", "templates/getStuAdd.html")
 	//编辑学生
@@ -452,6 +490,10 @@ func main() {
 	r.GET("/student", getStudent)
 	//查看学生的个人信息
 	r.GET("/student/:sno", getOneStuHTml)
+	//学生选课页面
+	r.GET("/student/selectCourse/:sno", getSelectCourseHtml)
+	//学生选课提交
+	r.POST("/student/selectCourse/:sno", postSelectCourse)
 	//获取添加学生页面
 	r.GET("/student/add", GetStudentAddHtml)
 	//添加学生
