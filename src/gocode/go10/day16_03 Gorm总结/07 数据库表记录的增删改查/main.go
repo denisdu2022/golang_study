@@ -324,20 +324,36 @@ func QueryDB(ctx *gin.Context) {
 	//	"stu": stu,
 	//})
 
-	//6.条件查询
-	//单个使用Teacher  多个使用[]Teacher
-	var students []Student
-	//where string
-	//查询性别为女的学生
-	//db.Where("gender = ?", 0).Find(&students)
-	//查询性别为男的学生
-	db.Where("gender = ?", 1).Find(&students)
+	////6.条件查询
+	////单个使用Teacher  多个使用[]Teacher
+	//var students []Student
+	////where string
+	////查询性别为女的学生
+	////db.Where("gender = ?", 0).Find(&students)
+	////查询性别为男的学生
+	//db.Where("gender = ?", 1).Find(&students)
+	//
+	////打印取出的数据
+	//fmt.Println(students)
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"stu": students,
+	//})
 
-	//打印取出的数据
-	fmt.Println(students)
+	//7.一对多的关联关系
+	//var student []Student
+	//db.Find(&student)
+	//fmt.Println("students>>> ", student)
+
+	//定义学生变量
+	var student []Student
+	//Preload预加载Class这张表 ,预加载的表是跟后边查询的表必须是相关的
+	db.Preload("Class").Find(&student)
+	fmt.Println("students>>> ", student)
+
 	//响应
 	ctx.JSON(http.StatusOK, gin.H{
-		"stu": students,
+		"student": student,
 	})
 }
 

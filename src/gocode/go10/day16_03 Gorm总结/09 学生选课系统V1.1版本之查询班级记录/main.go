@@ -168,7 +168,8 @@ func getStudent(ctx *gin.Context) {
 		//查询数据库中student表中的数据
 		//查询所有学生
 		//从数据库查询并写入student
-		db.Find(&student)
+		//连续跨表预加载两个表
+		db.Preload("Class.Tutor").Find(&student)
 		//响应学生页面
 		ctx.HTML(http.StatusOK, "student.html", gin.H{
 			"student": student,
@@ -176,12 +177,39 @@ func getStudent(ctx *gin.Context) {
 	} else {
 		//数据库查询
 		//模糊查询 "name like ?", "%"+name+"%"  包含name参数的
-		db.Where("name like ?", "%"+name+"%").Find(&student)
+		db.Where("name like ?", "%"+name+"%").Preload("Class.Tutor").Find(&student)
 		//响应学生页面
 		ctx.HTML(http.StatusOK, "student.html", gin.H{
 			"student": student,
 		})
 	}
+
+}
+
+//查看学生信息详情
+
+func getOneStuHTml(ctx *gin.Context) {
+	//获取动态参数
+	strSno := ctx.Param("sno")
+	//强转
+	intSno, _ := strconv.Atoi(strSno)
+
+	//定义学生信息
+	var stu Student
+	//数据库查询 预加载班级表
+	db.Where("sno = ? ", intSno).Preload("Class").Take(&stu)
+
+	////响应
+	//ctx.JSON(200, gin.H{
+	//	"intSno": stu,
+	//})
+
+	//响应学生个人详情页面
+	ctx.HTML(http.StatusOK, "detailStudent.html", gin.H{
+		"stu": stu,
+	})
+
+	//fmt.Println("stu >>> ", stu)
 
 }
 
@@ -389,6 +417,8 @@ func createMyRender() multitemplate.Renderer {
 	render.AddFromFiles("index.html", "templates/base.html", "templates/index.html")
 	//学生页面
 	render.AddFromFiles("student.html", "templates/base.html", "templates/student.html")
+	//学生个人详情
+	render.AddFromFiles("detailStudent.html", "templates/base.html", "templates/detailStudent.html")
 	//添加学生
 	render.AddFromFiles("getStuAdd.html", "templates/base.html", "templates/getStuAdd.html")
 	//编辑学生
@@ -420,6 +450,8 @@ func main() {
 
 	//学生管理
 	r.GET("/student", getStudent)
+	//查看学生的个人信息
+	r.GET("/student/:sno", getOneStuHTml)
 	//获取添加学生页面
 	r.GET("/student/add", GetStudentAddHtml)
 	//添加学生
