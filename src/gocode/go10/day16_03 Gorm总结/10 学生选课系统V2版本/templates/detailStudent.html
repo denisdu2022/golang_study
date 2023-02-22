@@ -90,12 +90,34 @@
     </tr>
 
 </table>
-<p>
-    <a href="/student">
-        <input type="submit" value="返回" class="btn btn-primary pull-right">
-    </a>
-</p>
 
+<a href="/student">
+    <input type="submit" value="返回" class="btn btn-primary pull-right">
+</a>
+
+
+
+<div class="form-group">
+    <table class="table table-bordered ">
+        <tr class="danger">
+            <th colspan="4" class="text-center" >{{$stu.Name}}的已选课程</th>
+        </tr>
+        <tr>
+            <th>课程名</th>
+            <th>学分</th>
+            <th>周期</th>
+            <th>任课老师</th>
+        </tr>
+        {{range $courses := .selectCourses}}
+        <tr>
+            <td>{{$courses.Name}}</td>
+            <td>{{$courses.Credit}}</td>
+            <td>{{$courses.Period}}</td>
+            <td>{{$courses.Teacher.Name}}</td>
+        </tr>
+        {{end}}
+    </table>
+</div>
 
 
 {{end}}

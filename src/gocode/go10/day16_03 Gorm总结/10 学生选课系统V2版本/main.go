@@ -199,6 +199,10 @@ func getOneStuHTml(ctx *gin.Context) {
 	//数据库查询 预加载班级表
 	db.Where("sno = ? ", intSno).Preload("Class").Take(&stu)
 
+	//查询学生的关联课程
+	var selectCourses []Course
+	db.Preload("Teacher").Model(&stu).Association("Courses").Find(&selectCourses)
+
 	////响应
 	//ctx.JSON(200, gin.H{
 	//	"intSno": stu,
@@ -206,7 +210,8 @@ func getOneStuHTml(ctx *gin.Context) {
 
 	//响应学生个人详情页面
 	ctx.HTML(http.StatusOK, "detailStudent.html", gin.H{
-		"stu": stu,
+		"stu":           stu,
+		"selectCourses": selectCourses,
 	})
 
 	//fmt.Println("stu >>> ", stu)
@@ -239,14 +244,33 @@ func getSelectCourseHtml(ctx *gin.Context) {
 //提交选课
 
 func postSelectCourse(ctx *gin.Context) {
+	//获取学生学号
+	sno := ctx.Param("sno")
+	fmt.Println("sno>>> ", sno)
+
+	//数据库查询学生对象
+	var stu Student
+	db.Where("sno = ?", sno).Take(&stu)
+
 	//获取前端传来的数据 获取多个值,键值对使用PostFormArray
-	courseID := ctx.PostFormArray("course_id")
-	fmt.Println(courseID)
+	courseIDSlice := ctx.PostFormArray("course_id")
+	fmt.Println(courseIDSlice)
+
+	//获取所有课程
+	var courses []Course
+	db.Where("id in ?", courseIDSlice).Find(&courses)
+	fmt.Println(courses)
+
+	//绑定课程
+	db.Model(&stu).Association("Courses").Append(courses)
 
 	//响应
-	ctx.JSON(http.StatusOK, gin.H{
-		"courseID": courseID,
-	})
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"courseID": courseIDSlice,
+	//	"courses":  courses,
+	//})
+	//重定向跳转到个人详情页
+	ctx.Redirect(http.StatusMovedPermanently, "/student/"+sno)
 }
 
 //添加学生路由函数

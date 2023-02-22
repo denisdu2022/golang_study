@@ -203,29 +203,96 @@ func Add(ctx *gin.Context) {
 	////添加到数据库记录
 	//db.Create(&cl1)
 
-	//批量创建一对多的记录
-	cl1 := Class{BaseModel: BaseModel{Name: "软件一班"}, Num: 36, TutorID: 2}
-	cl2 := Class{BaseModel: BaseModel{Name: "软件二班"}, Num: 38, TutorID: 8}
-	cl3 := Class{BaseModel: BaseModel{Name: "计算机科学与技术一班"}, Num: 38, TutorID: 3}
-	cl4 := Class{BaseModel: BaseModel{Name: "计算机科学与技术二班"}, Num: 38, TutorID: 9}
-	//批量添加创建切片
-	classes := []Class{cl1, cl2, cl3, cl4}
-	//添加到数据库记录
-	db.Create(&classes)
+	////批量创建一对多的记录
+	//cl1 := Class{BaseModel: BaseModel{Name: "软件一班"}, Num: 36, TutorID: 2}
+	//cl2 := Class{BaseModel: BaseModel{Name: "软件二班"}, Num: 38, TutorID: 8}
+	//cl3 := Class{BaseModel: BaseModel{Name: "计算机科学与技术一班"}, Num: 38, TutorID: 3}
+	//cl4 := Class{BaseModel: BaseModel{Name: "计算机科学与技术二班"}, Num: 38, TutorID: 9}
+	////批量添加创建切片
+	//classes := []Class{cl1, cl2, cl3, cl4}
+	////添加到数据库记录
+	//db.Create(&classes)
+	//
+	////打印班级ID
+	//for _, class := range classes {
+	//	fmt.Println(class.ID) //班级ID 3,4,5,6
+	//}
+	//
+	//////指定批量添加的大小
+	////db.CreateInBatches(classes,100)
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"msg": "添加成功!",
+	//	"cl":  classes,
+	//})
 
-	//打印班级ID
-	for _, class := range classes {
-		fmt.Println(class.ID) //班级ID 3,4,5,6
-	}
+	////多对多的添加
+	////实例化学生对象
+	//var stu Student
+	//stu = Student{BaseModel: BaseModel{Name: "dianDian"}, Sno: 200111, Pwd: "123", Tel: "111", Gender: 1, ClassID: 3}
+	////添加前的stu:  {{0 dianDian <nil> <nil> <nil>} 200111 123 111 1 <nil>  3 {{0  <nil> <nil> <nil>} 0 0 {{0  <nil> <nil> <nil>} 0   0 <nil> }} []}
+	//fmt.Println("添加前的stu: ", stu)
+	//db.Create(&stu)
+	///*
+	//	添加后的stu:  {{16 dianDian 2023-02-21 14:17:03.799 +0800 CST 2023-02-21 14:17:03.799 +0800 CST 2023-02-21 14:17:03.799 +0800 CST} 200111 123 111 1 <nil>  3 {{0  <nil> <nil> <nil>} 0 0 {{0  <nil> <nil> <nil>} 0   0 <nil> }} []}
+	//	可以看到Course是空的
+	//*/
+	//fmt.Println("添加后的stu: ", stu)
 
-	////指定批量添加的大小
-	//db.CreateInBatches(classes,100)
+	////多对多的绑定(学生和课程)
+	////为学生绑定课程
+	//var courses []Course
+	////先查询
+	//db.Where("id in ?", []int{1, 2}).Find(&courses)
+	////打印查询出来的课程
+	//fmt.Println("courses>>> ", courses)
+	//
+	////第一种绑定方法  创建学生的同时绑定课程
+	//stu1 := Student{
+	//	BaseModel: BaseModel{Name: "翟辰瑜"},
+	//	Sno:       200112,
+	//	Pwd:       "123",
+	//	Tel:       "15556835561",
+	//	Gender:    1,
+	//	ClassID:   3,
+	//	//绑定查到的课程
+	//	Courses: courses,
+	//}
+	////插入到数据库中
+	//db.Create(&stu1)
+
+	////第二种  创建学生后 在绑定课程
+	////为查理绑定课程
+	//var courses []Course
+	////先查询
+	//db.Where("name in ?", []string{"数据结构导论", "数据库及其应用"}).Find(&courses)
+	////打印查询出来的课程
+	//fmt.Println("courses>>> ", courses)
+	////查找学生
+	//var stu Student
+	////数据库查询
+	//db.Where("name = ?", "查理").Take(&stu)
+	////给查理绑定课程
+	////db.Model查找修改当前学生stu.关联Courses找到第三张表student2courses这张表.追加要绑定的课程courses
+	////db.Model(&stu).Association("Courses").Append(courses)
+
+	////clear 取消关联,清楚关联的记录
+	//db.Model(&stu).Association("Courses").Clear()
+
+	//查询 关联关系
+	//定义课程
+	var courses []Course
+	//定义学生并查询
+	var stu Student
+	db.Where("name = ?", "翟辰瑜").Take(&stu)
+	//查询
+	db.Model(&stu).Association("Courses").Find(&courses)
+
 	//响应
 	ctx.JSON(http.StatusOK, gin.H{
-		"msg": "添加成功!",
-		"cl":  classes,
+		"stu":     stu,
+		"courses": courses,
 	})
-
 }
 
 //查询
