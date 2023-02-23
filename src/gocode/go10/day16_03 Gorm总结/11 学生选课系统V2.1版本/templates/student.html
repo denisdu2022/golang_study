@@ -1,0 +1,76 @@
+{{/*继承base*/}}
+{{template "base.html" .}}
+
+{{/*重写盒子*/}}
+{{ define "title"}}
+<title>学生管理</title>
+{{end}}
+
+{{define "content"}}
+<h3>学生管理</h3>
+<div class="row">
+  <div class="col-md-3 pull-left" >
+    <p><a class="btn btn-primary " href="/student/add">添加学生</a></p>
+  </div>
+  <div class="pull-right col-md-3">
+    <!--基于模糊查询的搜索框实现-->
+<!--    不加method="get"默认就是get-->
+    <form  action="" class="form-inline"  >
+      <div class="form-group">
+        <input type="text" class="form-control" id="name" placeholder="输入学生姓名查询" name="name">
+      </div>
+      <button type="submit" class="btn btn-default">搜索</button>
+    </form>
+  </div>
+</div>
+
+
+<div>
+  <div>
+    <table class="table table-hover">
+      <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>电话</th>
+        <th>生日</th>
+        <th>班级</th>
+        <th>导员</th>
+        <th>备注</th>
+        <th>编辑</th>
+        <th>删除</th>
+      </tr>
+      {{range $stu := .student}}
+      <tr>
+        <td>{{$stu.Sno}}</td>
+<!--        查询个人信息功能-->
+        <td>
+          <a href="/student/{{$stu.Sno}}">{{$stu.Name}}</a>
+        </td>
+<!--       判断gender的值来展示男或者女-->
+        {{if eq $stu.Gender 0}}
+        <td>女</td>
+        {{else}}
+        <td>男</td>
+        {{end}}
+        <td>{{$stu.Tel}}</td>
+        <td>{{$stu.Birth}}</td>
+        <td>{{$stu.Class.Name}}</td>
+        <td>{{$stu.Class.Tutor.Name}}</td>
+        <td>{{$stu.Remark}}</td>
+<!--        编辑学生-->
+        <td>
+          <a href="/student/edit/{{$stu.Sno}}">
+            <span class="btn btn-primary glyphicon glyphicon-edit " aria-hidden="true"></span>
+          </a>
+        </td>
+<!--        删除学生-->
+        <td><a href="/student/delete/{{$stu.Sno}}">
+            <span class="glyphicon glyphicon-trash btn btn-danger" aria-hidden="true"></span>
+        </a></td>
+      </tr>
+      {{end}}
+    </table>
+  </div>
+</div>
+{{end}}
