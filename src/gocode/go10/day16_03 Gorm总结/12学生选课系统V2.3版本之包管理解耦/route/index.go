@@ -9,8 +9,9 @@ func InitIndex(r *gin.Engine) {
 
 	//首页
 
-	r.GET("/", Index)
+	//r.GET("/", Index)
 
-	r.GET("/index", GetIndex)
+	r.GET("/index", Index)
+	r.GET("/", GetIndex)
 
 }
