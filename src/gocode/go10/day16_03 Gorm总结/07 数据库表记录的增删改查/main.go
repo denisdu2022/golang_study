@@ -279,20 +279,103 @@ func Add(ctx *gin.Context) {
 	////clear 取消关联,清楚关联的记录
 	//db.Model(&stu).Association("Courses").Clear()
 
-	//查询 关联关系
-	//定义课程
+	////查询 关联关系
+	////定义课程
+	//var courses []Course
+	////定义学生并查询
+	//var stu Student
+	//db.Where("name = ?", "翟辰瑜").Take(&stu)
+	////查询
+	//db.Model(&stu).Association("Courses").Find(&courses)
+	//
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"stu":     stu,
+	//	"courses": courses,
+	//})
+
+	//// 批量添加课程
+	////实例化课程对象
+	//course1 := Course{BaseModel: BaseModel{Name: "数字电路"}, Credit: 3, Period: 16, TeacherID: 8}
+	//course2 := Course{
+	//	BaseModel: BaseModel{Name: "计算机微型接口"},
+	//	Credit:    2,
+	//	Period:    18,
+	//	TeacherID: 10,
+	//}
+	//course3 := Course{BaseModel: BaseModel{Name: "计算机网络"}, Credit: 3, Period: 17, TeacherID: 11}
+	////创建一个课程切片
+	//courses := []Course{course1, course2, course3}
+	//
+	////写入数据库表记录
+	//db.Create(&courses)
+	//
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"courses": courses,
+	//})
+
+	//添加多对多的关联表的记录
+	//绑定课程对象切片
 	var courses []Course
-	//定义学生并查询
-	var stu Student
-	db.Where("name = ?", "翟辰瑜").Take(&stu)
-	//查询
-	db.Model(&stu).Association("Courses").Find(&courses)
+	//先查询
+	//获取课程,写入课程对象切片
+	db.Where("name in ?", []string{"数字电路", "计算机网络"}).Find(&courses)
+	fmt.Println("courses>>> ", courses)
+
+	////添加学生1
+	////创建学生不绑定课程
+	//stu1 := Student{BaseModel: BaseModel{Name: "幸尧声"}, Sno: 200121, Pwd: "123", Tel: "13858413483", Gender: 1, ClassID: 6}
+	//db.Create(&stu1)
+	//
+	////多对多添加方式1
+	////创建学生的同时绑定课程
+	//stu2 := Student{
+	//	BaseModel: BaseModel{Name: "颜淮锨"},
+	//	Sno:       200122,
+	//	Pwd:       "123",
+	//	Tel:       "13792715256",
+	//	Gender:    0,
+	//	ClassID:   5,
+	//	//给学生绑定课程
+	//	Courses: courses,
+	//}
+	////添加到数据库
+	//db.Create(&stu2)
+
+	////多对多添加方式2
+	////先创建学生在绑定课程
+	//stu3 := Student{
+	//	BaseModel: BaseModel{Name: "龙栋诚"},
+	//	Sno:       200123,
+	//	Pwd:       "123",
+	//	Tel:       "13896458484",
+	//	Gender:    1,
+	//	ClassID:   6,
+	//}
+	////添加学生到数据库
+	//db.Create(&stu3)
+	////打印学生ID
+	//fmt.Println("stu3的ID>>> ", stu3.ID)
+	////给学生关联绑定课程
+	////注意: Courses是多对多的关联字段,不是关联表
+	//db.Model(&stu3).Association("Courses").Append(courses)
+
+	//多对多添加方式3
+	//已有学生关联绑定课程
+	//先查询学生
+	var stu4 Student
+	db.Where("name = ?", "羿伊琳").First(&stu4)
+	//打印查询到的学生信息
+	fmt.Println("stu4 的ID >>> ", stu4.ID)
+	//关联绑定课程
+	db.Model(&stu4).Association("Courses").Append(courses)
 
 	//响应
 	ctx.JSON(http.StatusOK, gin.H{
-		"stu":     stu,
-		"courses": courses,
+		"msg": "ok",
 	})
+
 }
 
 //查询
