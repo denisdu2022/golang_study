@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算器</title>
+
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.3/jquery.js"></script>
+
+</head>
+<body>
+
+
+    <h3>加法计算器</h3>
+    <input type="text" class="num1" > + <input type="text" class="num2"  > = <input type="text" class="ret" >
+    <button class="cal" >计算</button>
+
+
+
+    <script>
+        // 使用css的标签选择器
+        //.click 绑定点击事件,里边放一个匿名函数
+        //alert() 弹窗
+        $(".cal").click(function (){
+            //测试弹窗123
+            //alert(123)
+            //发送Ajax请求
+            $.ajax({
+                //URL路径
+                "url":"/cal",
+                //请求方式
+                "type":"get",
+                //数据
+                data:{
+                    //测试数据
+                    // "num1":10,
+                    // "num2":20,
+                    //值是动态的选择,使用css的标签选择器填充格式是$(".num1")的输入值  $(".num1").val()
+                    "num1":$(".num1").val(),
+                    "num2":$(".num2").val(),
+
+
+                },
+                //响应成功,执行函数  res是响应参数
+                success:function (res){
+                    //测试响应成功
+                    // alert(666)
+                    console.log(res)
+                    //获取后端的计算结果
+                    $(".ret").val(res.ret)
+                }
+            })
+        })
+    </script>
+
+
+
+
+
+
+
+
+</body>
+</html>
