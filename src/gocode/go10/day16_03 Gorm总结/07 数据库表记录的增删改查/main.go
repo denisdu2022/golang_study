@@ -378,6 +378,13 @@ func Add(ctx *gin.Context) {
 
 }
 
+//Group Having 分组查询结构体
+
+type Result struct {
+	ClassID int
+	Total   int
+}
+
 //查询
 
 func QueryDB(ctx *gin.Context) {
@@ -495,15 +502,122 @@ func QueryDB(ctx *gin.Context) {
 	//db.Find(&student)
 	//fmt.Println("students>>> ", student)
 
-	//定义学生变量
+	////定义学生变量
+	//var student []Student
+	////Preload预加载Class这张表 ,预加载的表是跟后边查询的表必须是相关的
+	//db.Preload("Class").Find(&student)
+	//fmt.Println("students>>> ", student)
+	//
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"student": student,
+	//})
+
+	//基于string的where语句
+	//var student Student
+	////查询名字叫做查理的学生
+	//// SELECT * FROM `students` WHERE name = '查理' ORDER BY `students`.`id` LIMIT 1
+	//db.Where("name = ?", "查理").First(&student)
+	//fmt.Println("学生姓名>>> ", student.Name)
+
+	////查询学号在2001到200105之间的学生
+	//var student []Student
+	//SELECT * FROM `students` WHERE Sno between 200101 and 200105
+	//db.Where("Sno between ? and ?", 200101, 200105).Find(&student)
+	//fmt.Println(student)
+
+	////查询学号在200105,200107的学生
+	//var student []Student
+	////SELECT * FROM `students` WHERE Sno in (200105,200107)
+	//db.Where("Sno in ?", []int64{200105, 200107}).Find(&student)
+	//fmt.Println(student)
+
+	////模糊查询
+	//var student []Student
+	////查询姓氏为刘姓的学生
+	////SELECT * FROM `students` WHERE name like '刘%'
+	//db.Where("name like ?", "刘%").Find(&student)
+	//fmt.Println(student)
+
+	////查询创建时间大于 2023-03-01 12:29:00  的学生
+	//var student []Student
+	////SELECT * FROM `students` WHERE create_time > '2023-03-01 12:29:00'
+	//db.Where("create_time > ?", "2023-03-01 12:29:00").Find(&student)
+	//fmt.Println(student)
+
+	////Struct条件
+	//var student []Student
+	////结构体查询
+	////SELECT * FROM `students` WHERE `students`.`name` = '查理' AND `students`.`gender` = 1
+	//db.Where(&Student{BaseModel: BaseModel{Name: "查理"}, Gender: 1}).Find(&student)
+	////注意:使用结构体作为条件查询时,GORM只会查询非零值字段
+	//// SELECT * FROM `students` WHERE `students`.`name` = '羿伊琳'  零值不会作为字段查询
+	//db.Where(&Student{BaseModel: BaseModel{Name: "羿伊琳"}, Gender: 0}).Find(&student)
+	//fmt.Println(student)
+
+	////map条件
+	//var student []Student
+	////SELECT * FROM `students` WHERE `Gender` = 1 AND `Name` = '查理'
+	//db.Where(map[string]interface{}{"Name": "查理", "Gender": 1}).Find(&student)
+	//fmt.Println(student)
+	////使用map条件非零值字段也会查询
+	////SELECT * FROM `students` WHERE `Gender` = 0 AND `Name` = '羿伊琳'
+	//db.Where(map[string]interface{}{"Name": "羿伊琳", "Gender": 0}).Find(&student)
+	//fmt.Println(student)
+	//
+	////响应
+	//ctx.JSON(http.StatusOK, gin.H{
+	//	"stu": student,
+	//})
+
+	//其他查询语句
 	var student []Student
-	//Preload预加载Class这张表 ,预加载的表是跟后边查询的表必须是相关的
-	db.Preload("Class").Find(&student)
-	fmt.Println("students>>> ", student)
+	////select语句,表示选择,其中写SQL部分
+	////SELECT name,sno FROM `students` WHERE id = 11 LIMIT 1
+	//db.Select("name,sno").Where("id = ?", 11).Take(&student)
+	//log.Println(student)
+	//
+	//db.Omit("name", "sno").Find(&student)
+	//fmt.Println(student)
+
+	////not语句 用法类似于where
+	////查询学号不在200104到200123的学生
+	//db.Not("sno between ? and ?", 200104, 200123).Find(&student)
+	//fmt.Println(student)
+
+	////or语句
+	////查询学号为200102或者姓为庞姓的学生
+	//db.Where("sno  = ?", 200102).Or("name like ?", "庞%").Find(&student)
+	//fmt.Println(student)
+
+	////Order表示排序,其中写SQL部分
+	////SELECT * FROM `students` WHERE create_time >= '2023-02-20' ORDER BY create_time desc,id
+	////创建时间大于等于2023-02-20 降序排列
+	//db.Where("create_time >= ?", "2023-02-20").Order("create_time desc,id").Find(&student)
+	//log.Println(student)
+
+	////Limit Offset 分页常用
+	////SELECT * FROM `students` ORDER BY create_time desc LIMIT 3 OFFSET 1
+	//db.Order("create_time desc").Limit(3).Offset(1).Find(&student)
+	//log.Println(student)
+
+	////Count计算行数
+	////SELECT count(*) FROM `students`
+	//var total int64
+	//db.Model(Student{}).Count(&total)
+	//fmt.Println(total)
+
+	//Group Having 分组查询,其中写SQL部分,Group必须和Select一起连用
+	//创建一个result的对象切片results
+	var results []Result
+	//SELECT class_id,Count(*) as total FROM `students` GROUP BY `class_id` HAVING total > 0
+	db.Model(Student{}).Select("class_id,Count(*) as total").Group("class_id").Having("total > 0").Scan(&results)
+
+	log.Println(results)
 
 	//响应
 	ctx.JSON(http.StatusOK, gin.H{
-		"student": student,
+		"stu": student,
 	})
 }
 
@@ -592,6 +706,32 @@ func Delete(ctx *gin.Context) {
 	})
 }
 
+func updateNew(ctx *gin.Context) {
+	//Save更新某条记录的所有字段
+	//实例化学生对象
+	stu01 := Student{}
+	//先查
+	db.First(&stu01)
+	fmt.Println(stu01.Name)
+	//修改查出来的学生的姓名:俞珑椒更改为俞小小
+	stu01.Name = "俞小小"
+	db.Save(&stu01)
+	fmt.Println(stu01.Name)
+	/*不推荐使用,因为会更新所有字段
+	[1.099ms] [rows:1] SELECT * FROM `students` ORDER BY `students`.`id` LIMIT 1
+	俞珑椒
+
+	2023/03/02 16:30:29 /Users/denis/code/golang_study/src/gocode/go10/day16_03 Gorm总结/07 数据库表记录的增删改查/main.go:718
+	[10.169ms] [rows:1] UPDATE `students` SET `name`='俞小小',`create_time`='2023-02-16 13:16:38.374',`update_time`='2023-02-16 13:16:38.374',`delete_time`='2023-02-16 13:16:38.374',`sno`=200103,`pwd`='123',`tel`='18802628595',`gender`=0,`birth`=NULL,`remark`='新生',`class_id`=4 WHERE `id` = 4
+	俞小小
+	*/
+
+	//响应
+	ctx.JSON(http.StatusOK, gin.H{
+		"stu": stu01,
+	})
+}
+
 func main() {
 
 	//初始化路由对象
@@ -606,6 +746,9 @@ func main() {
 
 	//更新
 	r.GET("/update", Update)
+
+	//NEW update
+	r.GET("/updateNew", updateNew)
 
 	//删除
 	r.GET("/delete", Delete)
