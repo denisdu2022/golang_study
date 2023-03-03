@@ -46,7 +46,9 @@ type Teacher struct {
 	Remark string `gorm:"type:varchar(255);"`
 }
 
-//Class  班级表
+//Class  班级表模型
+
+//Class表添加成员变量Student
 
 type Class struct {
 	//继承基本模型表
@@ -57,9 +59,14 @@ type Class struct {
 	TutorID int
 	//关联教师表
 	Tutor Teacher
+
+	//一对多关系
+	Student []Student //反向查询字段,因为有多个学生,所以是一个切片[]Student
 }
 
-//Course 课程表
+//Course 课程表模型
+
+//Course表添加成员变量student
 
 type Course struct {
 	//继承基本模型表
@@ -74,6 +81,9 @@ type Course struct {
 	TeacherID int
 	//关联教师表
 	Teacher Teacher
+
+	//多对多
+	Students []Student `gorm:"many2many:student2course;"`
 }
 
 //Student 学生表
@@ -709,26 +719,210 @@ func Delete(ctx *gin.Context) {
 func updateNew(ctx *gin.Context) {
 	//Save更新某条记录的所有字段
 	//实例化学生对象
-	stu01 := Student{}
-	//先查
-	db.First(&stu01)
-	fmt.Println(stu01.Name)
-	//修改查出来的学生的姓名:俞珑椒更改为俞小小
-	stu01.Name = "俞小小"
-	db.Save(&stu01)
-	fmt.Println(stu01.Name)
-	/*不推荐使用,因为会更新所有字段
-	[1.099ms] [rows:1] SELECT * FROM `students` ORDER BY `students`.`id` LIMIT 1
-	俞珑椒
+	//stu01 := Student{}
+	////先查
+	//db.First(&stu01)
+	//fmt.Println(stu01.Name)
+	////修改查出来的学生的姓名:俞珑椒更改为俞小小
+	//stu01.Name = "俞小小"
+	//db.Save(&stu01)
+	//fmt.Println(stu01.Name)
+	///*不推荐使用,因为会更新所有字段
+	//[1.099ms] [rows:1] SELECT * FROM `students` ORDER BY `students`.`id` LIMIT 1
+	//俞珑椒
+	//
+	//2023/03/02 16:30:29 /Users/denis/code/golang_study/src/gocode/go10/day16_03 Gorm总结/07 数据库表记录的增删改查/main.go:718
+	//[10.169ms] [rows:1] UPDATE `students` SET `name`='俞小小',`create_time`='2023-02-16 13:16:38.374',`update_time`='2023-02-16 13:16:38.374',`delete_time`='2023-02-16 13:16:38.374',`sno`=200103,`pwd`='123',`tel`='18802628595',`gender`=0,`birth`=NULL,`remark`='新生',`class_id`=4 WHERE `id` = 4
+	//俞小小
+	//*/
 
-	2023/03/02 16:30:29 /Users/denis/code/golang_study/src/gocode/go10/day16_03 Gorm总结/07 数据库表记录的增删改查/main.go:718
-	[10.169ms] [rows:1] UPDATE `students` SET `name`='俞小小',`create_time`='2023-02-16 13:16:38.374',`update_time`='2023-02-16 13:16:38.374',`delete_time`='2023-02-16 13:16:38.374',`sno`=200103,`pwd`='123',`tel`='18802628595',`gender`=0,`birth`=NULL,`remark`='新生',`class_id`=4 WHERE `id` = 4
-	俞小小
-	*/
+	////Update基于主键更新某条记录的单个字段
+	////更新ID为4学生俞小小的名字为俞珑椒
+	//stu02 := Student{BaseModel: BaseModel{ID: 4}}
+	////数据库更新
+	////UPDATE `students` SET `name`='俞珑椒' WHERE `id` = 4
+	//db.Model(&stu02).Update("name", "俞珑椒")
+	////打印ID为4的学生姓名
+	//fmt.Println("学生姓名: ", stu02.Name)
+
+	////Update更新所有记录的单个字段
+	////更改所有的课程周期为20周
+	////UPDATE `courses` SET `period`='20'
+	//db.Model(&Course{}).Update("period", 20)
+
+	////Update自定义条件而非主键记录更新某字段
+	////UPDATE `students` SET `sno`='200102' WHERE name = '俞珑椒'
+	//db.Model(&Student{}).Where("name = ? ", "俞珑椒").Update("sno", "200102")
+
+	////Update 更新多个字段
+	////通过`struct`更新多个字段,不会更新零值字段
+	////更新学生ID为4的sno为200103 和 pwd为321
+	////UPDATE `students` SET `sno`=200103,`pwd`='321' WHERE id = 4
+	//db.Model(&Student{}).Where("id = ?", 4).Updates(Student{Sno: 200103, Pwd: "321"})
+	//通过`map`更新多个字段,零值字段也会更新
+	//更新学生ID为9学生的学号为200102和remark为新生
+	//UPDATE `students` SET `remark`='新生',`sno`=200102 WHERE id = 9
+	//db.Model(&Student{}).Where("id = ? ", 9).Updates(map[string]interface{}{"Sno": 200102, "Remark": "新生"})
+
+	//更新表达式
+	//更新班级人数加1
+	//UPDATE `classes` SET `num`=Num + 1 WHERE id = 3
+	db.Model(&Class{}).Where("id = ?", 3).Update("Num", gorm.Expr("Num + 1"))
 
 	//响应
 	ctx.JSON(http.StatusOK, gin.H{
-		"stu": stu01,
+		"msg": "更新成功",
+	})
+}
+
+func getQuery(ctx *gin.Context) {
+
+	////查询学生庞川灵的班级名称
+	////方式一:手动查询
+	////先查询学生
+	////实例化学生对象
+	//stu := Student{}
+	////数据库查询
+	////SELECT * FROM `students` WHERE name = '庞川灵' LIMIT 1
+	//db.Where("name = ?", "庞川灵").Take(&stu)
+	////打印学生姓名和班级ID
+	//fmt.Println("学生姓名: ", stu.Name+"  班级ID: ", stu.ClassID)
+	////通过classID查询班级
+	////实例化班级对象
+	//class := Class{}
+	////数据库查询
+	//// SELECT * FROM `classes` WHERE id = 5  LIMIT 1
+	//db.Where("id = ? ", stu.ClassID).Take(&class)
+	////打印班级名称
+	//fmt.Println("班级名称: ", class.Name)
+
+	////Preload预加载查询
+	////实例化学生对象
+	//stu := Student{}
+	////数据库查询,查询的时候预加载class
+	////和上边手动查询一样也是两条SQL
+	////SELECT * FROM `classes` WHERE `classes`.`id` = 5
+	////SELECT * FROM `students` WHERE name = '庞川灵' LIMIT 1
+	//db.Where("name = ?", "庞川灵").Preload("Class").Take(&stu)
+	////打印班级名称
+	////班级名称:  计算机科学与技术一班
+	//fmt.Println("班级名称: ", stu.Class.Name)
+
+	////查询学生庞川灵所在班级名称和所报的课程
+	////实例化学生对象
+	//stu := Student{}
+	////数据库查询
+	///*
+	//	SELECT * FROM `classes` WHERE `classes`.`id` = 5
+	//	SELECT * FROM `student2course` WHERE `student2course`.`student_id` = 9
+	//	SELECT * FROM `courses` WHERE `courses`.`id` = 1
+	//	SELECT * FROM `students` WHERE name = '庞川灵' LIMIT 1
+	//	班级名称:  计算机科学与技术一班
+	//	课程名:  [{{1 数据结构导论 2023-02-18 21:13:18.074 +0800 CST 2023-02-18 21:13:18.074 +0800 CST 2023-02-18 21:13:18.074 +0800 CST} 3 20 9 {{0  <nil> <nil> <nil>} 0   0 <nil> }}]
+	//*/
+	//db.Where("name = ?", "庞川灵").Preload("Class").Preload("Courses").Find(&stu)
+	////打印学生所在班级名称
+	//fmt.Println("班级名称: ", stu.Class.Name)
+	////打印学生所报课程
+	//fmt.Println("课程信息: ", stu.Courses)
+	//fmt.Println("第一个课程: ", stu.Courses[:1])
+	////或者
+	//db.Where("name = ?", "庞川灵").Preload("Class.Courses").Find(&stu)
+	////打印学生所在班级名称
+	//fmt.Println("班级名称: ", stu.Class.Name)
+	////打印学生所报课程
+	//fmt.Println("课程信息: ", stu.Courses)
+	//fmt.Println("第一个课程: ", stu.Courses[:1])
+	//////有多个课程时,循环展示每个课程
+	////stuCourses := stu.Courses
+	////for k, v := range stuCourses {
+	////	fmt.Println(k, v)
+	////}
+
+	////实例化班级对象
+	//class := Class{}
+	////数据库查询
+	//db.Where("name = ?", "软件一班").Preload("Student").Find(&class)
+	////打印class信息
+	//fmt.Println("class>>> ", class)
+	//fmt.Println("class_student>>> ", class.Student)
+	////循环展示学生
+	//for _, stu := range class.Student {
+	//	fmt.Println("学生ID: ", stu.ID, "   学生姓名: "+stu.Name)
+	//}
+
+	////实例化班级对象
+	//class := Class{}
+	////数据库查询+预加载Preload
+	//db.Where("name = ? ", "软件一班").Preload("Student.Courses").Find(&class)
+	////打印班级数据
+	//fmt.Println("class>>> ", class)
+	//fmt.Println("class_student>>> ", class.Student)
+	////循环
+	//for _, stu := range class.Student {
+	//	fmt.Println("学生ID>>> ", stu.ID)
+	//	fmt.Println("学生姓名>>> ", stu.Name)
+	//	fmt.Println("学生所报课程信息>>> ", stu.Courses)
+	//	fmt.Println("-----------------------------------------------------------")
+	//	for _, course := range stu.Courses {
+	//		fmt.Println(course)
+	//	}
+	//}
+
+	////查询那些学生报了数据结构课程
+	////实例化课程对象
+	//course := Course{}
+	////数据库查询
+	//db.Where("name = ? ", "数据结构导论").Preload("Students").Find(&course)
+	////打印课程信息
+	//fmt.Println("course>>>", course)
+	//fmt.Println("course_students>>>", course.Students)
+	////循环
+	//for _, stu := range course.Students {
+	//	fmt.Println("报了数据结构课程的学生ID>>> ", stu.ID)
+	//	fmt.Println("报了数据结构课程的学生姓名>>> ", stu.Name)
+	//
+	//}
+
+	////查询学生庞川灵的班级名称(一对多)
+	////实例化学生对象
+	//var stu = Student{}
+	////数据库查询
+	//db.Where("students.name = ?", "庞川灵").Joins("Class").Find(&stu)
+	////打印学生信息
+	//fmt.Println("stu>>> ", stu)
+	//fmt.Println("stu_class>>> ", stu.Class)
+	//fmt.Println("stu_class_name>>> ", stu.Class.Name)
+	//
+	///*
+	//	[1.311ms] [rows:1] SELECT `students`.`id`,`students`.`name`,`students`.`create_time`,`students`.`update_time`,`students`.`delete_time`,`students`.`sno`,`students`.`pwd`,`students`.`tel`,`students`.`gender`,`students`.`birth`,`students`.`remark`,`students`.`class_id`,`Class`.`id` AS `Class__id`,`Class`.`name` AS `Class__name`,`Class`.`create_time` AS `Class__create_time`,`Class`.`update_time` AS `Class__update_time`,`Class`.`delete_time` AS `Class__delete_time`,`Class`.`num` AS `Class__num`,`Class`.`tutor_id` AS `Class__tutor_id` FROM `students` LEFT JOIN `classes` `Class` ON `students`.`class_id` = `Class`.`id` WHERE students.name = '庞川灵'
+	//	stu>>>  {{9 庞川灵 2023-02-17 22:58:58.801 +0800 CST 2023-02-17 22:58:58.801 +0800 CST 2023-02-17 22:58:58.801 +0800 CST} 200102 123 18600647479 1 <nil> 新生 5 {{5 计算机科学与技术一班 2023-02-15 10:40:26.61 +0800 CST 2023-02-15 10:40:26.61 +0800 CST 2023-02-15 10:40:26.61 +0800 CST} 39 3 {{0  <nil> <nil> <nil>} 0   0 <nil> } []} []}
+	//	stu_class>>>  {{5 计算机科学与技术一班 2023-02-15 10:40:26.61 +0800 CST 2023-02-15 10:40:26.61 +0800 CST 2023-02-15 10:40:26.61 +0800 CST} 39 3 {{0  <nil> <nil> <nil>} 0   0 <nil> } []}
+	//	stu_class_name>>>  计算机科学与技术一班
+	//*/
+
+	//查询ID为13学生所选的课程(多对多)
+	//实例化学生对象
+	stu := Student{BaseModel: BaseModel{ID: 13}}
+	//定义课程对象
+	var course []Course //一个学生会有多个课程,所以使用切片
+	//数据库查询
+	//注意db.Model()中必须是ID筛选
+	/*
+		SELECT `courses`.`id`,`courses`.`name`,`courses`.`create_time`,`courses`.`update_time`,`courses`.`delete_time`,`courses`.`credit`,`courses`.`period`,`courses`.`teacher_id` FROM `courses` JOIN `student2course` ON `student2course`.`course_id` = `courses`.`id` AND `student2course`.`student_id` = 13
+		courses>>>  [{{1 数据结构导论 2023-02-18 21:13:18.074 +0800 CST 2023-02-18 21:13:18.074 +0800 CST 2023-02-18 21:13:18.074 +0800 CST} 3 20 9 {{0  <nil> <nil> <nil>} 0   0 <nil> } []} {{5 数字电路 2023-03-01 11:47:27.242 +0800 CST 2023-03-01 11:47:27.242 +0800 CST 2023-03-01 11:47:27.242 +0800 CST} 3 16 8 {{0  <nil> <nil> <nil>} 0   0 <nil> } []} {{7 计算机网络 2023-03-01 11:47:27.242 +0800 CST 2023-03-01 11:47:27.242 +0800 CST 2023-03-01 11:47:27.242 +0800 CST} 3 17 11 {{0  <nil> <nil> <nil>} 0   0 <nil> } []}]
+	*/
+	db.Model(&stu).Association("Courses").Find(&course)
+	//打印课程信息
+	fmt.Println("courses>>> ", course)
+	//循环
+	for _, course := range course {
+		fmt.Println("课程名>>> ", course.Name)
+	}
+
+	//响应
+	ctx.JSON(http.StatusOK, gin.H{
+		"msg": "查询成功",
 	})
 }
 
@@ -743,6 +937,8 @@ func main() {
 
 	//查询
 	r.GET("/queryDB", QueryDB)
+
+	r.GET("query", getQuery)
 
 	//更新
 	r.GET("/update", Update)
