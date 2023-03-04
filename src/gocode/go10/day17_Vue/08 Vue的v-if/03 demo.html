@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue demo</title>
+<!--  引入本地vue文件-->
+  <script src="vue3.js"></script>
+
+    </style>
+</head>
+<body>
+
+<!--对标签做Dom操作-->
+<!--VUE去操作DOM,先设定一个区域,一般使用div设置一个ID-->
+<div id="app">
+    <h3>展示电影</h3>
+    <h3>v-if 二选一加载</h3>
+    <p><div v-if="age>18">成人电影</div></p>
+    <p><div v-else="">青少年电影</div></p>
+
+    <h3>展示成绩</h3>
+    <div v-if="score>90">成绩优秀</div>
+    <div v-else-if="score>70">成绩良好</div>
+    <div v-else-if="score>60">成绩及格</div>
+    <div v-else>成绩不及格</div>
+</div>
+
+
+<script>
+  // 创建Vue对象,{}里边填写参数,对那个进行操作mount(#xxxx)
+  //数据驱动页面 Vue的设计哲学
+  //第一个参数data
+  //创建一个app
+  //然后模板
+  //再渲染
+  vm = Vue.createApp({
+    data(){
+            return {
+                age:16,
+                score:96,
+            }
+         },
+  }).mount("#app")
+</script>
+
+
+
+</body>
+</html>

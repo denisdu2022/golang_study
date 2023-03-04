@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue demo</title>
+<!--  引入本地vue文件-->
+  <script src="vue3.js"></script>
+</head>
+<body>
+
+<!--对标签做Dom操作-->
+<!--VUE去操作DOM,先设定一个区域,一般使用div设置一个ID-->
+<div id="app">
+<!--  相当于模板语法的渲染-->
+    <p>消息: {{msg}} </p>
+<!--    绑定事件 @click=""-->
+    <p @click="bar">消息: {{msg}} </p>
+    <p @click="bar">消息: {{msg}} </p>
+</div>
+
+
+<script>
+  // 创建Vue对象,{}里边填写参数,对那个进行操作mount(#xxxx)
+  //数据驱动页面 Vue的设计哲学
+  //第一个参数data
+  //创建一个app
+  //然后模板
+  //再渲染
+  vm = Vue.createApp({
+    data(){
+            return {
+                msg:"hello Vue",
+                x:"10"
+            }
+         },
+    //定义一个方法
+    methods:{
+      //定义一个方法(就是声明一个函数)
+      //一个foo函数
+      foo(){
+        //弹窗
+        alert(123)
+      },
+      //第二个函数
+      bar(){
+        console.log(this); //this:在方法中指的是vue对象
+        //替换hello Vue
+        this.msg= "hello world!!!";
+      },
+    },
+  }).mount("#app")
+</script>
+
+
+
+</body>
+</html>
