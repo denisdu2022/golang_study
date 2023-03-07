@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue demo</title>
+<!--  引入本地vue文件-->
+  <script src="vue3.js"></script>
+
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.5/vue.global.js"></script>-->
+
+    </style>
+</head>
+<body>
+
+<!--对标签做Dom操作-->
+<!--VUE去操作DOM,先设定一个区域,一般使用div设置一个ID-->
+<div id="app">
+
+    <h3>四大名著</h3>
+    <p>{{books}}</p>
+
+<!--    原生js实现-->
+    <ul>
+        <li>{{books[0]}}</li>
+        <li>{{books[1]}}</li>
+        <li>{{books[2]}}</li>
+        <li>{{books[3]}}</li>
+    </ul>
+
+<!--  v-for循环  -->
+    <ul>
+<!--        循环取值,定义一个book in 数据books-->
+        <li v-for="book in books">{{book}}</li>
+    </ul>
+
+    <ul>
+        <!--        循环取值和索引,定义一个book in 数据books ,使用js表达式让索引加1-->
+        <li v-for="(b,i) in books">序号:{{i + 1}} : {{b}}</li>
+    </ul>
+
+<!--    table 展示书籍和价格-->
+    <table border="1">
+        <tr>
+            <th>序号</th>
+            <th>书籍名称</th>
+            <th>书籍价格</th>
+        </tr>
+<!--        v-for="值,索引"-->
+        <tr v-for="value,index in books2">
+<!--            使用js表达式使索引+1-->
+            <td>{{index + 1}}</td>
+            <td>{{value.title}}</td>
+            <td>{{value.price}}</td>
+        </tr>
+    </table>
+
+    <p>-------------------------------------------------------</p>
+
+    <h3>显示书籍价格大于36的书籍</h3>
+    <!--    table 展示书籍和价格-->
+    <table border="1">
+        <tr>
+            <th>序号</th>
+            <th>书籍名称</th>
+            <th>书籍价格</th>
+        </tr>
+        <!--        v-for="值,索引"-->
+        <tr v-for="value,index in books2">
+<!--            显示书籍价格大于36的书籍-->
+<!--            在vue3中v-if的优先级大于v-for-->
+<!--            template 相当于一个空匣子-->
+            <template v-if="value.price > 36">
+                <!--            使用js表达式使索引+1-->
+                <td>{{index + 1}}</td>
+                <td>{{value.title}}</td>
+                <td>{{value.price}}</td>
+            </template>
+        </tr>
+    </table>
+
+    <p>-------------------------------------------------------</p>
+
+    <h3>显示书籍价格大于36的书籍:推荐语法</h3>
+
+    <!--    table 展示书籍和价格-->
+    <table border="1">
+        <tr>
+            <th>序号</th>
+            <th>书籍名称</th>
+            <th>书籍价格</th>
+        </tr>
+        <!--        v-for="值,索引"-->
+<!--        使用属性计算器筛选filterBooks2-->
+        <tr v-for="value,index in filterBooks2">
+                <!--            使用js表达式使索引+1-->
+                <td>{{index + 1}}</td>
+                <td>{{value.title}}</td>
+                <td>{{value.price}}</td>
+        </tr>
+    </table>
+
+    <p>方法: {{ yyy() }}</p>
+    <p>计算属性: {{xxx}}</p>
+    <p>计算属性2: {{filterBooks2}}</p>
+</div>
+
+
+<script>
+  // 创建Vue对象,{}里边填写参数,对那个进行操作mount(#xxxx)
+  //数据驱动页面 Vue的设计哲学
+  //第一个参数data
+  //创建一个app
+  //然后模板
+  //再渲染
+     vm = Vue.createApp({
+    data(){
+            return {
+                books:["西游记","水浒传","三国演义","红楼梦","金瓶梅"],
+                //[] 是数组,里边是object对象
+                books2:[{title:"西游记",price:36},{title:"三国演义",price:38},{title:"红楼梦",price:56}],
+
+            }
+         },
+         //方法
+         methods: {
+             yyy(){
+                 return 200
+             },
+         },
+         //计算属性
+         computed: {
+             xxx(){
+                 return 100
+             },
+             filterBooks2(){
+                 //返回vue对象books2数据筛选,判断价格大于36的返回
+                 return this.books2.filter(function (item){
+                     if (item.price > 36){
+                         return item
+                     }
+                 })
+             },
+         },
+  }).mount("#app")
+</script>
+
+
+
+</body>
+</html>

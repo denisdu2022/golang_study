@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tab {
+            width: 800px;
+            height: 300px;
+            /*border: 1px solid rebeccapurple;*/
+            margin: 200px auto;
+        }
+
+        .tab ul {
+            list-style: none;
+        }
+
+        .tab ul li {
+            display: inline-block;
+        }
+
+        .tab_title {
+            background-color: #f7f7f7;
+            border: 1px solid #eee;
+            border-bottom: 1px solid #e4393c;
+        }
+
+        .tab .tab_title li {
+            padding: 10px 25px;
+            font-size: 14px;
+        }
+
+        .tab .tab_title li.active {
+            background-color: #e4393c;
+            color: #fff;
+            cursor: default;
+        }
+
+        .tab_con li.hide {
+            display: none;
+        }
+
+    </style>
+
+    <script src="vue3.js"></script>
+</head>
+<body>
+
+<div class="tab">
+    <div>
+        <ul class="tab_title">
+<!--            绑定事件,当currentNum等于循环的tab_tile_list的索引时,操作class,让active生效的条件是currentNum等于循环的索引-->
+            <li @click="currentNum = index" :class="{active:currentNum===index}"
+                v-for="(tab_title,index) in tab_title_list">{{tab_title}}
+            </li>
+        </ul>
+
+        <ul class="tab_con">
+
+<!--            使用class样式hide:   display: none;不显示 条件是currentNum不等于点击后的索引元素,除了点击的都隐藏        -->
+            <li v-for="(tab_con,index) in tab_con_list" :class="{hide:currentNum!==index}" >{{tab_con}}</li>
+        </ul>
+    </div>
+<p>--------------------------------------------------------------------------------------------------------</p>
+    <div>
+        <ul class="tab_title">
+            <li @click="foo(index)" :class="{active:currentNum===index}"
+                v-for="(tab_title,index) in tab_title_list">{{tab_title}}
+            </li>
+        </ul>
+
+        <ul class="tab_con">
+            <li v-for="(tab_con,index) in tab_con_list" :class="{hide:currentNum===index}"  >{{tab_con}}</li>
+        </ul>
+    </div>
+</div>
+
+
+
+<script>
+
+    // vue版本
+
+    vm = Vue.createApp({
+        data() {
+            return {
+                currentNum: 0,
+                tab_title_list: ["商品介绍", "规格与包装", "售后保障", "商品评论"],
+                tab_con_list: ["商品介绍...", "规格与包装...", "售后保障...", "商品评论..."],
+            }
+        },
+        //方法
+        methods :{
+            foo(index){
+                //打印当点击事件触发时候循环的索引
+                console.log(index);
+                this.currentNum=index;
+            }
+        }
+
+
+    }).mount('.tab')
+
+
+</script>
+
+</body>
+</html>
