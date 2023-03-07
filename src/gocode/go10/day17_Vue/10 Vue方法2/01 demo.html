@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+  <!--  引入本地vue文件-->
+  <script src="vue3.js"></script>
+</head>
+<body>
+
+<h3>methods</h3>
+
+
+<div id="app">
+
+</div>
+
+
+<script>
+
+  vm = Vue.createApp({
+    data(){
+      return {
+        books:["西游记","水浒传","三国演义","红楼梦","金瓶梅"],
+        //[] 是数组,里边是object对象
+        books2:[{title:"西游记",price:36},{title:"三国演义",price:38},{title:"红楼梦",price:56}],
+
+      }
+    },
+    //方法
+    methods: {
+      yyy(){
+        return 200
+      },
+    },
+    //计算属性
+    computed: {
+      xxx(){
+        return 100
+      },
+      filterBooks2(){
+        //返回vue对象books2数据筛选,判断价格大于36的返回
+        return this.books2.filter(function (item){
+          if (item.price > 36){
+            return item
+          }
+        })
+      },
+    },
+  }).mount("#app")
+</script>
+
+</body>
+</html>

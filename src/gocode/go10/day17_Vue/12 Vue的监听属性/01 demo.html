@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+  <!--  引入本地vue文件-->
+  <script src="vue3.js"></script>
+
+<!--    定义边框变色样式-->
+    <style>
+        .pass{
+            outline-color: cadetblue;
+        }
+
+        .noPass{
+            outline-color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h3>methods</h3>
+
+
+<div id="app">
+    <p>{{num}}</p>
+    <p><input type="text" v-model="num"></p>
+    
+<!--    侦听属性案例1 输入密码值大于5边框颜色变色 -->
+    <p><input type="password" :class="tips" v-model="password"></p>
+</div>
+
+
+<script>
+
+  vm = Vue.createApp({
+    data(){
+      return {
+            num:100,
+          password:"",
+          tips:"noPass",
+      }
+    },
+      //计算属性
+    computed:{
+    },
+      //侦听属性
+      watch:{
+        //newVal改变的新值,oldVal旧的值
+          //监听一个数据变化的行为
+          num:function (newVal,oldVal){
+              console.log("oldVal",oldVal);
+              console.log("newVal",newVal);
+          },
+          password: function (newVal,oldVal){
+                if(newVal.length > 5){
+                    //边框样式变成蓝色
+                    console.log("OK");
+                    this.tips = "pass"
+                }else {
+                    //边框样式变成红色
+                    console.log(" not OK");
+                    this.tips = "noPass"
+                }
+          },
+      },
+  }).mount("#app")
+</script>
+
+</body>
+</html>
