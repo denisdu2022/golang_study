@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue demo</title>
+		<!-- 引入本地vue3.js -->
+		<script src="js/vue3.js"></script>
+	</head>
+	<body>
+		
+		<dvi id="app">
+				<p>消息: {{msg}}</p>
+			
+			<!-- 原始html -->
+<!-- 			<p>
+				<img src="img/01.jpeg" alt="">
+			</p> -->
+			
+			<!-- v-bind 的完整写法 -->
+			<p>
+				<img v-bind:src="url" alt="">
+			</p>
+			<!-- v-bind的简写 -->
+			<p>
+				<img :src="url" alt="">
+			</p>
+			
+			<!-- v-bind:value(值)不会联动,因为v-model是双向绑定,v-bind是单向绑定 -->
+				<p><input type="text" :value="msg"></p>
+		</dvi>
+		
+		<script>
+			
+			//vue对象
+			vm = Vue.createApp({
+				data(){
+					return {
+						msg:"hello Vue!!!",
+						url:"img/01.jpeg",
+					}
+				},
+			}).mount("#app")
+		</script>
+	</body>
+</html>

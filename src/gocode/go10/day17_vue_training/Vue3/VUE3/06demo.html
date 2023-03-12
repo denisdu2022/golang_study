@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<!-- <script src="https://unpkg.com/vue@next"></script> -->
+		<script src="js/v3.2.8/vue.global.prod.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body>
+		<div id="app">
+			<p>消息: {{ msg }} </p>
+			
+			<h3>展示电影</h3>
+			<h3>v-if二选一加载</h3>
+			<!-- 注意if和else要紧挨着 -->
+			<div v-if="age>18">成人电影:红楼梦</div>
+			<div v-else="">未成年电影:小猪佩奇</div>
+			
+			
+			<h3>展示成绩</h3>
+			<div v-if="score>=90">成绩优秀</div>
+			<div v-else-if="score>=80">成绩良好</div>
+			<div v-else-if="score>=60">成绩及格</div>
+			<div v-else="">成绩不及格</div>
+		
+		</div>
+		<script>
+			const App = {
+				data() {
+					return {
+						msg: "hello Vue!!!",
+						//观影人年龄
+						age:19,
+						//成绩
+						score:96,
+						
+					}
+				}
+			};
+			Vue.createApp(App).mount('#app');
+		</script>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--引入vue-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.5/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+<!--    设置Vue可以操作的HTML内容范围,值一般就是css的id选择器.-->
+<!--    {{message}}表示把vue里的对象里面的data选项的对应数据输出到页面中-->
+<!--    在双标签中显示数据要通过{{ }}来完成 类似于gin的模板语法-->
+    <p>{{msg}}</p>
+    <p>姓名: {{user.name}}</p>
+    <p>年龄: {{user.age}}</p>
+
+    <span>Message: {{msg}}</span>
+</div>
+
+<script>
+
+    //const常量
+    const Counter= {
+        //数据
+        //data是将要展示到HTML标签元素中的数据.一般会在data这里预先设置vue要使用的变量数据,并给变量指定要一个默认值,
+        //当然最终data的数据都来自服务端
+        data(){
+            return  {
+                //字符串数据
+                msg: "hello vue",
+                //object 多个对象
+                user:{name: "test",age:22},
+            }
+        }
+    }
+
+
+
+  //vue对象
+  vm = Vue.createApp(Counter).mount(`#app`)
+  //在客户端浏览器打印vue对象
+  console.log(vm)
+    //打印数据
+    console.log(vm.user.name)
+
+</script>
+
+</body>
+</html>

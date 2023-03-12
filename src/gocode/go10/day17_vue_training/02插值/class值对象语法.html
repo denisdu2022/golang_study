@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!--引入vue-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.5/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+  <div :class="{ c1: isC1 }"> </div>
+
+  <div :class="classObject"></div>
+
+</div>
+
+<script>
+
+  const Counter = {
+    data(){
+      return {
+       classObject: {
+         isC1:true,
+         isC2:false,
+         c1: false,
+         c2: true,
+       }
+      }
+    }
+  }
+
+  //vm对象
+  vm = Vue.createApp(Counter).mount(`#app`)
+</script>
+</body>
+</html>>

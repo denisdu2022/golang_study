@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue demo</title>
+		<!-- 引入本地vue.js -->
+		<script src="js/vue3.js"></script>
+	</head>
+	<body>
+		
+		<div id="app">
+			
+			<p>消息: {{msg}}</p>
+			
+			<!-- v-html会渲染HTML标签 -->
+			<p>网站: <span v-html="link">{{link}}</span></p>
+			
+			<p>input标签</p>
+			
+			<input type="text" value="默认值">
+			
+			<!-- 使用v-model绑定数据 -->
+			<input type="text" v-model="data">
+			<!-- 使用v-model会有联动效果 -->
+			<input type="text" v-model="msg">
+		</div>
+		
+		
+		<script>
+			
+			//创建Vue对象
+			vm = Vue.createApp({
+				data(){
+					return {
+						msg:"hello Vue!!!",
+						link:`<a href="https://www.baidu.com">百度</a>`, 
+						data:"123",
+					}
+				},
+			}).mount("#app")
+		</script>
+		
+	</body>
+</html>
