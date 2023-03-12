@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<!-- <script src="https://unpkg.com/vue@next"></script> -->
+		<script src="js/v3.2.8/vue.global.prod.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<p>消息: {{ msg }} </p>
+			
+			<!-- 显示人的虚岁,使用js表达式+1 -->
+			<p>登录人的年龄周岁: {{ age }}</p>
+			<!-- 在js中两个数字是可以直接相加的,里边放的是js表达式,不能放js语句 -->
+			<p>登录人的年龄虚岁: {{ age + 1 }}</p>
+			
+			<p>三元运算</p>
+			<!-- 如果登录成功了显示admin用户,登录失败了显示guest用户,可以理解为if else语句 -->
+			<p>
+				是否登录:{{is_Login?user:guest}}
+			</p>
+			
+			<p>让城市倒序显示  字符串方法</p>
+			<p>城市: {{city}}</p>
+			<p>倒序显示,以,分割:{{city.split(" ").reverse().join(",")}}</p>
+		</div>
+		<script>
+			const App = {
+				data() {
+					return {
+						msg: "hello Vue!!!",
+						//年龄
+						age:23,
+						//是否登录
+						is_Login:true,
+						//用户名
+						user:"admin",
+						//密码
+						pwd:"123",
+						//city list
+						city:"北京 上海 深圳 广州",
+						
+					}
+				}
+			};
+			Vue.createApp(App).mount('#app');
+		</script>
+	</body>
+</html>

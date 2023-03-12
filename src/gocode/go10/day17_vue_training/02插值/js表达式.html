@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--引入vue-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.5/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+<!--    使用js表达式,两个变量的值类型相同可以相加-->
+    <p>number: {{number + 1}}</p>
+
+    <p>三元表达式: {{ok ? `YES` : `NO`}}</p>
+
+
+    <p>{{msg.split(` `).reverse().join(` `)}}</p>
+
+    <div :class="`list-` + id">{{id}}</div>
+
+</div>
+
+<script>
+
+    const Counter = {
+        data(){
+            return {
+                number:100,
+                ok:true,
+                msg:"hello world",
+                id:3,
+            }
+        }
+    }
+
+    //vm对象
+    vm = Vue.createApp(Counter).mount(`#app`)
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <!--引入vue-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.5/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+<!--  v-bind属性名-->
+  <p><a v-bind:href="link">{{site}}</a></p>
+<!--  :属性名 简写格式-->
+  <p><a :href="link">{{site}}</a></p>
+
+
+
+  <p>
+    网站名称 <input type="text" v-model="site">
+    URL地址 <input type="text" v-model="link">
+
+  </p>
+
+</div>
+
+
+<script>
+
+  //const常量
+  const Counter = {
+    data(){
+      return {
+        site:"百度",
+        link:"https://www.baidu.com"
+      }
+    }
+  }
+
+  //vue对象
+  vm = Vue.createApp(Counter).mount(`#app`)
+</script>
+</body>
+</html>

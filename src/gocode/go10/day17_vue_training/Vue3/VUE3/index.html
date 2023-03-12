@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>js</title>
+		<!-- 引入原生js代码 -->
+<!-- 		<script>
+			console.log("hello js!!")
+		</script> -->
+		
+		<!-- 引入本地js -->
+<!-- 		<script src="js/common.js"></script> -->
+
+		<!-- cdn方式引入vue -->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.5/vue.global.js"></script> -->
+		
+		<!-- 本地使用vue js -->
+		<script src="js/vue3.js"></script>
+	</head>
+	<body>
+		
+		<div id="app">
+			<p>{{msg}}</p>
+		</div>
+		
+		
+		
+		<script>
+			const Counter = {
+				data(){
+					return {
+						msg:"hello Vue!!!",
+					}
+				}
+			}
+			
+			//vue对象
+			vm = Vue.createApp(Counter).mount(`#app`)
+			
+			console.log(vm)
+		</script>
+	</body>
+</html>

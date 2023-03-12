@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <!--引入vue-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.5/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+ <p> 会显示为文本</p>
+  <p>Using mustaches: {{ rawHtml }}</p>
+  <p>v-html渲染HTML标签</p>
+  <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+
+</div>
+
+
+<script>
+
+  const Counter ={
+    data(){
+      return{
+        rawHtml: "<a href='https://www.baidu.com/'>百度</a>"
+      }
+    }
+  }
+
+
+  //vue对象
+  vm = Vue.createApp(Counter).mount(`#app`)
+</script>
+
+</body>
+</html>
