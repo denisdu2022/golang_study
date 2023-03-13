@@ -17,25 +17,51 @@
 	</head>
 	<body>
 		<div id="app">
-
+			<h3>四大名著</h3>
+			<p>{{books}}</p>
+			<p>{{books2}}</p>
 			
-			<input type="text" v-model="show_num">
-			<div class="item" v-show="show_num==='1'">亚洲区</div>
-			<div class="item" v-show="show_num==='2'">欧美区</div>
-			<div class="item" v-show="show_num===='3'">欧巴区</div>
+			<!-- 原生js展示每一本书 -->
+			<ul>
+				<li>{{books[0]}}</li>
+				<li>{{books[1]}}</li>
+				<li>{{books[2]}}</li>
+				<li>{{books[3]}}</li>
+			</ul>
+			
+			<!-- v-for循环 -->
+			<ul>
+				<!-- 循环取值,定义一个books变量,接收来自数据的books -->
+				<li v-for="books in books">{{books}}</li>
+			</ul>
+			
+			<ul>
+				<!-- 循环取值,(booksValue,booksIndex)中booksValue是值,booksIndex是索引,从0开始 -->
+				<li v-for="(booksValue,booksIndex) in books">序号:{{booksIndex}} :: {{booksValue}} </li>
+			</ul>
+			
+			<ul>
+				<!-- 循环取值,(booksValue,booksIndex)中booksValue是值,booksIndex是索引,从0开始 -->
+				<!-- 使用js表达式使索引自加1 -->
+				<li v-for="(booksValue,booksIndex) in books">序号:{{ booksIndex + 1 }} :: {{booksValue}} </li>
+			</ul>
 
 		
 		</div>
 		<script>
 			const App = {
+				//数据
 				data() {
 					return {
-						show_num:'1',
-						
+						//数组数据
+						books:["西游记","水浒传","三国演义","红楼梦","金瓶梅"],
+						//[]里边是数组,数组里边是object对象
+						books2:[{title:"西游记",price:36},{title:"三国演义",price:38},{title:"红楼梦",price:56}]
 					}
-				}
+				},
+				
 			};
-			Vue.createApp(App).mount("#app");
+			Vue.createApp(App).mount('#app');
 		</script>
 	</body>
 </html>
