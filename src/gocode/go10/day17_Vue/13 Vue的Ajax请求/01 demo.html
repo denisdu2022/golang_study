@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax请求</title>
+
+  <!--  引入本地vue文件-->
+  <script src="vue3.js"></script>
+<!--    引入axios模块-->
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
+</head>
+<body>
+
+<h3>Ajax请求</h3>
+
+
+<div id="app">
+        <button @click="sendAjax">发送Ajax请求</button>
+</div>
+
+
+<script>
+
+  vm = Vue.createApp({
+    data(){
+      return {
+
+      }
+    },
+      //方法
+      methods:{
+            //发送Ajax请求
+          sendAjax(){
+              //获取天气信息 发起get请求
+              //axios.get("url",{params:{}})
+              axios.get("https://v0.yiketianqi.com/api?unescape=1&version=v61&appid=32631524&appsecret=6gMTwOdt",{
+                  params:{
+                      city:"北京",
+                  }
+              }).then(function (response){
+                  //then响应
+                  console.log("response>>>",response)
+              })
+          }
+      },
+
+  }).mount("#app")
+</script>
+
+</body>
+</html>
