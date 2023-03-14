@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax请求</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+  <!--  引入本地vue文件-->
+  <script src="vue3.js"></script>
+<!--    引入axios模块-->
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
+</head>
+<body>
+
+<h3>Ajax请求</h3>
+
+
+<div id="app">
+       <p><button @click="sendAjax">发送Ajax请求</button></p>
+
+
+    <h3>输入城市名称获取七日天气</h3>
+    <p><input type="text"  v-model="city">
+        <button @click="sendAjax" >获取七日天气</button>
+    </p>
+
+
+<!--    <div>七日天气数据{{data1}}</div>-->
+<!--    如果获取的天气数据v-if="data1.length >1的长度大于1才想显示七日天气表格-->
+    <table class="table table-bordered" v-if="data1.length >1">
+        <tr>
+            <td>日期</td>
+            <td>最高气温</td>
+            <td>最低气温</td>
+            <td>天气类型</td>
+            <td>天气详情</td>
+        </tr>
+        <tr v-for="(day_data1,i) in data1">
+            <td>{{day_data1.day}}</td>
+            <td>{{day_data1.tem1}}</td>
+            <td>{{day_data1.tem}}</td>
+            <td>{{day_data1.wea}}</td>
+            <td>{{day_data1.narrative}}</td>
+        </tr>
+    </table>
+</div>
+
+
+<script>
+
+  vm = Vue.createApp({
+    data(){
+      return {
+          city:"北京",
+          data1:[],
+
+      }
+    },
+      //方法
+      methods:{
+            //发送Ajax请求
+          sendAjax(){
+              //定义this对象
+              var that = this
+              //获取天气信息 发起get请求
+              //axios.get("url",{params:{}})
+              axios.get("https://v0.yiketianqi.com/api?unescape=1&version=v91&appid=32631524&appsecret=6gMTwOdt",{
+                  params:{
+                      city:that.city,
+                  }
+              }).then(function (response){
+                  //then响应
+                  console.log("response>>>",response)
+                  that.data1 = response.data.data
+              })
+          },
+      },
+      //create方法
+      created(){
+          //在构建数据的时候自动触发
+          //在页面构建的时候加载
+          this.sendAjax()
+      }
+  }).mount("#app")
+</script>
+
+</body>
+</html>

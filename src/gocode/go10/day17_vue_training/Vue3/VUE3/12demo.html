@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue demo</title>
+		<!-- 使用本地vue.js -->
+		<script src="js/vue3.js"></script>
+		
+	</head>
+	<body>
+		<div id="app">
+			<h3>methods方法</h3>
+			
+			<!-- 绑定事件 -->
+			<!-- 绑定单击事件@click -->
+			<!-- foo没有参数默认可以不加括号 -->
+			<p @click="foo">{{msg}}</p>
+			
+			<!-- bar()带括号参数 -->
+			<p @click="bar('hello hello')">{{msg}}</p>
+			
+			双击事件
+			<p @dblclick="foo">{{msg}}</p>
+			
+			<button @click="increment">sum</button> {{count}}
+		
+		</div>
+		<script>
+			const App = {
+				//数据
+				data() {
+					return {
+						msg:"hello world!!!",
+						//[]里边是数组,数组里边是object对象
+						books2:[{title:"西游记",price:36},{title:"三国演义",price:38},{title:"红楼梦",price:56}],
+						
+						//计数器
+						count:1,
+					}
+				},
+				//方法
+				methods:{
+					//foo
+					foo(){
+						//点击事件改变msg数据
+						this.msg = "hello Vue!!!"
+					},
+					//带参数方法
+					bar(name){
+						//点击事件改变msg数据
+						this.msg = name;
+						//打印vm对象
+						console.log(this)//这是vue对象
+						
+						//把this重新定义为一个that
+						var that = this;
+						
+						this.books2.filter(function(){
+							console.log("window对象>>",this)
+							console.log("vue对象>>>",that)
+						})
+					},
+					//加法器
+					increment(){
+						//this指向该组件实例
+						this.count++
+					}
+				},
+			};
+			Vue.createApp(App).mount('#app');
+		</script>
+	</body>
+</html>

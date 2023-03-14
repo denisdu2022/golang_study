@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>js 扩展</title>
+		
+		
+		<!-- 原生js -->
+		<script>
+			//定义一个数组
+			var arr = [1,2,3,4,5,6]
+			//filter()高阶函数, 只能做过滤
+			var ret = arr.filter(function (item){
+				//返回大于3的元素
+				return item > 3
+			})
+			//浏览器控制台打印
+			console.log(ret)
+			
+			//定义数组2
+			var arr2 = [1,2,3,4,5,6]
+			//map高阶函数
+			var ret2 = arr.map(function(item){
+				//可以做运算
+				return item * item
+			})
+			//浏览器控制台打印
+			console.log(ret2)
+		</script>
+		
+		
+		
+	</head>
+	<body>
+	</body>
+</html>
