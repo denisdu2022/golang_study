@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.5/vue.global.js"></script>
+    <style>
+        body {
+            font-size: 14px;
+        }
+
+        table, tr, th, td {
+            border: 1px solid red;
+            border-collapse: collapse; /* 合并边框 */
+        }
+
+        th, td {
+            width: 200px;
+            text-align: center; /* 文本水平居中 */
+            height: 30px;
+            line-height: 30px;
+        }
+
+        input {
+            width: 80px;
+        }
+
+        .active {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+    <table>
+        <tr>
+            <th>序号</th>
+            <th>书籍名称</th>
+            <th>价格</th>
+        </tr>
+
+        <tr v-for="(book,index) in books2" :class="{active:book.isActive}">
+            <td>{{index + 1}}</td>
+            <td>{{book.name}}</td>
+            <td>{{book.price}}</td>
+        </tr>
+
+    </table>
+</div>
+
+<script>
+
+    Vue.createApp({
+        data() {
+            return {
+                books: [
+                    {"name": "python入门", "price": 150},
+                    {"name": "python进阶", "price": 100},
+                    {"name": "python高级", "price": 75},
+                    {"name": "python高阶", "price": 160},
+                    {"name": "python放弃", "price": 110},
+                ],
+            }
+        },
+        computed: {
+            books2() {
+                return this.books.filter(function (book) {
+                    console.log(book)
+                    if (book.price > 100) {
+                        book.isActive = "true"
+                    }
+                    return book
+                })
+            },
+        }
+
+    }).mount('#app')
+</script>
+
+</body>
+</html>

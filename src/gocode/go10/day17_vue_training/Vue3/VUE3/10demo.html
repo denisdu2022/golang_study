@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<!-- <script src="https://unpkg.com/vue@next"></script> -->
+		<script src="js/v3.2.8/vue.global.prod.js" type="text/javascript" charset="utf-8"></script>
+
+		
+	</head>
+	<body>
+		<div id="app">
+			<h3>四大名著</h3>
+			<p>{{books}}</p>
+			<p>{{books2}}</p>
+			
+			
+			<!-- v-for循环 -->
+			<h3>显示书籍价格大于36的书籍</h3>
+			table展示书籍和价格
+			<table border="1">
+				<tr>
+					<td>序号</td>
+					<td>书籍名称</td>
+					<td>书籍价格</td>
+				</tr>
+				<!-- 循环书籍价格表 -->
+				<tr v-for="(v,i) in books2">
+					<!-- 显示书籍价格大于36元的书籍 -->
+					<!-- 在vue3中v-if的优先级大于v-for -->
+					<!-- template相当于一个空匣子 -->
+					<!-- template v-if如果书籍价格大于36元 -->
+					<template v-if="v.price > 36">
+					<!-- 使用js表达式使索引自加1显示正常序号 -->
+						<td>{{ i + 1 }}</td>
+						<td>{{ v.title }}</td>
+						<td>{{ v.price}}</td>
+					</template>
+					
+				</tr>
+			</table>
+			
+    <p>-------------------------------------------------------</p>
+	
+	<p>方法: {{xxx()}}</p>
+	<p>计算属性: {{ yyy }}</p>
+	<p>计算属性:筛选大于36元的书籍 {{filterBooks2}}</p>
+	
+	<!-- v-for循环 -->
+	<h3>显示书籍价格大于36的书籍:推荐计算属性语法</h3>
+
+	<table border="1">
+		<tr>
+			<td>序号</td>
+			<td>书籍名称</td>
+			<td>书籍价格</td>
+		</tr>
+		<!-- 循环书籍价格表 -->
+		<tr v-for="(v,i) in filterBooks2">
+			<!-- 显示书籍价格大于36元的书籍 -->
+			<!-- 在vue3中v-if的优先级大于v-for -->
+			<!-- 使用js表达式使索引自加1显示正常序号 -->
+				<td>{{ i + 1 }}</td>
+				<td>{{ v.title }}</td>
+				<td>{{ v.price}}</td>
+		</tr>
+	</table>
+		
+		</div>
+		<script>
+			const App = {
+				//数据
+				data() {
+					return {
+						//数组数据
+						books:["西游记","水浒传","三国演义","红楼梦","金瓶梅"],
+						//[]里边是数组,数组里边是object对象
+						books2:[{title:"西游记",price:36},{title:"三国演义",price:38},{title:"红楼梦",price:56}]
+					}
+				},
+				//方法
+				methods:{
+					//一个xxx函数
+					xxx(){
+						return 200
+					}
+				},
+				//计算属性
+				computed:{
+					//一个yyy函数
+					yyy(){
+						return 100
+					},
+					filterBooks2(){
+						//返回vue对象的books2的数据筛选,判断价格大于36元的书籍
+						return this.books2.filter(function (item){
+							if (item.price > 36){
+								return item
+							}
+						})
+					},
+				}
+			};
+			Vue.createApp(App).mount('#app');
+		</script>
+	</body>
+</html>

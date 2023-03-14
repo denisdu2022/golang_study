@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Tab切换案例</title>
+		<!-- 引入本地vue文件 -->
+		<script src="js/vue3.js"></script>
+	</head>
+	<body>
+		
+		<div id="app">
+			<p>消息: {{msg}}</p>
+		</div>
+		
+		
+		
+		<script>
+			
+			//常量
+			const App = {
+				//数据
+				data(){
+					return {
+						msg:"hello vue!!!",
+					}
+				}
+			}
+			
+			//创建vue对象
+			vm = Vue.createApp(App).mount('#app')
+		</script>
+	</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Tab切换案例</title>
+		<!-- 引入本地vue文件 -->
+		<script src="js/vue3.js"></script>
+		<!-- 样式 -->
+		 <style>
+		
+		        * {
+		            margin: 0;
+		            padding: 0;
+		        }
+		
+		        .tab {
+		            width: 800px;
+		            height: 300px;
+		            /*border: 1px solid rebeccapurple;*/
+		            margin: 200px auto;
+		        }
+		
+		        .tab ul {
+		            list-style: none;
+		        }
+		
+		        .tab ul li {
+		            display: inline-block;
+		        }
+		
+		        .tab_title {
+		            background-color: #f7f7f7;
+		            border: 1px solid #eee;
+		            border-bottom: 1px solid #e4393c;
+		        }
+		
+		        .tab .tab_title li {
+		            padding: 10px 25px;
+		            font-size: 14px;
+		        }
+		
+		        .tab .tab_title li.active {
+		            background-color: #e4393c;
+		            color: #fff;
+		            cursor: default;
+		        }
+		
+		        .tab_con li.hide {
+		            display: none;
+		        }
+		
+		    </style>
+	</head>
+	<body>
+		
+		<div class="tab">
+			<p>消息: {{msg}}</p>
+			
+			<div>
+				<ul class="tab_title">
+					<!-- 绑定事件,当currentNum等于循环的tab_title_list的索引时,操作class,让样式生效的条件是currentNum等于循环的索引 -->
+					<li @click="currentNum = index" :class="{active:currentNum===index}"
+					v-for="(titleValue,index) in tab_title_list">{{titleValue}}
+					</li>
+				</ul>
+				
+				<ul class="tab_con">
+					<!-- 使用class样式hide: display:none;不显示,条件是currentNum不等于点击后的索引元素,除了点击的都隐藏 -->
+					<li  :class="{hide:currentNum!==index}" v-for="(conValue,index) in tab_con_list" >{{conValue}}</li>
+				</ul>
+				
+				<p>-----------------------------------------------------------------------</p>
+				<h3>使用methods</h3>
+				<ul class="tab_title">
+					<!-- 绑定方法,当循环的tab_title_list的索引传入foo方法时,操作class,让样式生效的条件是currentNum等于循环的index -->
+					<li @click="foo(index)" :class="{active:currentNum===index}"
+					v-for="(titleValue,index) in tab_title_list">{{titleValue}}
+					</li>
+				</ul>
+				
+				<ul class="tab_con">
+					<!-- 使用class样式hide: display:none;不显示,条件是currentNum不等于点击后的索引元素,除了点击的都隐藏 -->
+					<li  :class="{hide:currentNum!==index}" v-for="(conValue,index) in tab_con_list" >{{conValue}}</li>
+				</ul>
+				
+			</div>
+			
+			
+		</div>
+		
+		
+		
+		<script>
+			
+			//常量
+			const App = {
+				//数据
+				data(){
+					return {
+						msg:"hello vue!!!",
+						//计数
+						currentNum:0,
+						tab_title_list:["商品介绍","规格与包装","售后保障","商品评论"],
+						tab_con_list:["商品介绍...","规格与包装...","售后保障...","商品评论..."]
+					}
+				},
+				//方法
+				methods: {
+					//需要一个带参数的方法,参数传入索引
+					foo(index){
+						//打印当点击事件触发时候循环的索引
+						console.log(index);
+						this.currentNum=index;
+					}
+				}
+			}
+			
+			//创建vue对象
+			vm = Vue.createApp(App).mount('.tab')
+		</script>
+	</body>
+</html>
