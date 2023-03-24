@@ -5,33 +5,47 @@
     <title>模板语法之插入值</title>
 <!--  引入vue3.js-->
   <script src="vue3.js"></script>
+
+  <style>
+    .c1{
+      background: lightblue;
+      color: rebeccapurple;
+    }
+
+    .c2{
+      font-family: "Times New Roman";
+      font-size: 32px;
+      font-style: italic;
+    }
+
+    .c3{
+        text-align: center;
+    }
+
+  </style>
 </head>
 <body>
 
 <div id="app">
-  <h3>模板语法之插入值</h3>
-  <p>文本: {{msg}}</p>
-  <p>vue中会将数据中的值都作为文本显示</p>
-  <p>link:{{link}}</p>
-  <p>显示html标签需要使用v-html</p>
-  <p><span v-html="link"></span></p>
-
-  <p>属性值和数据绑定,使用v-bind:属性  可以使用缩写:value="userInfo" 然后属性里边写数据变量</p>
-  <p>v-bind是单向绑定,value不会联动</p>
-  <p>用户名:<input type="text" v-bind:value="userInfo"></p>
-  <p>用户名:<input type="text" :value="userInfo"></p>
+  <p>通过vue切换class的样式属性值</p>
 
 
-  <p>v-modle是双向绑定,value会改变,联动 . 注意:v-model仅限单标签 value属性</p>
-  <p>用户名:<input type="text" v-model="name"></p>
-  <p>用户名:<input type="text" v-model="name"></p>
-  <hr/>
-  <p>
-      请输入网站名称:<input type="text" v-model="link1">
-      请输入网站url:<input type="text" v-model="href">
-  </p>
-  <hr/>
-  <a :href="href">{{link1}}</a>
+  <p>使用变量</p>
+  <p><div :class="style">hello Vue!!!</div></p>
+<p>不使用变量直接使用对象</p>
+  <p><div :class="{c1:true,c2:false}">hello Vue!!!</div></p>
+
+
+  <p>在vue里绑定事件</p>
+  <p><button @click="setC1">c1样式</button></p>
+  <p><button @click="setC2">c2样式</button></p>
+  <p><div :class="setStyle">hello Vue!!!</div></p>
+
+
+  <p>使用数组,可以使用多套样式</p>
+  <p>[数组里面写对象或者变量]</p>
+  <p><div :class="[{c1:true,c2:false},{c3:true}]">hello Vue!!!</div></p>
+
 
 
 </div>
@@ -45,14 +59,47 @@
     //数据
     data(){
       return {
-        msg:"hello vue!!!",
-        link:"<a href='https://www.baidu.com'>百度</a>",
-        userInfo:"test",
-        name:"haha",
-        link1:"百度",
-        href:"https://www.baidu.com",
+        //style对象
+        style: {
+          //拥有c1和c2的值,将c1和c2设置为true
+          c1:true,
+          c2:true,
+        },
+        //事件设置样式
+        setStyle: {
+          "c1":"",
+          "c2":"",
+        }
       }
     },
+    //方法
+    methods:{
+      setC1(){
+        //弹窗验证
+        //alert("setC1")
+        //this是全局的vm对象
+        //if判断第一次点击增加样式,第二次点击取消事件
+        //如果c1有样式就改为false取消样式,反之增加样式
+        // if (this.setStyle.c1){
+        //   this.setStyle.c1 = false;
+        // }else {
+        //   this.setStyle.c1 = true;
+        // }
+
+        //或者使用原生js的取反
+        this.setStyle.c1 = !this.setStyle.c1
+      },
+      setC2(){
+        //弹窗验证
+        //alert("setC2")
+        if(this.setStyle.c2){
+          this.setStyle.c2 = false;
+        }else{
+          this.setStyle.c2 = true;
+        }
+
+      }
+    }
 
   }
 
