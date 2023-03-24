@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法之插入值</title>
+<!--  引入vue3.js-->
+  <script src="vue3.js"></script>
+</head>
+<body>
+
+<div id="app">
+  <h3>模板语法之插入值</h3>
+  <p>文本: {{msg}}</p>
+  <p>vue中会将数据中的值都作为文本显示</p>
+  <p>link:{{link}}</p>
+  <p>显示html标签需要使用v-html</p>
+  <p><span v-html="link"></span></p>
+
+  <p>属性值和数据绑定,使用v-bind:属性  可以使用缩写:value="userInfo" 然后属性里边写数据变量</p>
+  <p>v-bind是单向绑定,value不会联动</p>
+  <p>用户名:<input type="text" v-bind:value="userInfo"></p>
+  <p>用户名:<input type="text" :value="userInfo"></p>
+
+
+  <p>v-modle是双向绑定,value会改变,联动 . 注意:v-model仅限单标签 value属性</p>
+  <p>用户名:<input type="text" v-model="name"></p>
+  <p>用户名:<input type="text" v-model="name"></p>
+  <hr/>
+  <p>
+      请输入网站名称:<input type="text" v-model="link1">
+      请输入网站url:<input type="text" v-model="href">
+  </p>
+  <hr/>
+  <a :href="href">{{link1}}</a>
+
+
+</div>
+
+
+<script>
+
+  //设置常量
+  const app = {
+
+    //数据
+    data(){
+      return {
+        msg:"hello vue!!!",
+        link:"<a href='https://www.baidu.com'>百度</a>",
+        userInfo:"test",
+        name:"haha",
+        link1:"百度",
+        href:"https://www.baidu.com",
+      }
+    },
+
+  }
+
+
+
+  //vue对象
+  vm = Vue.createApp(app).mount("#app")
+</script>
+
+</body>
+</html>
