@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>初识js</title>
+
+<!--    样式-->
+    <style>
+        .p1{
+            color: rebeccapurple;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<p class="p1">hello world!!!</p>
+
+
+
+<!--js代码写在最后边,HTML文件从上往下-->
+<script>
+    //引入js代码
+
+    //js的扩展组件 jQuery vue react
+
+    //找到要操作的标签
+    element = document.getElementsByClassName("p1")[0]
+    console.log("element>>>",element)
+    //绑定事件
+    element.onclick = function (){
+        //弹窗
+        //alert("123")
+        //当点击这个p标签时变成蓝色
+        this.style.color= "blue"
+
+        //js是编程语言,是在客户端浏览器上执行的,也是具有分支语句的
+        if(this.innerHTML === "hello world!!!"){
+            alert("hello world!!!")
+        }else {
+            alert("hello js")
+        }
+    }
+</script>
+</body>
+</html>

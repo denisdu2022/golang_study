@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue初识</title>
+
+<!--  引入vue3-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.5/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+  <p>msg: {{msg}}</p>
+    <p>msg: {{msg}}</p>
+
+    <p>用户信息:{{user}}}</p>
+    <h3>显示用户姓名和年龄</h3>
+    <p>姓名:{{user.name}}</p>
+    <p>年龄:{{user.age}}</p>
+    <p>性别:{{user.gender}}</p>
+
+
+</div>
+
+
+<script>
+
+  //设置app常量
+  const app = {
+    //数据
+    data(){
+      return {
+        //键  :  值
+          msg:"hello world",
+          user:{
+              name:"test",
+              age:22,
+              gender:"男",
+          } ,//类似于go的map对象
+      }
+    },
+  }
+
+  //vm 对象  注册app     加载到模板中
+  vm = Vue.createApp(app).mount("#app")
+
+</script>
+
+</body>
+</html>
