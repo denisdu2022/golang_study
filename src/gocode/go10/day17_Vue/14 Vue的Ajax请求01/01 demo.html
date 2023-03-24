@@ -35,7 +35,7 @@
 
 <!--    <div>七日天气数据{{data1}}</div>-->
 <!--    如果获取的天气数据v-if="data1.length >1的长度大于1才想显示七日天气表格-->
-    <table class="table table-bordered" v-if="data1.length >1">
+    <table class="table table-bordered" v-if="forecast.length >1">
         <tr>
             <td>日期</td>
             <td>最高气温</td>
@@ -43,12 +43,12 @@
             <td>天气类型</td>
             <td>天气详情</td>
         </tr>
-        <tr v-for="(day_data1,i) in data1">
-            <td>{{day_data1.day}}</td>
-            <td>{{day_data1.tem1}}</td>
-            <td>{{day_data1.tem}}</td>
-            <td>{{day_data1.wea}}</td>
-            <td>{{day_data1.narrative}}</td>
+        <tr v-for="(forecast,i) in forecast">
+            <td>{{forecast.day}}</td>
+            <td>{{forecast.tem1}}</td>
+            <td>{{forecast.tem}}</td>
+            <td>{{forecast.wea}}</td>
+            <td>{{forecast.narrative}}</td>
         </tr>
     </table>
 </div>
