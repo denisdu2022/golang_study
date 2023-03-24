@@ -1,4 +1,4 @@
-# hello-eorld
+# vue-pro
 
 ## Project setup
 ```

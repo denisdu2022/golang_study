@@ -1,17 +1,17 @@
 <template>
 <!--  <nav>-->
-<!--&lt;!&ndash;    路由&ndash;&gt;-->
-<!--    <router-link to="/">Home</router-link> |-->
-<!--    <router-link to="/about">About</router-link>-->
+<!--&lt;!&ndash;&lt;!&ndash;    路由&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <router-link to="/">Home</router-link> |&ndash;&gt;-->
+<!--&lt;!&ndash;    <router-link to="/about">About</router-link>&ndash;&gt;-->
 <!--  </nav>-->
 <!--  路由关系-->
-<!--  <router-view/>-->
-  <h1>hello-world</h1>
+  <router-view/>
+<!--  <h1>hello-world</h1>-->
 
-<!--  把子组件放置在位置上加载-->
+
 </template>
 
-<!--导入子组件-->
+
 
 <style>
 #app {
