@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todolist</title>
+<!--  引入vue3.js-->
+  <script src="vue3.js"></script>
+<!--    script样式-->
+    <style type="text/css">
+        .list_con {
+            width: 600px;
+            margin: 50px auto 0;
+        }
+
+        .inputtxt {
+            width: 550px;
+            height: 30px;
+            border: 1px solid #ccc;
+            padding: 0px;
+            text-indent: 10px;
+        }
+
+        .inputbtn {
+            width: 40px;
+            height: 32px;
+            padding: 0px;
+            border: 1px solid #ccc;
+        }
+
+        .list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .list li {
+            height: 40px;
+            line-height: 40px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .list li span {
+            float: left;
+        }
+
+        .list li a {
+            float: right;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+   
+
+</head>
+<body>
+
+<div id="app" class="list_con">
+    <h2>To do list</h2>
+    <input type="text" v-model="message" class="inputtxt">
+    <input type="button" @click="addItem" value="增加" class="inputbtn">
+
+    <ul id="list" class="list">
+        <li v-for="(item,key) in dolist">
+            <span>{{item}}</span>
+            <a @click="upItem(key)" class="up">↑</a>
+            <a @click="downItem(key)" class="down">↓</a>
+            <a @click="delItem(key)" class="del">删除</a>
+        </li>
+    </ul>
+
+</div>
+
+
+<script>
+
+  //设置常量
+  const app = {
+
+    //数据
+    data() {
+        return {
+            message:"",
+            //任务列表
+            dolist:[
+                "学习go","学习HTML","学习vue"
+            ],
+        }
+    },
+      //方法
+      methods:{
+        //增加
+        addItem(){
+            //测试
+            // alert(this.message)
+            this.dolist.unshift(this.message)
+        },
+          //删除
+          delItem(key){
+            console.log(key)
+              //删除 使用splice方法删除,从key索引删除,删除1个
+              this.dolist.splice(key,1)
+          },
+          //往上移
+          upItem(key){
+              console.log(key)
+              //先把当前的删除
+              let ret =this.dolist.splice(key,1);
+              //然后再把删除的添加到上一项的上边
+              this.dolist.splice(key-1,0,ret[0])
+          },
+          //往下移
+          downItem(key){
+              console.log(key)
+          }
+
+      },
+      //计算属性
+      computed:{
+
+      }
+
+  }
+
+
+
+  //vue对象
+  vm = Vue.createApp(app).mount("#app")
+</script>
+
+</body>
+</html>

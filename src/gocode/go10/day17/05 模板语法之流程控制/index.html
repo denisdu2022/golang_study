@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法之插入值</title>
+<!--  引入vue3.js-->
+  <script src="vue3.js"></script>
+
+    <style>
+        body {
+            font-size: 14px;
+        }
+
+        table, tr, th, td {
+            border: 1px solid red;
+            border-collapse: collapse; /* 合并边框 */
+        }
+
+        th, td {
+            width: 200px;
+            text-align: center; /* 文本水平居中 */
+            height: 30px;
+            line-height: 30px;
+        }
+
+        input {
+            width: 80px;
+        }
+
+        .active{
+            background-color: lightskyblue;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="app">
+  <div class="header">
+
+<p>年龄大于18显示成人区</p>
+    <p>v-if 和v-else 这两个要紧挨着</p>
+    <div v-if="user.age > 18" class="adult">
+      <ul>
+        <li>亚洲区</li>
+        <li>欧美区</li>
+        <li>非洲区</li>
+      </ul>
+    </div>
+    <div v-else= class="children">
+      <ul>
+        <li>动漫</li>
+        <li>小说</li>
+        <li>武侠</li>
+      </ul>
+    </div>
+  </div>
+
+    <p>循环展示书籍v-for</p>
+
+    <div class="content">
+        <table >
+            <tr>
+                <td>学号</td>
+                <td>书籍名</td>
+                <td>价格</td>
+                <td>出版社</td>
+            </tr>
+            <tr v-for="(bookValue,bookIndex) in books">
+<!--                使用js表达式-->
+                <td>{{bookIndex + 1}}</td>
+                <td>{{bookValue.title}}</td>
+                <td>{{bookValue.price}}</td>
+                <td>{{bookValue.publish}}</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+<script>
+
+  //设置常量
+  const app = {
+
+    //数据
+    data(){
+      return {
+       user:{
+         name:"test",
+         age:17,
+
+       },
+        //书籍
+        books:[
+          {title:"西游记",price:128,publish:"人民出版社"},
+          {title:"三国演义",price:135,publish:"人民出版社"},
+          {title:"水浒传",price:138,publish:"人民出版社"},
+          {title:"红楼梦",price:156,publish:"人民出版社"},
+
+        ]
+      }
+    },
+
+  }
+
+
+
+  //vue对象
+  vm = Vue.createApp(app).mount("#app")
+</script>
+
+</body>
+</html>

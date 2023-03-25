@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发送Ajax请求</title>
+<!--  引入vue3.js-->
+  <script src="vue3.js"></script>
+
+<!--    引入axios包-->
+    <script src="axios.js"></script>
+
+<!--    样式-->
+    <style>
+        body {
+            font-size: 16px;
+        }
+
+        table, tr, th, td {
+            border: 1px solid red;
+            border-collapse: collapse; /* 合并边框 */
+        }
+
+        th, td {
+            width: 200px;
+            text-align: center; /* 文本水平居中 */
+            height: 30px;
+            line-height: 30px;
+        }
+
+
+        h2 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+    <div>
+        <h2>输入城市名称获取七日天气预报</h2>
+        <p><input type="text"  v-model="city"><button @click="sendAjax">提交</button></p>
+
+        <p>当天气数据没有数据时不渲染天气预报列表 使用v-if判断长度</p>
+        <h2>{{city}}七日天气预报</h2>
+        <table v-if="data.length > 0">
+            <tr>
+                <th>日期</th>
+                <th>星期</th>
+                <th>天气状况</th>
+                <th>空气等级</th>
+                <th>最高气温</th>
+                <th>最低气温</th>
+            </tr>
+            <tr v-for="dataValue in data">
+                <td>{{dataValue.date}}</td>
+                <td>{{dataValue.week}}</td>
+                <td>{{dataValue.wea}}</td>
+                <td>{{dataValue.air_level}}</td>
+                <td>{{dataValue.tem1}}</td>
+                <td>{{dataValue.tem2}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+<script>
+
+  //设置常量
+  const app = {
+
+    //数据
+    data(){
+      return {
+          //天气数据
+          data:[],
+          //城市
+          city:"珠海",
+
+
+      }
+    },
+      //方法
+      methods:{
+        sendAjax(){
+            //发送Ajax请求
+            //alert(123)
+            //原生js可以发送Ajax请求 ,但是太复杂,一般使用发送Ajax的请求的模块,在vue中我们一般选择axios模块
+            //使用axios发送get请求
+            // axios.get("https://v0.yiketianqi.com/api?unescape=1&version=v9&appid=32631524&appsecret=6gMTwOdt")
+            //     .then(response=>{console.log("response>>>",response.data.data)})
+            // //响应回来的内容
+
+            //定义vue对象以便于在里边使用
+            let that = this
+            axios.get("https://v0.yiketianqi.com/api?unescape=1&version=v9&appid=32631524&appsecret=6gMTwOdt",{
+                params:{
+                    city:that.city
+                }
+            }).then(response=>{console.log("response>>>",response.data.data);
+                    this.data = response.data.data;
+                })
+            //响应回来的内容,js代码局部显示
+
+        },
+
+
+      },
+      //create 在页面初始的时候加载
+        created(){
+        //页面构建的时候发送Ajax请求
+        this.sendAjax()
+        }
+
+  }
+
+
+
+  //vue对象
+  vm = Vue.createApp(app).mount("#app")
+</script>
+
+</body>
+</html>

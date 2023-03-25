@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法之插入值</title>
+<!--  引入vue3.js-->
+  <script src="vue3.js"></script>
+
+    <style>
+        body {
+            font-size: 14px;
+        }
+
+        table, tr, th, td {
+            border: 1px solid red;
+            border-collapse: collapse; /* 合并边框 */
+        }
+
+        th, td {
+            width: 200px;
+            text-align: center; /* 文本水平居中 */
+            height: 30px;
+            line-height: 30px;
+        }
+
+        input {
+            width: 80px;
+        }
+
+        .active{
+            background: rebeccapurple;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="app">
+  <div class="header">
+
+<p>年龄大于18显示成人区</p>
+    <p>v-if 和v-else 这两个要紧挨着</p>
+    <div v-if="user.age > 18" class="adult">
+      <ul>
+        <li>亚洲区</li>
+        <li>欧美区</li>
+        <li>非洲区</li>
+      </ul>
+    </div>
+    <div v-else= class="children">
+      <ul>
+        <li>动漫</li>
+        <li>小说</li>
+        <li>武侠</li>
+      </ul>
+    </div>
+  </div>
+
+    <p>循环展示书籍v-for</p>
+    <p>展示价格大于130的书籍</p>
+    <p>在vue3中v-if优先级大于v-for</p>
+
+    <div class="content">
+        <table >
+            <tr>
+                <td>学号</td>
+                <td>书籍名</td>
+                <td>价格</td>
+                <td>出版社</td>
+            </tr>
+<!--            <tr v-for="(bookValue,bookIndex) in books">-->
+<!--&lt;!&ndash;                使用js表达式&ndash;&gt;-->
+<!--                <td>{{bookIndex + 1}}</td>-->
+<!--                <td>{{bookValue.title}}</td>-->
+<!--                <td>{{bookValue.price}}</td>-->
+<!--                <td>{{bookValue.publish}}</td>-->
+<!--            </tr>-->
+<!--&lt;!&ndash;            方法一:使用template&ndash;&gt;-->
+<!--&lt;!&ndash;            先循环&ndash;&gt;-->
+<!--            <template v-for="(bookValue,bookIndex) in books">-->
+<!--&lt;!&ndash;                再判断&ndash;&gt;-->
+<!--                <tr v-if="bookValue.price > 130">-->
+<!--                    <td>{{bookIndex}}</td>-->
+<!--                    <td>{{bookValue.title}}</td>-->
+<!--                    <td>{{bookValue.price}}</td>-->
+<!--                    <td>{{bookValue.publish}}</td>-->
+<!--                </tr>-->
+<!--            </template>-->
+
+            <!--            方法二:推荐用法使用计算属性-->
+
+                <tr v-for="(bookValue,bookIndex) in filterBooks">
+                    <td>{{bookIndex + 1}}</td>
+                    <td>{{bookValue.title}}</td>
+                    <td>{{bookValue.price}}</td>
+                    <td>{{bookValue.publish}}</td>
+                </tr>
+
+        </table>
+    </div>
+
+<div>
+    <p>方法: {{foo()}}  ,  foo()要加括号()</p>
+    <p>计算属性: {{bar}}  ,   bar 属性不加括号</p>
+</div>
+
+    <p>展示价格大于130的书籍,计算属性过滤后的值:{{filterBooks}}</p>
+
+    <p>展示价格大于150的书籍,背景色变为紫色</p>
+    <div class="content">
+        <table >
+            <tr>
+                <td>学号</td>
+                <td>书籍名</td>
+                <td>价格</td>
+                <td>出版社</td>
+            </tr>
+            <tr :class="{active:bookValue.active}" v-for="(bookValue,bookIndex) in backgroundBooks">
+                <td>{{bookIndex + 1}}</td>
+                <td>{{bookValue.title}}</td>
+                <td>{{bookValue.price}}</td>
+                <td>{{bookValue.publish}}</td>
+            </tr>
+
+        </table>
+
+</div>
+
+
+<script>
+
+  //设置常量
+  const app = {
+
+    //数据
+    data(){
+      return {
+       user:{
+         name:"test",
+         age:17,
+
+
+       },
+        //书籍
+        books:[
+          {title:"西游记",price:128,publish:"人民出版社"},
+          {title:"三国演义",price:135,publish:"人民出版社"},
+          {title:"水浒传",price:138,publish:"人民出版社"},
+          {title:"红楼梦",price:156,publish:"人民出版社"},
+
+        ]
+      }
+    },
+      //方法
+      methods:{
+        foo(){
+            return [1,2,3,4,5,6]
+        }
+      },
+      //计算属性
+      computed:{
+          bar(){
+              return [6,5,4,3,2,1]
+          },
+          filterBooks(){
+              //返回书籍价格大于130的书籍
+              return this.books.filter(function (item){
+                    return item.price > 130
+              });
+          },
+          backgroundBooks(){
+              return this.books.filter(function (item){
+                  //价格大于150的书籍做一个判断,把样式设置为"true"
+                  if (item.price >150){
+                      item.active = "true"
+                  }
+                  return item
+
+              })
+          }
+      }
+
+  }
+
+
+
+  //vue对象
+  vm = Vue.createApp(app).mount("#app")
+</script>
+
+</body>
+</html>
