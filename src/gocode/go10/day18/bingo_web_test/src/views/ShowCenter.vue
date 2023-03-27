@@ -1,0 +1,123 @@
+<template>
+  <h1>ShowCenter</h1>
+<!--  hr是分割-->
+  <hr/>
+ <p> <button @click="get_weather">点击查看天气信息</button></p>
+<!--  <p>发送Ajax请求响应回来的数据: {{data}}</p>-->
+  <hr/>
+  <div>
+    <h2>七日天气预报</h2>
+    <div>
+      <h2>输入城市名称获取七日天气预报</h2>
+      <p><input type="text"  v-model="city"><button @click="get_weather">提交</button></p>
+
+      <!--      <p>当天气数据没有数据时不渲染天气预报列表 使用v-if判断长度</p>-->
+      <h2>{{city}}七日天气预报</h2>
+      <table v-if="data.length > 0">
+        <tr>
+          <th>日期</th>
+          <th>星期</th>
+          <th>天气状况</th>
+          <th>空气等级</th>
+          <th>最高气温</th>
+          <th>最低气温</th>
+        </tr>
+        <tr v-for="dataValue in data">
+          <td>{{dataValue.date}}</td>
+          <td>{{dataValue.week}}</td>
+          <td>{{dataValue.wea}}</td>
+          <td>{{dataValue.air_level}}</td>
+          <td>{{dataValue.tem1}}</td>
+          <td>{{dataValue.tem2}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <hr/>
+
+  <p>ant-design的按钮</p>
+  <a-button type="primary">Primary Button</a-button>
+  <a-button>Default Button</a-button>
+  <a-button type="dashed">Dashed Button</a-button>
+  <a-button type="text">Text Button</a-button>
+  <a-button type="link">Link Button</a-button>
+  <hr/>
+
+</template>
+
+<script>
+//引入axios模块
+import axios from "axios";
+
+
+
+//对外导出
+export default {
+  name: 'ShowCenter',
+  //以下是选项API
+  //数据
+  data(){
+    return {
+      //天气数据,空数组
+      data: [],
+      //城市 默认珠海
+      city:"珠海",
+    }
+  },
+  //methods方法
+  methods:{
+    //发送Ajax请求的函数
+    get_weather(){
+      //定义vue对象叫that
+       let that = this
+      //使用axios发送Ajax请求
+      axios.get("https://v0.yiketianqi.com/api?unescape=1&version=v9&appid=32631524&appsecret=6gMTwOdt",{
+        params:{
+          city:that.city
+        }
+      }).then(response =>{  //响应
+        //在客户端浏览器打印响应的数据
+        console.log("response>>> ",response.data);
+        //让影响回来的数据赋值给data
+        that.data = response.data.data  //响应回来的内容,js代码局部显示
+      })
+    }
+  },
+  //mounted
+  mounted() {
+    //当页面构建时触发mounted
+    //弹窗测试
+    //alert(123)
+
+    //可以在页面构建时发送Ajax请求
+    //定义vue对象以便于在里边使用
+    // let that = this
+    // axios.get("https://v0.yiketianqi.com/api?unescape=1&version=v9&appid=32631524&appsecret=6gMTwOdt",{
+    //   params:{
+    //     city:that.city
+    //   }
+    // }).then(response=>{console.log("response>>>",response.data.data);
+    //   this.data = response.data.data;
+    // })
+
+    //当页面构建时触发get_weather方法
+    this.get_weather();
+  },
+
+}
+</script>
+
+<!--style 设置了scoped属性只针对当前组件生效-->
+<style scoped>
+table, tr, th, td {
+  border: 1px solid red;
+  border-collapse: collapse; /* 合并边框 */
+}
+
+th, td {
+  width: 200px;
+  text-align: center; /* 文本水平居中 */
+  height: 30px;
+  line-height: 30px;
+}
+</style>
