@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue的监听属性</title>
+		<!-- 引入本地vue文件 -->
+		<script src="js/vue3.js"></script>
+		<!-- 样式 -->
+		<!--    定义边框变色样式-->
+		    <style>
+		        .pass{
+		            outline-color: cadetblue;
+		        }
+		
+		        .noPass{
+		            outline-color: red;
+		        }
+		    </style>
+	</head>
+	<body>
+		
+		<div id="app">
+			<p>{{num}}</p>
+			<p><input type="text" v-model="num"></p>
+			
+			<!-- 侦听属性案例1 输入密码值大于5边框颜色变色 -->
+			<p><input type="password" :class="tips" v-model="password">密码</p>
+		</div>
+		
+		
+		
+		<script>
+			
+			//常量
+			const App = {
+				//数据
+				data(){
+					return {
+						num:100,
+						password:"",
+						tips:"noPass",
+					}
+				},
+				//侦听属性
+				watch:{
+					//newVal新的值  ,oldVal旧的值
+					//监听一个数据(比如num)变化的行为
+					num:function(newVal,oldVal){
+						//在客户端浏览器打印旧的值
+						console.log("oldVal",oldVal)
+						//在客户端浏览器打印新的值
+						console.log("newVal",newVal)
+					},
+					password:function(newVal,oldVal){
+						//通过输入的长度,判断输入密码值大于5边框颜色变色
+						if(newVal.length > 5){
+							//边框样式变成蓝色
+							console.log("ok");
+							//vue对象 v-bind绑定的样式改为pass
+							this.tips = "pass"
+						}else{
+							//边框样式变成红色
+							console.log("not ok");
+							this.tips = "noPass"
+						}
+					}
+				}
+				
+			}
+			
+			//创建vue对象
+			vm = Vue.createApp(App).mount('#app')
+		</script>
+	</body>
+</html>
