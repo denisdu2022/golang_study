@@ -1,110 +1,55 @@
 <template>
   <h1>ShowCenter</h1>
-<!--  hr是分割-->
-  <hr/>
- <p> <button @click="get_weather">点击查看天气信息</button></p>
-<!--  <p>发送Ajax请求响应回来的数据: {{data}}</p>-->
-  <hr/>
+  <p>ant-design的按钮</p>
   <div>
-    <h2>七日天气预报</h2>
-    <div>
-      <h2>输入城市名称获取七日天气预报</h2>
-      <p><input type="text"  v-model="city"><button @click="get_weather">提交</button></p>
-
-      <!--      <p>当天气数据没有数据时不渲染天气预报列表 使用v-if判断长度</p>-->
-      <h2>{{city}}七日天气预报</h2>
-      <table v-if="data.length > 0">
-        <tr>
-          <th>日期</th>
-          <th>星期</th>
-          <th>天气状况</th>
-          <th>空气等级</th>
-          <th>最高气温</th>
-          <th>最低气温</th>
-        </tr>
-        <tr v-for="dataValue in data">
-          <td>{{dataValue.date}}</td>
-          <td>{{dataValue.week}}</td>
-          <td>{{dataValue.wea}}</td>
-          <td>{{dataValue.air_level}}</td>
-          <td>{{dataValue.tem1}}</td>
-          <td>{{dataValue.tem2}}</td>
-        </tr>
-      </table>
-    </div>
+  <p>
+    <a-tag color="pink">pink</a-tag>
+    <a-tag color="red">red</a-tag>
+    <a-tag color="orange">orange</a-tag>
+    <a-tag color="green">green</a-tag>
+    <a-tag color="cyan">cyan</a-tag>
+    <a-tag color="blue">blue</a-tag>
+    <a-tag color="purple">purple</a-tag>
+  </p>
+  <p>
+    <a-tag color="#f50">#f50</a-tag>
+    <a-tag color="#2db7f5">#2db7f5</a-tag>
+    <a-tag color="#87d068">#87d068</a-tag>
+    <a-tag color="#108ee9">#108ee9</a-tag>
+  </p>
   </div>
   <hr/>
+  <p>使用Echarts的饼图</p>
+  <div >
+    <div  ref="chart"> </div>
+  </div>
 
-  <p>ant-design的按钮</p>
-  <a-button type="primary">Primary Button</a-button>
-  <a-button>Default Button</a-button>
-  <a-button type="dashed">Dashed Button</a-button>
-  <a-button type="text">Text Button</a-button>
-  <a-button type="link">Link Button</a-button>
-  <hr/>
 
 </template>
 
-<script>
-//引入axios模块
-import axios from "axios";
+<script >
+//导入
+import {onMounted,ref} from "vue";
+//导入echarts
+import  * as echarts from 'echarts';
+//echarts饼图
+//定义响应式变量
+const  chart = ref(); //const chart = reactive({value:""})
+//设置饼图
+let setBingtu = () => {
+  //弹窗测试
+  alert(123)
+}
 
+onMounted(() =>{
+  setBingtu()
+})
 
-
-//对外导出
 export default {
   name: 'ShowCenter',
-  //以下是选项API
-  //数据
-  data(){
-    return {
-      //天气数据,空数组
-      data: [],
-      //城市 默认珠海
-      city:"珠海",
-    }
-  },
-  //methods方法
-  methods:{
-    //发送Ajax请求的函数
-    get_weather(){
-      //定义vue对象叫that
-       let that = this
-      //使用axios发送Ajax请求
-      axios.get("https://v0.yiketianqi.com/api?unescape=1&version=v9&appid=32631524&appsecret=6gMTwOdt",{
-        params:{
-          city:that.city
-        }
-      }).then(response =>{  //响应
-        //在客户端浏览器打印响应的数据
-        console.log("response>>> ",response.data);
-        //让影响回来的数据赋值给data
-        that.data = response.data.data  //响应回来的内容,js代码局部显示
-      })
-    }
-  },
-  //mounted
-  mounted() {
-    //当页面构建时触发mounted
-    //弹窗测试
-    //alert(123)
-
-    //可以在页面构建时发送Ajax请求
-    //定义vue对象以便于在里边使用
-    // let that = this
-    // axios.get("https://v0.yiketianqi.com/api?unescape=1&version=v9&appid=32631524&appsecret=6gMTwOdt",{
-    //   params:{
-    //     city:that.city
-    //   }
-    // }).then(response=>{console.log("response>>>",response.data.data);
-    //   this.data = response.data.data;
-    // })
-
-    //当页面构建时触发get_weather方法
-    this.get_weather();
-  },
 
 }
+
 </script>
 
 <!--style 设置了scoped属性只针对当前组件生效-->
