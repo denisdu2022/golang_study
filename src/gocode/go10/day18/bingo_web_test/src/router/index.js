@@ -8,6 +8,11 @@ const routes = [
     name: 'ShowCenter',
     component: () => import('../views/ShowCenter.vue')
   },
+  {
+    path: '/group',
+    name: 'Group',
+    component: () => import('../views/Group.vue')
+  },
 
   {
     path: '/about',

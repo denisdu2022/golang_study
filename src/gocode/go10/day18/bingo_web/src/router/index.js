@@ -1,12 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import ShowCenter from "../views/ShowCenter.vue";
+//导入GroupAPI
+import GroupAPI from "../views/GroupAPI.vue";
 
 const routes = [
   {
     path: '/',
     name: 'ShowCenter',
     component: ShowCenter
+  },
+  {
+    path: '/groupAPI',
+    name: 'GroupAPI',
+    component: GroupAPI
   },
   {
     path: '/about',

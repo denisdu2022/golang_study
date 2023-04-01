@@ -1,0 +1,50 @@
+<template>
+
+  <h1>组合API</h1>
+  <p>显示变量信息{{age}}</p>
+  <p><button @click="ajax_get_age(18)">点击更改年龄</button></p>
+  <p><button @click="change_age">点击按钮使年龄增加</button></p>
+
+
+
+</template>
+
+<script>
+
+//从vue引入 ref
+import { ref } from "vue"
+
+export default {
+  name: "Group",
+  beforeCreate() {
+    console.log("beforeCreate执行了")
+  },
+  created() {
+    console.log("created执行了")
+  },
+  //setup会自动执行,并且会在befroreCreate钩子方法之前就自动执行了
+  setup(){
+    console.log("setup自动执行了")
+    //this=undefined ，setup执行的时候，连this都没有定义，所以，我们不可能在setup里面调用之前的选项API方法了。
+    //如果还要使用原来的props,emit,watch之类的选项则需要使用新的写法
+    console.log(`this=${this}`)
+
+    //在组合API里声明一个基本数据类型的变量,需要先从vue引入ref,在声明
+    let age = ref(0)
+    //声明函数 模拟Ajax请求 >从服务端获取的
+    let ajax_get_age= (num)=>{
+      age.value = num
+    }
+    //让年龄做自加
+    let change_age = ()=>{
+      age.value++
+    }
+    //return 外部使用
+    return {age,ajax_get_age,change_age}
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

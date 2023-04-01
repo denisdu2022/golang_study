@@ -1,0 +1,75 @@
+<template>
+
+  <h1>组合API</h1>
+  <p>显示基本数据类型变量信息{{age}}</p>
+  <p><button @click="ajax_get_age(18)">点击更改年龄</button></p>
+  <p><button @click="change_age">点击按钮使年龄增加</button></p>
+
+  <p>显示复杂数据类型的信息</p>
+  <p>{{state}}}</p>
+  <p>{{state.user_info}}</p>
+  <p><button @click="get_user_info">点击获取用户信息</button></p>
+  <p><button @click="state.user_info.age++">年龄自增</button></p>
+
+  <p>调用外部封装的数据和操作数据的方法</p>
+  <p>{{student}}</p>
+  <p>{{student.get_info}}</p>
+  <p><button @click="student.get_info()">点击获取学生数据</button></p>
+  <p><button @click="student.sum_info()">点击学生年龄自增</button></p>
+</template>
+
+<script>
+
+//从vue引入 ref
+import { ref,reactive } from "vue";
+//导入student.js的外部数据
+import student from "../api/student";
+
+export default {
+  name: "Group",
+  beforeCreate() {
+    console.log("beforeCreate执行了")
+  },
+  created() {
+    console.log("created执行了")
+  },
+  //setup会自动执行,并且会在befroreCreate钩子方法之前就自动执行了
+  setup(){
+    console.log("setup自动执行了")
+    //this=undefined ，setup执行的时候，连this都没有定义，所以，我们不可能在setup里面调用之前的选项API方法了。
+    //如果还要使用原来的props,emit,watch之类的选项则需要使用新的写法
+    console.log(`this=${this}`)
+
+    //在组合API里声明一个基本数据类型的变量,需要先从vue引入ref,在声明
+    //数值,布尔值,字符串 使用ref
+    let age = ref(0)  //底层ref执行完成了以后,相当于执行了reactive({value:0})
+    //操作基本类型数据的方法
+    //声明函数 模拟Ajax请求 >从服务端获取的
+    let ajax_get_age= (num)=>{
+      age.value = num
+    }
+    //让年龄做自加
+    let change_age = ()=>{
+      age.value++
+    }
+
+    //声明一个复杂数据类型的变量,需要先从vue引入reactive,在声明
+    //对象,数组等其他复杂数据类型使用reactive
+    let state = reactive({
+      user_info:{},
+    })
+    let get_user_info = ()=>{
+        state.user_info = {name:"xiaoming",age:13}
+    }
+
+
+    //如果要把setup中声明的变量的方法提供给template中进行调用,则必须写在return中.
+    //return 外部使用
+    return {age,ajax_get_age,change_age,state,get_user_info,student}
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
