@@ -1,0 +1,86 @@
+<template>
+
+  <h1>组合API</h1>
+  <p>显示基本数据类型变量信息{{age}}</p>
+  <p><button @click="ajax_get_age(18)">点击更改年龄</button></p>
+  <p><button @click="change_age">点击按钮使年龄增加</button></p>
+  <p>age * 4 = {{new_age}}</p>
+
+
+  <p>显示复杂数据类型的信息</p>
+  <p>{{state}}}</p>
+  <p>{{state.user_info}}</p>
+  <p><button @click="get_user_info">点击获取用户信息</button></p>
+  <p><button @click="state.user_info.age++">年龄自增</button></p>
+
+
+</template>
+
+<script setup>
+
+//从vue引入 ref,reactive,watch,computed,onMounted
+import { ref,reactive,watch,computed,onMounted } from "vue";
+
+    //在组合API里声明一个基本数据类型的变量,需要先从vue引入ref,在声明
+    //数值,布尔值,字符串 使用ref
+    let age = ref(0)  //底层ref执行完成了以后,相当于执行了reactive({value:0})
+    //操作基本类型数据的方法
+    //声明函数 模拟Ajax请求 >从服务端获取的
+    let ajax_get_age= (num)=>{
+      age.value = num
+    }
+    //让年龄做自加
+    let change_age = ()=>{
+      age.value++
+    }
+
+    //计算属性的应用
+    //使年龄*4
+    let new_age = computed(()=>{
+      return age.value * 4 ;
+    })
+
+    //钩子方法
+    onMounted(()=>{
+      console.log('Component is mounted')
+    })
+
+
+    //侦听属性的应用
+    //监听基本类型数据的变化,
+    //参数1,回调函数,返回值必须是经过ref或者reactive包装过得数据[响应式数据]
+    //如果 监听的是reactive包装过的数据,必须写成回调函数格式
+    //参数2,数据发生改变时,自动执行的回调函数,该回调函数默认提供2个参数,分别是监听数据的修改后和修改前的值
+    watch(
+        age, //ref包装的数据
+        ()=>{
+          console.log(age)
+          if(age.value > 30){
+            console.log("别点了,在点就老了")
+            alert("别点了,在点就老了")
+          }
+        }
+    )
+
+    //声明一个复杂数据类型的变量,需要先从vue引入reactive,在声明
+    //对象,数组等其他复杂数据类型使用reactive
+    let state = reactive({
+      user_info:{},
+    })
+    let get_user_info = ()=>{
+        state.user_info = {name:"xiaoming",age:13}
+    }
+
+    //监听复杂类型数据的变化
+    watch(
+        ()=>state.user_info.age, //reactive包装的数据,格式是回调函数的格式
+        ()=>{
+          console.log("监听函数执行了,state.user_info>",state.user_info)
+        }
+    )
+
+</script>
+
+<style scoped>
+
+</style>

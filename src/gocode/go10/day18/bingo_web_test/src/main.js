@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 //引入ant-design-vue
 import Antd from 'ant-design-vue';
-//import 'ant-design-vue/dist/antd.css';
+import 'ant-design-vue/dist/antd.css';
 //引入settings
 import './settings';
 import settings from "@/settings";

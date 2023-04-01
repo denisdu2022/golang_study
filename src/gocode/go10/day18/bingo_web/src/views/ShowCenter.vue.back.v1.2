@@ -1,5 +1,36 @@
 <template>
 <h1>ShowCenter</h1>
+
+  <button @click="get_weather">查看天气信息</button>
+  <div>
+    <h2>七日天气预报</h2>
+    <div>
+      <h2>输入城市名称获取七日天气预报</h2>
+      <p><input type="text"  v-model="city"><button @click="get_weather">提交</button></p>
+
+<!--      <p>当天气数据没有数据时不渲染天气预报列表 使用v-if判断长度</p>-->
+      <h2>{{city}}七日天气预报</h2>
+      <table v-if="data.length > 0">
+        <tr>
+          <th>日期</th>
+          <th>星期</th>
+          <th>天气状况</th>
+          <th>空气等级</th>
+          <th>最高气温</th>
+          <th>最低气温</th>
+        </tr>
+        <tr v-for="dataValue in data">
+          <td>{{dataValue.date}}</td>
+          <td>{{dataValue.week}}</td>
+          <td>{{dataValue.wea}}</td>
+          <td>{{dataValue.air_level}}</td>
+          <td>{{dataValue.tem1}}</td>
+          <td>{{dataValue.tem2}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
   <hr/>
   <h3>Ant-design的按钮</h3>
   <a-button type="primary">Primary Button</a-button>
@@ -8,21 +39,11 @@
   <a-button type="text">Text Button</a-button>
   <a-button type="link">Link Button</a-button>
   <hr/>
-  <h3>日历</h3>
-  <div :style="{ width: '300px', border: '1px solid #d9d9d9', borderRadius: '4px' }">
-    <a-calendar v-model:value="value" :fullscreen="false" @panelChange="onPanelChange" />
-  </div>
-  <hr/>
 </template>
 
 <script>
 //引入axios模块
 import axios from "axios";
-
-
-
-
-
 
 export default {
   name: "ShowCenter",
