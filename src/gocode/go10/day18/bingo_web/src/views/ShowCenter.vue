@@ -1,90 +1,101 @@
 <template>
 <h1>ShowCenter</h1>
-  <hr/>
-  <h3>Ant-design的按钮</h3>
-  <a-button type="primary">Primary Button</a-button>
-  <a-button>Default Button</a-button>
-  <a-button type="dashed">Dashed Button</a-button>
-  <a-button type="text">Text Button</a-button>
-  <a-button type="link">Link Button</a-button>
-  <hr/>
-  <h3>日历</h3>
   <div :style="{ width: '300px', border: '1px solid #d9d9d9', borderRadius: '4px' }">
     <a-calendar v-model:value="value" :fullscreen="false" @panelChange="onPanelChange" />
   </div>
-  <hr/>
+
+  <div>
+    <a-button type="primary" @click="showModal">Open Modal</a-button>
+    <a-modal v-model:visible="visible" title="Basic Modal" @ok="handleOk">
+      <a-form :model="formState" :label-col="labelCol" :wrapper-col="wrapperCol">
+        <a-form-item label="Activity name">
+          <a-input v-model:value="formState.name" />
+        </a-form-item>
+        <a-form-item label="Instant delivery">
+          <a-switch v-model:checked="formState.delivery" />
+        </a-form-item>
+        <a-form-item label="Activity type">
+          <a-checkbox-group v-model:value="formState.type">
+            <a-checkbox value="1" name="type">Online</a-checkbox>
+            <a-checkbox value="2" name="type">Promotion</a-checkbox>
+            <a-checkbox value="3" name="type">Offline</a-checkbox>
+          </a-checkbox-group>
+        </a-form-item>
+        <a-form-item label="Resources">
+          <a-radio-group v-model:value="formState.resource">
+            <a-radio value="1">Sponsor</a-radio>
+            <a-radio value="2">Venue</a-radio>
+          </a-radio-group>
+        </a-form-item>
+        <a-form-item label="Activity form">
+          <a-input v-model:value="formState.desc" type="textarea" />
+        </a-form-item>
+        <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+          <a-button type="primary" @click="onSubmit">Create</a-button>
+          <a-button style="margin-left: 10px">Cancel</a-button>
+        </a-form-item>
+      </a-form>
+    </a-modal>
+  </div>
 </template>
 
 <script>
-//引入axios模块
-import axios from "axios";
+import { defineComponent, ref , toRaw , reactive} from 'vue';
+
+export default defineComponent({
+  setup() {
+    //日历组件
+    const value = ref();
+    const onPanelChange = (value, mode) => {
+      console.log(value, mode);
+    };
 
 
+    //对话框
+    const visible = ref(false);
+    const showModal = () => {
+      visible.value = true;
+    };
+    const handleOk = e => {
+      console.log(e);
+      visible.value = false;
+    };
 
+    //form表单
+    const formState = reactive({
+      name: '',
+      delivery: false,
+      type: [],
+      resource: '',
+      desc: '',
+    });
+    const onSubmit = () => {
+      console.log('submit!', toRaw(formState));
+    };
 
-
-
-export default {
-  name: "ShowCenter",
-  //数据
-  data() {
     return {
-      //天气数据
-      data: [],
-      //城市
-      city: "珠海",
-    }
+      value,
+      onPanelChange,
+      visible,
+      showModal,
+      handleOk,
+      labelCol: {
+        style: {
+          width: '150px',
+        },
+      },
+      wrapperCol: {
+        span: 14,
+      },
+      formState,
+      onSubmit,
+    };
   },
-  //methods方法
-  methods: {
-    get_weather() {
-      //定义vue对象以便于在里边使用
-      let that = this
-      axios.get("https://v0.yiketianqi.com/api?unescape=1&version=v9&appid=32631524&appsecret=6gMTwOdt", {
-        params: {
-          city: that.city
-        }
-      }).then(response => {
-        console.log("response>>>", response.data.data);
-        this.data = response.data.data;
-      })
-      //响应回来的内容,js代码局部显示
-
-    },
-  },
-    //mounted
-    mounted(){
-      //测试
-      //alert(123)
-
-      //定义vue对象以便于在里边使用
-      // let that = this
-      // axios.get("https://v0.yiketianqi.com/api?unescape=1&version=v9&appid=32631524&appsecret=6gMTwOdt",{
-      //   params:{
-      //     city:that.city
-      //   }
-      // }).then(response=>{console.log("response>>>",response.data.data);
-      //   this.data = response.data.data;
-      // })
-      //当页面构建时发送Ajax请求
-      this.get_weather();
-    },
-  }
-
+});
 
 </script>
 
 <!--scoped只对当前组件生效样式-->
 <style scoped>
-table, tr, th, td {
-  border: 1px solid red;
-  border-collapse: collapse; /* 合并边框 */
-}
 
-th, td {
-  width: 200px;
-  text-align: center; /* 文本水平居中 */
-  height: 30px;
-  line-height: 30px;
-}
 </style>
