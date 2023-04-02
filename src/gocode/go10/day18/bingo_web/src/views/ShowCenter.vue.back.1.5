@@ -1,18 +1,9 @@
 <template>
 <h1>ShowCenter</h1>
-  <h2>Echarts饼图</h2>
-  <div>
-    <div class="echarts">
-      <div class="myChart" ref="chart"></div>
-    </div>
-  </div>
-  <hr/>
-  <h2>日历</h2>
   <div :style="{ width: '300px', border: '1px solid #d9d9d9', borderRadius: '4px' }">
     <a-calendar v-model:value="value" :fullscreen="false" @panelChange="onPanelChange" />
   </div>
-  <hr/>
-  <h2>模态对话框</h2>
+
   <div>
     <a-button type="primary" @click="showModal">Open Modal</a-button>
     <a-modal v-model:visible="visible" title="Basic Modal" @ok="handleOk">
@@ -46,20 +37,23 @@
       </a-form>
     </a-modal>
   </div>
-  <p></p>
   <hr/>
-
-
-
-
+  <h3>Echarts饼图</h3>
+  <div>
+    <div class="echarts">
+      <div class="myChart" ref="chart"></div>
+    </div>
+  </div>
+  <hr/>
 </template>
 
-<!--setup简写-->
-<script setup>
-import {  ref , toRaw , reactive , onMounted} from 'vue';
+<script>
+import { defineComponent, ref , toRaw , reactive , onMounted} from 'vue';
 //导入echarts
 import * as echarts from 'echarts';
 
+export default defineComponent({
+  setup() {
     //日历组件
     const value = ref();
     const onPanelChange = (value, mode) => {
@@ -144,13 +138,32 @@ import * as echarts from 'echarts';
     })
 
 
-
+    return {
+      value,
+      onPanelChange,
+      visible,
+      showModal,
+      handleOk,
+      labelCol: {
+        style: {
+          width: '150px',
+        },
+      },
+      wrapperCol: {
+        span: 14,
+      },
+      formState,
+      onSubmit,
+      chart,
+    };
+  },
+});
 
 </script>
 
 <!--scoped只对当前组件生效样式-->
 <style scoped>
   .myChart{
-    height: 550px;
+    height: 600px;
   }
 </style>
