@@ -3,12 +3,26 @@ import { createRouter, createWebHistory } from 'vue-router'
 import ShowCenter from "../views/ShowCenter.vue";
 //导入GroupAPI
 import GroupAPI from "../views/GroupAPI.vue";
+//导入login组件
+import Login from "../views/Login.vue";
+//导入base组件
+import Base from "../views/Base.vue";
 
 const routes = [
   {
     path: '/',
     name: 'ShowCenter',
     component: ShowCenter
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/base',
+    name: 'Base',
+    component: Base
   },
   {
     path: '/groupAPI',
