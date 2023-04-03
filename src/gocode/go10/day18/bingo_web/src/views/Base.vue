@@ -8,19 +8,25 @@
 
 <!--        如果没有子菜单则渲染这个-->
         <a-menu-item v-if="menu.children.length ===0 " :key="menu.id">
-          <router-link to="menu.menu_url">
-          <span>{{menu.title}}</span>
-          </router-link>
+<!--            将menu.icon通过子组件设置父组件中的icon-->
+          <MyIcon :icon="menu.icon"></MyIcon>
+          <span>
+            <router-link :to="menu.menu_url">
+              {{menu.title}}
+            </router-link>
+          </span>
+
         </a-menu-item>
 <!--        如果有子菜单渲染-->
         <a-sub-menu v-else :key="menu.id">
           <template #title>
             <span>
+              <MyIcon :icon="menu.icon"></MyIcon>
               <span>{{menu.title}}</span>
             </span>
           </template>
           <a-menu-item v-for="child_menu in menu.children" :key="child_menu.id">
-            <router-link to="child_menu.menu_url">
+            <router-link :to="child_menu.menu_url">
               {{child_menu.title}}
             </router-link>
           </a-menu-item>
@@ -29,19 +35,53 @@
 
       </a-menu>
     </a-layout-sider>
+
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0" />
+      <a-layout-header style="background: #fff; padding: 20px">
+
+        <a-row type="flex" justify="start">
+
+          <a-col :span="6">
+            <a-breadcrumb>
+              <a-breadcrumb-item href="">
+                <home-outlined/>
+              </a-breadcrumb-item>
+              <a-breadcrumb-item href="">
+                <user-outlined/>
+                <span>Application List</span>
+              </a-breadcrumb-item>
+              <a-breadcrumb-item>Application</a-breadcrumb-item>
+            </a-breadcrumb>
+          </a-col>
+
+          <a-col :span="1" :offset="17">
+            <a-breadcrumb>
+
+              <a-popconfirm
+                  title="您确认要注销登陆吗?"
+                  ok-text="Yes"
+                  cancel-text="No"
+                  @confirm="logout"
+                  @cancel="cancel"
+              >
+                <a-button type="primary" class="logout">
+                  注销
+                </a-button>
+              </a-popconfirm>
+
+            </a-breadcrumb>
+          </a-col>
+
+        </a-row>
+
+      </a-layout-header>
+
       <a-layout-content style="margin: 0 16px">
-        <a-breadcrumb style="margin: 16px 0">
-          <a-breadcrumb-item>User</a-breadcrumb-item>
-          <a-breadcrumb-item>Bill</a-breadcrumb-item>
-        </a-breadcrumb>
-        <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-          Bill is a cat.
-        </div>
+<!--        根据路由展示view(渲染页面)-->
+        <router-view/>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        Ant Design ©2018 Created by Ant UED
+        Ant Design ©2023 Created by Ant UED
       </a-layout-footer>
     </a-layout>
   </a-layout>
@@ -49,6 +89,8 @@
 <script setup>
 import {reactive, ref} from 'vue';
 import {HomeOutlined, UserOutlined,} from '@ant-design/icons-vue';
+//导入子组件
+import MyIcon from "@/components/MyIcon.vue";
 
 const collapsed = ref(false)
 const selectedKeys = ref(['1'])
