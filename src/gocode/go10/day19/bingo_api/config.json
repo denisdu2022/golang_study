@@ -1,6 +1,4 @@
 {
-  "name": "bingo_api",
-  "version": "1.0.0",
-  "dependencies": {
-  }
+  "mode": "debug",
+  "port": 8080
 }
