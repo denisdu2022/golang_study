@@ -5,6 +5,7 @@ import (
 	"bingo_api/applcation/initialize"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 	"path/filepath"
 )
 
@@ -27,12 +28,24 @@ func main() {
 	gin.SetMode(config.Conf.Mode)
 
 	//3.日志初始化
-	initialize.InitLogger()
+	//initialize.InitLogger()
+	if err := initialize.InitLogger(config.Conf.LogConfig); err != nil {
+		fmt.Printf("初始化日志失败,错误信息是: %v\n", err)
+		return
+	}
+
+	//调试信息
+	zap.S().Debugf("调试信息:%d", config.Conf.Port)
 
 	//4.初始化路由
 	Router := initialize.InitRouter()
 
+	//zap提供了一个S函数和一个L函数给开发者使用,调用S函数或者L函数,可以得到一个全局的线程安全的logger对象
+	zap.S().Info("服务端启动,端口: ", config.Conf.Port)
+
 	//5.启动,监听8080端口
-	Router.Run(fmt.Sprintf(":%d", config.Conf.Port))
+	if err := Router.Run(fmt.Sprintf(":%d", config.Conf.Port)); err != nil {
+		zap.S().Panic("服务端启动失败: ", err.Error())
+	}
 
 }

@@ -2,7 +2,6 @@ package config
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 )
 
@@ -17,6 +16,16 @@ import (
 type Config struct {
 	Mode string `json:"mode"`
 	Port int    `json:"port"`
+	//新增日志成员
+	*LogConfig `json:"log"`
+}
+
+type LogConfig struct {
+	Level      string `json:"level"`       //日志级别
+	Filename   string `json:"filename"`    //日志路径
+	MaxSize    int    `json:"maxsize"`     //单个日志文件的大小
+	MaxAge     int    `json:"max_age"`     //日志周期
+	MaxBackups int    `json:"max_backups"` //日志的备份数量
 }
 
 //Conf全局配置变量
@@ -32,6 +41,6 @@ func Init(filePath string) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println("打印传进来的json数据>>>", string(b))
+	//fmt.Println("打印传进来的json数据>>>", string(b))
 	return json.Unmarshal(b, Conf)
 }

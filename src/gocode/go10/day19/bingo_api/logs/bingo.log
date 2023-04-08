@@ -1,0 +1,2 @@
+{"level":"DEBUG","time":"2023-04-08T22:42:40.712+0800","caller":"applcation/main.go:38","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-08T22:42:40.713+0800","caller":"applcation/main.go:44","msg":"服务端启动,端口: 8080"}

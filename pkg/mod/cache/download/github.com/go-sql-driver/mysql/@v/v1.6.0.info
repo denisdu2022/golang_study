@@ -1,1 +1,1 @@
-{"Version":"v1.6.0","Time":"2021-04-01T01:56:49Z"}
+{"Version":"v1.6.0","Time":"2021-04-01T01:56:49Z","Origin":{"VCS":"git","URL":"https://github.com/go-sql-driver/mysql","Ref":"refs/tags/v1.6.0","Hash":"bcc459a906419e2890a50fc2c99ea6dd927a88f2"}}
