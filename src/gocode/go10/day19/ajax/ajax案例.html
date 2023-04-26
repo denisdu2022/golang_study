@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax案例</title>
+<!--    引入jQuery库-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+</head>
+<body>
+
+<h3>ajax的学习</h3>
+
+<button id="btn">获取天气数据</button>
+
+<div class="data" style="border: 2px;;height: 800px;background-color:lavenderblush"></div>
+
+<script>
+    //给标签绑定事件
+    $("#btn").click(function (){
+        //弹窗测试
+        //alert(123)
+        //发送Ajax请求
+        // $.ajax({
+        //     url:"https://v0.yiketianqi.com/api?unescape=1&version=v9&appid=32631524&appsecret=6gMTwOdt",
+        //     type:"get",
+        //     data:{},
+        //     //success回调函数,res响应回来的内容
+        //     success:function (res){
+        //         console.log("res",JSON.stringify(res.data))
+        //         //把响应回来的数据写到HTML的div里去
+        //         $(".data").html(JSON.stringify(res.data))
+        //     }
+        // })
+
+        $.ajax({
+            url:"http://127.0.0.1:8080/api/host/",
+            type:"get",
+            data:{},
+            //success回调函数,res响应回来的内容
+            success:function (res){
+                console.log("res",JSON.stringify(res.data))
+                //把响应回来的数据写到HTML的div里去
+                $(".data").html(JSON.stringify(res.data))
+            }
+        })
+    })
+</script>
+
+</body>
+</html>
