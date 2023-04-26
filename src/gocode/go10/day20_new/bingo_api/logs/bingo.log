@@ -1,0 +1,79 @@
+{"level":"DEBUG","time":"2023-04-08T22:42:40.712+0800","caller":"applcation/main.go:38","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-08T22:42:40.713+0800","caller":"applcation/main.go:44","msg":"服务端启动,端口: 8080"}
+{"level":"DEBUG","time":"2023-04-09T11:59:52.844+0800","caller":"applcation/main.go:38","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-09T11:59:52.845+0800","caller":"applcation/main.go:44","msg":"服务端启动,端口: 8080"}
+{"level":"INFO","time":"2023-04-09T12:00:10.431+0800","caller":"middleware/logger.go:25","msg":"/api/user/authenticate{status 11 200  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 31375  <nil>}"}
+{"level":"INFO","time":"2023-04-09T12:00:15.720+0800","caller":"middleware/logger.go:25","msg":"/api/user/authenticate{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 19375  <nil>}"}
+{"level":"DEBUG","time":"2023-04-09T17:53:48.203+0800","caller":"applcation/main.go:38","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-09T17:53:48.204+0800","caller":"applcation/main.go:44","msg":"服务端启动,端口: 8080"}
+{"level":"INFO","time":"2023-04-09T17:53:54.685+0800","caller":"middleware/logger.go:31","msg":"/api/user/authenticate{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 54916  <nil>}"}
+{"level":"INFO","time":"2023-04-09T17:53:59.425+0800","caller":"middleware/logger.go:31","msg":"/api/user/authenticate{status 11 200  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 29708  <nil>}"}
+{"level":"DEBUG","time":"2023-04-09T18:39:47.448+0800","caller":"applcation/main.go:38","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-09T18:39:47.449+0800","caller":"applcation/main.go:44","msg":"服务端启动,端口: 8080"}
+{"level":"DEBUG","time":"2023-04-09T20:12:23.078+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-09T20:12:23.078+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+-------------------------------------------------------------------------------------------------------------------
+{"level":"DEBUG","time":"2023-04-11T10:37:37.541+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-11T10:37:37.541+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+{"level":"ERROR","time":"2023-04-11T10:38:53.242+0800","caller":"database/mysql.go:38","msg":"数据库连接失败,失败原因是: dial tcp 8.141.211.192:3306: connect: operation timed out"}
+{"level":"DEBUG","time":"2023-04-11T10:42:30.199+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-11T10:42:30.200+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+{"level":"INFO","time":"2023-04-11T10:42:42.220+0800","caller":"middleware/logger.go:31","msg":"/api/user{status 11 201  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 264222416  <nil>}"}
+{"level":"INFO","time":"2023-04-11T10:43:27.708+0800","caller":"middleware/logger.go:31","msg":"/api/user{status 11 200  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 80667  <nil>}"}
+{"level":"INFO","time":"2023-04-11T10:44:45.261+0800","caller":"middleware/logger.go:31","msg":"/api/user{status 11 201  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 252707166  <nil>}"}
+{"level":"DEBUG","time":"2023-04-11T13:56:43.190+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-11T13:56:43.191+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+{"level":"INFO","time":"2023-04-11T13:56:52.582+0800","caller":"middleware/logger.go:31","msg":"/api/user{status 11 200  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 54458  <nil>}"}
+{"level":"INFO","time":"2023-04-11T13:57:00.915+0800","caller":"middleware/logger.go:31","msg":"/api/user{status 11 200  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 388828125  <nil>}"}
+{"level":"DEBUG","time":"2023-04-11T13:59:55.123+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-11T13:59:55.124+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+{"level":"ERROR","time":"2023-04-11T14:00:05.867+0800","caller":"api/user.go:33","msg":"用户创建失败,失败原因是: EOF"}
+{"level":"INFO","time":"2023-04-11T14:00:05.868+0800","caller":"middleware/logger.go:31","msg":"/api/user{status 11 200  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 1177875  <nil>}"}
+{"level":"INFO","time":"2023-04-11T14:00:10.305+0800","caller":"middleware/logger.go:31","msg":"/api/user/{status 11 404  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 667  <nil>}"}
+{"level":"DEBUG","time":"2023-04-11T14:02:52.410+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-11T14:02:52.410+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+{"level":"INFO","time":"2023-04-11T14:03:02.232+0800","caller":"middleware/logger.go:31","msg":"/api/user/{status 11 404  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 4916  <nil>}"}
+{"level":"ERROR","time":"2023-04-11T14:03:06.664+0800","caller":"api/user.go:33","msg":"创建用户失败!"}
+{"level":"INFO","time":"2023-04-11T14:03:06.665+0800","caller":"middleware/logger.go:31","msg":"/api/user{status 11 200  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 134792  <nil>}"}
+{"level":"DEBUG","time":"2023-04-11T14:04:04.173+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-11T14:04:04.173+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+{"level":"ERROR","time":"2023-04-11T14:04:12.832+0800","caller":"api/user.go:33","msg":"创建用户失败!"}
+{"level":"INFO","time":"2023-04-11T14:04:12.832+0800","caller":"middleware/logger.go:31","msg":"/api/user{status 11 200  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 180125  <nil>}"}
+{"level":"ERROR","time":"2023-04-11T14:04:25.567+0800","caller":"api/user.go:41","msg":"创建用户成功!"}
+{"level":"INFO","time":"2023-04-11T14:04:25.567+0800","caller":"middleware/logger.go:31","msg":"/api/user{status 11 201  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 879647000  <nil>}"}
+{"level":"DEBUG","time":"2023-04-13T13:09:25.701+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-13T13:09:25.702+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+{"level":"DEBUG","time":"2023-04-13T13:12:47.911+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"DEBUG","time":"2023-04-13T13:13:29.987+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-13T13:13:29.988+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+{"level":"INFO","time":"2023-04-13T13:14:34.555+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 53417  <nil>}"}
+{"level":"INFO","time":"2023-04-13T13:14:49.882+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 27292  <nil>}"}
+{"level":"INFO","time":"2023-04-13T13:14:54.678+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 41375  <nil>}"}
+{"level":"INFO","time":"2023-04-13T13:15:32.450+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 <nil>} {cost timer 8 38833  <nil>}"}
+{"level":"INFO","time":"2023-04-13T13:15:32.505+0800","caller":"middleware/logger.go:31","msg":"/favicon.ico{status 11 404  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 <nil>} {cost timer 8 708  <nil>}"}
+{"level":"INFO","time":"2023-04-13T13:16:16.278+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 <nil>} {cost timer 8 25583  <nil>}"}
+{"level":"INFO","time":"2023-04-13T13:20:24.175+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 <nil>} {cost timer 8 23708  <nil>}"}
+{"level":"DEBUG","time":"2023-04-13T13:45:23.373+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-13T13:45:23.374+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+{"level":"INFO","time":"2023-04-13T13:45:34.730+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 <nil>} {cost timer 8 65958  <nil>}"}
+{"level":"DEBUG","time":"2023-04-13T13:45:52.364+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-13T13:45:52.365+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+{"level":"INFO","time":"2023-04-13T13:45:57.089+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 <nil>} {cost timer 8 60167  <nil>}"}
+{"level":"INFO","time":"2023-04-13T13:46:03.908+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 <nil>} {cost timer 8 47291  <nil>}"}
+{"level":"INFO","time":"2023-04-13T13:46:04.581+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 <nil>} {cost timer 8 46208  <nil>}"}
+{"level":"INFO","time":"2023-04-13T13:46:05.166+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 <nil>} {cost timer 8 25375  <nil>}"}
+{"level":"INFO","time":"2023-04-13T13:46:08.416+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 <nil>} {cost timer 8 56958  <nil>}"}
+{"level":"DEBUG","time":"2023-04-13T13:55:53.890+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-13T13:55:53.890+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+{"level":"DEBUG","time":"2023-04-13T14:20:55.356+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-13T14:20:55.356+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+{"level":"INFO","time":"2023-04-13T14:21:03.641+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 80958  <nil>}"}
+{"level":"INFO","time":"2023-04-13T14:37:14.505+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 <nil>} {cost timer 8 33416  <nil>}"}
+{"level":"INFO","time":"2023-04-13T14:38:24.859+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 <nil>} {cost timer 8 30541  <nil>}"}
+{"level":"DEBUG","time":"2023-04-13T15:09:46.203+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-13T15:09:46.204+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+{"level":"INFO","time":"2023-04-13T15:10:11.247+0800","caller":"middleware/logger.go:31","msg":"/api/host{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 <nil>} {cost timer 8 66625  <nil>}"}
+{"level":"DEBUG","time":"2023-04-14T01:30:31.972+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-14T01:30:31.972+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}
+{"level":"DEBUG","time":"2023-04-14T01:30:55.023+0800","caller":"applcation/main.go:40","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-04-14T01:30:55.023+0800","caller":"applcation/main.go:46","msg":"服务端启动,端口: 8080"}

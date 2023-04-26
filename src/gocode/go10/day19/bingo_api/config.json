@@ -1,4 +1,23 @@
 {
   "mode": "debug",
-  "port": 8080
+  "port": 8080,
+  "log": {
+    "level": "debug",
+    "filename": "logs/bingo.log",
+    "maxsize": 300,
+    "max_age": 7,
+    "max_backups": 10
+  },
+  "database": {
+    "driver": "mysql",
+    "host": "xxxxxx",
+    "port": "3306",
+    "database": "bingo",
+    "username": "xxxx",
+    "password": "xxxxx",
+    "charset": "utf8mb4",
+    "maximum_connection": 10,
+    "maximum_free_connection": 50,
+    "timeout": -1
+  }
 }
