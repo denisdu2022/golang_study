@@ -12,7 +12,7 @@
     "driver": "mysql",
     "host": "xxxxxx",
     "port": "33xx",
-    "database": "xxxx",
+    "database": "xxxxx",
     "username": "root",
     "password": "xxxxxx",
     "charset": "utf8mb4",
