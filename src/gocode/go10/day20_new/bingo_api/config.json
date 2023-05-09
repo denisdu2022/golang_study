@@ -11,7 +11,7 @@
   "database": {
     "driver": "mysql",
     "host": "xxxxxx",
-    "port": "330x",
+    "port": "33xx",
     "database": "xxxxx",
     "username": "root",
     "password": "xxxxxx",
