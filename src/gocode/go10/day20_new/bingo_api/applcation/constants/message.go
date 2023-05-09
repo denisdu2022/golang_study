@@ -1,6 +1,19 @@
 package constants
 
 const (
+	Success = "成功!"
+
+	//用户相关
+
 	CreateUserSuccess = "创建用户成功!"
-	CreateUserFai     = "创建用户失败!"
+	CreateUserFail    = "创建用户失败!"
+	NoSuchUser        = "用户不存在!"
+	PasswordError     = "密码错误"
+
+	//Token相关
+
+	TokenIsExpired     = "认证令牌过期!"
+	TokenIsNotValidYet = "令牌尚未激活!"
+	TokenIsMalformd    = "认证令牌格式有误!"
+	TokenIsInvalid     = "无效的认证令牌!"
 )

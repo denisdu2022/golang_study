@@ -2,6 +2,8 @@ package utils
 
 import (
 	"bingo_api/applcation/constants"
+	"fmt"
+	uuid "github.com/satori/go.uuid"
 	"golang.org/x/crypto/bcrypt"
 	"math/rand"
 	"time"
@@ -52,13 +54,13 @@ func RandomAscii(n int) string {
  加密密码
 */
 
-func MakeHashPassword(RawPassword string) (HashPassword string, err error) {
+func MakeHashPassword(RawPassword string) (HashPasswrd string, err error) {
 	pwd := []byte(RawPassword)
 	hash, err := bcrypt.GenerateFromPassword(pwd, bcrypt.MinCost)
 	if err != nil {
 		return
 	}
-	HashPassword = string(hash)
+	HashPasswrd = string(hash)
 	return
 }
 
@@ -74,4 +76,10 @@ func CheckPassword(HashPassword string, RawPassword string) bool {
 		return false
 	}
 	return true
+}
+
+//UUID
+
+func UUID4() string {
+	return fmt.Sprintf("%s", uuid.NewV4())
 }

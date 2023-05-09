@@ -11,13 +11,17 @@
   "database": {
     "driver": "mysql",
     "host": "xxxxxx",
-    "port": "3306",
+    "port": "33xx",
     "database": "xxxxx",
     "username": "root",
-    "password": "xxxxx",
+    "password": "xxxxxx",
     "charset": "utf8mb4",
     "maximum_connection": 10,
     "maximum_free_connection": 50,
     "timeout": -1
+  },
+  "secret_key":"Ub=~sV,U1QXmvHObh_My6#6-O9>}zK{8",
+  "claims": {
+    "exp": 36000
   }
 }
