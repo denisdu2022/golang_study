@@ -15,9 +15,9 @@ func InitUserRouter(Router *gin.RouterGroup) {
 		//用户认证登录 Post请求(    路径,  认证函数 )
 		//UserRouter.POST("authenticate", api.UserAuthenticate)
 		//注册( 路由,[]string{"请求方式"},路径,handles方法 )
-		Register(UserRouter, []string{"GET", "POST"}, "authenticate", api.UserAuthenticate)
+		Register(UserRouter, []string{"POST"}, "authenticate", api.UserAuthenticate)
 		//用户创建
-		Register(UserRouter, []string{"POST"}, "", api.UserCreate)
+		Register(UserRouter, []string{"POST"}, "create", api.UserCreate)
 
 	}
 }
