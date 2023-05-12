@@ -27,7 +27,14 @@ func main() {
 	gin.SetMode(config.Conf.Mode)
 
 	//初始化日志配置
-	initialize.InitLogger()
+	//initialize.InitLogger()
+	if err := initialize.InitLogger(config.Conf.LogConfig); err != nil {
+		fmt.Printf("初始化日志失败,错误信息是:%v\n", err)
+		return
+	}
+
+	//调试信息
+	zap.S().Debugf("调试信息:%d", config.Conf.Port)
 
 	//初始化路由
 	Router := initialize.InitRouter()
