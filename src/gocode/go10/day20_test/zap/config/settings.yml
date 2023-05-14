@@ -1,0 +1,5 @@
+log:
+  MaxSize: 1
+  MaxBackups: 10
+  MaxAge: 7
+  Compress: false
