@@ -55,7 +55,7 @@ func InitLogger(cfg *config.LogConfig) (err error) {
 	core := zapcore.NewCore(encoder, writeSyncer, levelLog)
 
 	//对全局Logger对象进行重写赋值
-	Logger := zap.New(core, zap.AddCaller())
+	Logger = zap.New(core, zap.AddCaller())
 
 	//用于项目生产阶段,格式json:适合用于集成到第三方日志分析系统中
 	//logger,_ := zap.NewProduction()

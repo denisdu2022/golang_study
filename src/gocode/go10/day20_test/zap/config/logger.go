@@ -1,7 +1,6 @@
 package config
 
 import (
-	"errors"
 	"fmt"
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"
@@ -21,12 +20,13 @@ func InitLogger() *zap.SugaredLogger {
 	//创建core对象  zapcore.NewCore(参数1:定义日志格式,参数2:日志写,参数3:日志的级别)
 	core := zapcore.NewCore(getEncoder(), getWriteSyncer(), logMode)
 
-	//测试
-	test := zap.New(core).Sugar()
-	test.Infof("Error: %s", errors.New("test......输出日志....."))
+	////测试
+	//test := zap.New(core).Sugar()
+	//test.Infof("Error: %s", errors.New("test......输出日志....."))
 
 	//返回core
 	return zap.New(core).Sugar()
+
 }
 
 // 日志格式函数 返回zapcore.Encoder 日志格式
@@ -40,7 +40,9 @@ func getEncoder() zapcore.Encoder {
 	//日志记录时间格式化
 	encoderConfig.EncodeTime = func(t time.Time, encoder zapcore.PrimitiveArrayEncoder) {
 		//使用go语言提供的时间格式化方式  "2006-01-02 15:04:05"
-		encoder.AppendString(t.Local().Format("2006-01-02 15:04:05"))
+		//encoder.AppendString(t.Local().Format("2006-01-02 15:04:05"))
+		//使用time包提供的常量，在go version 1.20后提供的
+		encoder.AppendString(t.Local().Format(time.DateTime))
 	}
 
 	//返回 JSON 的 encoderConfig 对象
@@ -59,7 +61,8 @@ func getWriteSyncer() zapcore.WriteSyncer {
 	stRootDir, _ := os.Getwd()
 	fmt.Println("当前工作目录: ", stRootDir)
 	//日志文件存储路径 当前目录+路径分隔符+目录名+当前年-月-日+文件名
-	stLogFilePath := stRootDir + stSeparator + "log" + stSeparator + time.Now().Format("2006-01-02") + ".log"
+	//stLogFilePath := stRootDir + stSeparator + "log" + stSeparator + time.Now().Format("2006-01-02") + ".log"
+	stLogFilePath := stRootDir + stSeparator + "log" + stSeparator + time.Now().Format(time.DateOnly) + ".log"
 	fmt.Println("日志文件存储路径: ", stLogFilePath)
 
 	//-------------日志切割------------------

@@ -1,0 +1,11 @@
+{
+  "mode": "debug",
+  "port": 8083,
+  "log": {
+    "level": "debug",
+    "max_size": 300,
+    "max_age": 7,
+    "max_backups": 10,
+    "compress": false
+  }
+}
