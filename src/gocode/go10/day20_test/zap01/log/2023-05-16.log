@@ -1,0 +1,6 @@
+{"level":"DEBUG","time":"2023-05-16 16:55:12","caller":"zap01/main.go:36","msg":"模式:debug"}
+{"level":"DEBUG","time":"2023-05-16 16:55:12","caller":"zap01/main.go:37","msg":"服务启动端口:8083"}
+{"level":"DEBUG","time":"2023-05-16 17:49:05","caller":"zap01/main.go:37","msg":"模式:debug"}
+{"level":"DEBUG","time":"2023-05-16 17:49:05","caller":"zap01/main.go:38","msg":"服务启动端口:8083"}
+{"level":"INFO","time":"2023-05-16 17:49:15","caller":"middleware/logger.go:25","msg":"/{status 11 200  <nil>} {method 15 0 GET <nil>} {clientIP 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 <nil>} {cost timer 8 0  <nil>}"}
+{"level":"INFO","time":"2023-05-16 17:49:15","caller":"middleware/logger.go:25","msg":"/favicon.ico{status 11 404  <nil>} {method 15 0 GET <nil>} {clientIP 15 0 127.0.0.1 <nil>} {user-agent 15 0 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 <nil>} {cost timer 8 0  <nil>}"}
