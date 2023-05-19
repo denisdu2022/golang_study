@@ -2,7 +2,9 @@ package main
 
 import (
 	"bingotest01/application/config"
+	"bingotest01/application/database"
 	"bingotest01/application/initialize"
+	"bingotest01/application/model"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -42,6 +44,14 @@ func main() {
 	//zap提供了一个S函数和一个L函数给开发者使用,调用S函数或者L函数,可以得到一个全局的线程安全的logger对象
 	zap.S().Info("服务已启动,调试模式是:", config.Conf.Mode)
 	zap.S().Info("服务已启动,端口:", config.Conf.Port)
+
+	//数据库初始化
+	Orm := database.InitDB(config.Conf.DatabaseConfig)
+	//数据库迁移
+	Orm.AutoMigrate(&model.User{})
+	//禁用复数
+	Orm.SingularTable(true)
+	defer Orm.Close()
 
 	//启动
 	if err := Router.Run(fmt.Sprintf(":%d", config.Conf.Port)); err != nil {
