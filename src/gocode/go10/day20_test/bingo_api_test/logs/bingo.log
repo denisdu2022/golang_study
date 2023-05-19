@@ -14,3 +14,10 @@
 {"level":"INFO","time":"2023-05-12T22:05:00.877+0800","caller":"middleware/logger.go:25","msg":"/api/user/authenticate{status 11 404  <nil>} {method 15 0 PUT <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime/7.32.2 <nil>} {cost timer 8 375  <nil>}"}
 {"level":"INFO","time":"2023-05-12T22:05:03.087+0800","caller":"middleware/logger.go:25","msg":"/api/user/authenticate{status 11 200  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime/7.32.2 <nil>} {cost timer 8 30916  <nil>}"}
 {"level":"INFO","time":"2023-05-12T22:05:05.369+0800","caller":"middleware/logger.go:25","msg":"/api/user/authenticate{status 11 200  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime/7.32.2 <nil>} {cost timer 8 29333  <nil>}"}
+{"level":"DEBUG","time":"2023-05-20T02:54:16.839+0800","caller":"application/main.go:39","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-05-20T02:54:16.840+0800","caller":"application/main.go:45","msg":"服务已启动,调试模式是:debug"}
+{"level":"INFO","time":"2023-05-20T02:54:16.840+0800","caller":"application/main.go:46","msg":"服务已启动,端口:8080"}
+{"level":"ERROR","time":"2023-05-20T02:54:16.840+0800","caller":"database/mysql.go:32","msg":"数据库连接失败,错误信息是: sql: unknown driver \"mysql\" (forgotten import?)"}
+{"level":"DEBUG","time":"2023-05-20T02:55:51.919+0800","caller":"application/main.go:39","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-05-20T02:55:51.919+0800","caller":"application/main.go:45","msg":"服务已启动,调试模式是:debug"}
+{"level":"INFO","time":"2023-05-20T02:55:51.920+0800","caller":"application/main.go:46","msg":"服务已启动,端口:8080"}

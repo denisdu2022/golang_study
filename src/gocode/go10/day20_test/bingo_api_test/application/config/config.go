@@ -5,6 +5,31 @@ import (
 	"io/ioutil"
 )
 
+//DatabaseConfig数据库配置
+
+type DatabaseConfig struct {
+	//数据库驱动
+	Driver string `json:"driver"`
+	//数据库主机
+	Host string `json:"host"`
+	//数据库端口
+	Port string `json:"port"`
+	//库
+	Database string `json:"database"`
+	//用户名
+	Username string `json:"username"`
+	//密码
+	Password string `json:"password"`
+	//字符集
+	Charset string `json:"charset"`
+	//最大连接数
+	MaximumConn int `json:"maximum_connection"`
+	//空闲连接数
+	MaximumFreeConn int `json:"maximum_free_connection"`
+	//连接超时
+	TimeOut int `json:"timeout"`
+}
+
 //日志对象结构体
 
 type LogConfig struct {
@@ -22,6 +47,8 @@ type Config struct {
 	Port int    `json:"port"`
 	//新增日志成员
 	*LogConfig `json:"log"`
+	//数据库配置项
+	*DatabaseConfig `json:"database"`
 }
 
 //配置文件解析
