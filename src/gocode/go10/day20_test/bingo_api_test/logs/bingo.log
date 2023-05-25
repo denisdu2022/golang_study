@@ -21,3 +21,12 @@
 {"level":"DEBUG","time":"2023-05-20T02:55:51.919+0800","caller":"application/main.go:39","msg":"调试信息:8080"}
 {"level":"INFO","time":"2023-05-20T02:55:51.919+0800","caller":"application/main.go:45","msg":"服务已启动,调试模式是:debug"}
 {"level":"INFO","time":"2023-05-20T02:55:51.920+0800","caller":"application/main.go:46","msg":"服务已启动,端口:8080"}
+{"level":"DEBUG","time":"2023-05-25T14:36:09.960+0800","caller":"application/main.go:39","msg":"调试信息:8080"}
+{"level":"INFO","time":"2023-05-25T14:36:09.961+0800","caller":"application/main.go:45","msg":"服务已启动,调试模式是:debug"}
+{"level":"INFO","time":"2023-05-25T14:36:09.961+0800","caller":"application/main.go:46","msg":"服务已启动,端口:8080"}
+{"level":"INFO","time":"2023-05-25T14:37:03.129+0800","caller":"middleware/logger.go:25","msg":"/api/usre/create{status 11 404  <nil>} {method 15 0 GET <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 292  <nil>}"}
+{"level":"INFO","time":"2023-05-25T14:37:21.642+0800","caller":"middleware/logger.go:25","msg":"/api/usre/create{status 11 404  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 667  <nil>}"}
+{"level":"INFO","time":"2023-05-25T14:40:33.972+0800","caller":"middleware/logger.go:25","msg":"/api/usre/create/{status 11 404  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 333  <nil>}"}
+{"level":"INFO","time":"2023-05-25T14:40:50.923+0800","caller":"middleware/logger.go:25","msg":"/api/usre/create/{status 11 404  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 250  <nil>}"}
+{"level":"INFO","time":"2023-05-25T14:40:57.226+0800","caller":"middleware/logger.go:25","msg":"/api/user/authenticate{status 11 200  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 151958  <nil>}"}
+{"level":"INFO","time":"2023-05-25T14:41:37.325+0800","caller":"middleware/logger.go:25","msg":"/api/user/create{status 11 201  <nil>} {method 15 0 POST <nil>} {ip 15 0 127.0.0.1 <nil>} {user-agent 15 0 PostmanRuntime-ApipostRuntime/1.1.0 <nil>} {cost timer 8 5233875  <nil>}"}
