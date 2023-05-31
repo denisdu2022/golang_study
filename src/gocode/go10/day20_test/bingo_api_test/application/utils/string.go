@@ -2,6 +2,8 @@ package utils
 
 import (
 	"bingotest01/application/constants"
+	"fmt"
+	uuid "github.com/satori/go.uuid"
 	"golang.org/x/crypto/bcrypt"
 	"math/rand"
 	"time"
@@ -59,11 +61,19 @@ func MakeHashPassword(RawPassword string) (HashPassword string, err error) {
 
 func CheckPassword(HashPassword string, RawPassword string) bool {
 	ByteHash := []byte(HashPassword)
+	fmt.Println("ByteHash: ", string(ByteHash))
 	BytePwd := []byte(RawPassword)
+	fmt.Println("BytePwd: ", string(BytePwd))
 
 	err := bcrypt.CompareHashAndPassword(ByteHash, BytePwd)
 	if err != nil {
 		return false
 	}
 	return true
+}
+
+//UUID
+
+func uuid4() string {
+	return fmt.Sprintf("%s", uuid.NewV4())
 }
