@@ -19,5 +19,9 @@
     "maximum_connection": 10,
     "maximum_free_connection": 50,
     "timeout": -1
+  },
+  "secret_key": "Ub=~sV,U1QXmvHObh_My6#6-O9>}zK{8",
+  "jwt": {
+    "exp": 1800
   }
 }

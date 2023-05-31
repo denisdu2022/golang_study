@@ -12,8 +12,8 @@ func InitRouter() *gin.Engine {
 	//创建路由
 	Router := gin.Default()
 
-	//使用全局中间件
-	Router.Use(middleware.RequestLogger())
+	//使用全局中间件 RequestLogger() 日志中间件  Cors 跨域中间件
+	Router.Use(middleware.RequestLogger(), middleware.Cors)
 
 	//路由分组
 	ApiGroup := Router.Group("/api")

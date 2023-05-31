@@ -2,6 +2,7 @@ package config
 
 import (
 	"encoding/json"
+	"github.com/dgrijalva/jwt-go"
 	"io/ioutil"
 )
 
@@ -49,6 +50,9 @@ type Config struct {
 	*LogConfig `json:"log"`
 	//数据库配置项
 	*DatabaseConfig `json:"database"`
+	//jwt相关配置
+	SecretKey           string `json:"secret_key"`
+	*jwt.StandardClaims `json:"jwt"`
 }
 
 //配置文件解析
