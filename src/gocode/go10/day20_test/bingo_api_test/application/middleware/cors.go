@@ -9,7 +9,7 @@ var Cors = cors.New(cors.Config{
 	//准许跨域请求网站,多个使用,分开,可以使用*通配符
 	AllowOrigins: []string{"*"},
 	//准许使用的请求方式
-	AllowMethods: []string{"PUT", "PATCH", "POST", "GET", "DELETE"},
+	AllowMethods: []string{"OPTIONS", "PUT", "PATCH", "POST", "GET", "DELETE"},
 	//准许使用的请求头
 	AllowHeaders: []string{"Origin", "Authorization", "Content-Type"},
 	//显示的请求表头

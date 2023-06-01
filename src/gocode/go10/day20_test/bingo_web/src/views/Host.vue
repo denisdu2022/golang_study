@@ -8,15 +8,17 @@
 <script>
 //导入axios模块
 import axios from "axios";
+import http from "@/utils/http";
 
 export default {
   name: "Host",
     methods:{
       "sexAjax":function (){
-          axios.get("http://127.0.0.1:8080/api/host",
-              {params:{
-                  }}
-          ).then(response => {
+          http.get("host",{
+              "headers":{
+                 "Authorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY2NGUyZTJjLTk0NWUtNDQwZi04NGE3LTM1MmQ0YmNjOTZjOSIsInVzZXJuYW1lIjoiand0Iiwibmlja25hbWUiOiIiLCJhdmF0YXIiOiIiLCJleHAiOjE2ODU1MjQ4MTIsImlhdCI6MTY4NTUyMzAxMiwibmJmIjoxNjg1NTIzMDEyfQ.wcRXSrf4GJk753WBiDi9ywRCmLTrdjiHv3hQl58dBbE",
+              }
+              },).then(response => {
                   console.log(">>>",response)
               })
       }

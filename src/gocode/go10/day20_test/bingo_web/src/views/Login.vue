@@ -3,7 +3,7 @@
         <img src="../assets/login.jpg" alt="">
         <div class="login">
             <div class="login-title">
-                <p class="hi">Hello,Uricgo!</p>
+                <p class="hi">Hello,Bingo!</p>
             </div>
             <div class="login_box">
                 <div class="title">

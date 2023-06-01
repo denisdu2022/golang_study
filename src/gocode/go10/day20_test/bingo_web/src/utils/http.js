@@ -1,4 +1,5 @@
 import axios from "axios"
+import storage from "@/utils/storage";
 
 const http = axios.create({
     // timeout: 2500,                          // 请求超时，有大文件上传需要关闭这个配置
@@ -10,6 +11,8 @@ const http = axios.create({
 http.interceptors.request.use((config) => {
     // alert("http请求之前")
     console.log("http请求之前");
+    //设置token
+    config.headers.Authorization = storage.state.token
     return config;
 }, (error) => {
     console.log("http请求错误");
