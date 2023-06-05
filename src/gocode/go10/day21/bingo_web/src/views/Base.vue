@@ -57,11 +57,11 @@
                         <a-breadcrumb>
 
                             <a-popconfirm
-                                    title="您确认要注销登陆吗?"
-                                    ok-text="Yes"
-                                    cancel-text="No"
-                                    @confirm="logout"
-                                    @cancel="cancel"
+                                title="您确认要注销登陆吗?"
+                                ok-text="Yes"
+                                cancel-text="No"
+                                @confirm="logout"
+                                @cancel="cancel"
                             >
                                 <a-button type="primary" class="logout">
                                     注销
