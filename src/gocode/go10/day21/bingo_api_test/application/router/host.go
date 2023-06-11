@@ -27,6 +27,9 @@ func InitHostRouter(Router *gin.RouterGroup) {
 		//查看主机类别
 		utils.Register(HostRouter, []string{"GET"}, "", api.HostList)
 
+		//删除主机
+		utils.Register(HostRouter, []string{"DELETE"}, "", api.HostDelete)
+
 	}
 
 }

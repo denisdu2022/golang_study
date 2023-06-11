@@ -20,7 +20,7 @@
                             <a-col :span="12">
                                 <a-select
                                         ref="select"
-                                        v-model:value="hostForm.form.category"
+                                        v-model:value="hostForm.form.host_category_id"
                                         @change="handleCategorySelectChange"
 
                                 >
@@ -98,7 +98,7 @@
                     <a-popconfirm
                             v-if="dataSource.length"
                             title="是否要删除?"
-                            @confirm="onDelete(record.key)"
+                            @confirm="onDelete(record)"
                     >
                         <a>Delete</a>
                     </a-popconfirm>
@@ -109,9 +109,11 @@
 </template>
 
 <script setup>
-import {computed, reactive, ref} from 'vue';
+import {computed, reactive, ref,onMounted} from 'vue';
 import {CheckOutlined, EditOutlined} from '@ant-design/icons-vue';
 import {cloneDeep} from 'lodash-es';
+import http from '@/utils/http'
+import {message} from "ant-design-vue";
 
 
 // 主机表格
@@ -138,38 +140,7 @@ const columns = [{
     dataIndex: 'operation_del',
 }];
 const dataSource = ref([
-    {
-        'id': 1,
-        'category_name': '数据库服务器',
-        'name': 'izbp13e05jqwodd605vm3gz',
-        'ip_addr': '47.58.131.12',
-        'port': 22,
-        'remark': ''
-    },
-    {
-        'id': 2,
-        'category_name': '数据库服务器',
-        'name': 'iZbp1a3jw4l12ho53ivhkkZ',
-        'ip_addr': '12.18.125.22',
-        'port': 22,
-        'remark': ''
-    },
-    {
-        'id': 3,
-        'category_name': '缓存服务器',
-        'name': 'iZbp1b1xqfqw257gs563k2iZ',
-        'ip_addr': '12.19.135.130',
-        'port': 22,
-        'remark': ''
-    },
-    {
-        'id': 4,
-        'category_name': '缓存服务器',
-        'name': 'iZbp1b1jw4l01ho53muhkkZ',
-        'ip_addr': '47.98.101.89',
-        'port': 22,
-        'remark': ''
-    }
+
 ]);
 const count = computed(() => dataSource.value.length + 1);
 const editableData = reactive({});
@@ -180,9 +151,20 @@ const save = key => {
     Object.assign(dataSource.value.filter(item => key === item.key)[0], editableData[key]);
     delete editableData[key];
 };
-const onDelete = key => {
+const onDelete = record => {
+    console.log("record: ",record.id)
     // dataSource.value = dataSource.value.filter(item => item.key !== key);
-    //发送Ajax请求删除
+    //发送Ajax请求,调用服务端删除接口
+    http.delete("host",{
+        params:{
+            "id":record.id
+        }
+    }).then((res)=>{
+        console.log("res",res)
+        //删除主机之后页面刷新显示剩余的主机信息
+        dataSource.value = dataSource.value.filter(item => item.id !== record.id);
+        message.success('删除主机成功!')
+    })
 };
 
 // 添加主机
@@ -191,8 +173,22 @@ const showModal = () => {
     visible.value = true;
 };
 const handleOk = e => {
+    //先将输入的端口字符串转为int
+    hostForm.form.port = parseInt(hostForm.form.port)
+
+    console.log("hostForm: ",hostForm.form)
+    //然后在发送Ajax请求添加主机
+    http.post("host",hostForm.form).then((res)=>{
+        console.log("res",res)
+        message.success('添加主机成功!')
+        //将添加的主机放在最上边
+        dataSource.value.unshift(res.data.data.host)
+    })
+
     resetForm()
     visible.value = false;
+
+
 };
 
 const cancelForm = e => {
@@ -205,7 +201,7 @@ const hostForm = reactive({
     other: '',
     form: {
         name: '',
-        category: "",
+        host_category_id: "",
         ip_addr: '',
         username: '',
         port: '',
@@ -221,7 +217,7 @@ const hostForm = reactive({
             {required: true, message: '请输入连接密码', trigger: 'blur'},
             {min: 3, max: 30, message: '长度在3-10位之间', trigger: 'blur'}
         ],
-        category: [
+        host_category_id: [
             {required: true, message: '请选择类别', trigger: 'change'}
         ],
         username: [
@@ -264,6 +260,30 @@ const handleValidate = (...args) => {
 };
 const categoryList = reactive({
     data: []
+})
+
+//获取主机列表
+const getHostlist = () =>{
+    //alert(123)
+    http.get("host").then((res)=>{
+        console.log("res",res)
+        dataSource.value = res.data.data.host_list
+    })
+}
+
+//获取主机类别列表
+const getCategoryList = ()=>{
+    http.get("host/category").then((res)=>{
+        console.log("res",res)
+        categoryList.data = res.data.data
+    })
+
+
+}
+
+onMounted(()=>{
+    getHostlist()
+    getCategoryList()
 })
 </script>
 

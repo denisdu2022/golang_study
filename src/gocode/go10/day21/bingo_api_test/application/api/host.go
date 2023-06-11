@@ -110,3 +110,27 @@ func HostList(ctx *gin.Context) {
 		},
 	})
 }
+
+//删除主机
+
+func HostDelete(ctx *gin.Context) {
+	//获取参数:要删除的主机ID
+	idStr, _ := ctx.GetQuery("id")
+	idInt, _ := strconv.Atoi(idStr)
+	//调用业务层删除方法
+	host, err := services.DeleteHost(uint(idInt))
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"code":    constants.CodeDelHostFail,
+			"message": err.Error(),
+		})
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"code":    constants.CodeSuccess,
+		"message": constants.Success,
+		"data": map[string]interface{}{
+			"已成功删除主机:": host.Name,
+		},
+	})
+}
