@@ -103,3 +103,34 @@ func GetHostList(name string, hostCategoryId uint, hostname string) ([]model.Hos
 	}
 	return instanceList, err
 }
+
+//删除主机
+
+func DeleteHost(hostId uint) (model.HostInstance, error) {
+	//获取要删除的host对象
+	var delHost = model.Host{}
+	var instance = model.HostInstance{}
+	var err error
+
+	//获取要删除的host.Id
+	err = delHost.GetOneById(hostId)
+	if err != nil {
+		return instance, err
+	}
+	//调用删除方法
+	err = delHost.Delete()
+	if err != nil {
+		return instance, err
+	}
+
+	instance = model.HostInstance{
+		Name:       delHost.Name,
+		IpAddr:     delHost.IpAddr,
+		Port:       delHost.Port,
+		Username:   delHost.Username,
+		Remark:     delHost.Remark,
+		CategoryID: delHost.HostCategoryID,
+	}
+
+	return instance, err
+}

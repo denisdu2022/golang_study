@@ -12,5 +12,6 @@ const (
 	CodeCreateHostFail         = 1012 // 添加主机信息失败！
 	CodeHostCategoryNotExist   = 1013 // 主机类别不存在！
 	CodeGetHostFail            = 1014 // 无法获取主机列表
+	CodeDelHostFail            = 1015 //删除主机失败
 
 )
