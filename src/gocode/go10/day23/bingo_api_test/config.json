@@ -1,0 +1,31 @@
+{
+  "mode": "debug",
+  "port": 8080,
+  "log": {
+    "level": "debug",
+    "filename": "logs/bingo.log",
+    "maxsize": 300,
+    "max_age": 7,
+    "max_backups": 10
+  },
+  "database": {
+    "driver": "mysql",
+    "host": "127.0.0.1",
+    "port": "3306",
+    "database": "bingo",
+    "username": "root",
+    "password": "12345678",
+    "charset": "utf8mb4",
+    "maximum_connection": 10,
+    "maximum_free_connection": 50,
+    "timeout": -1
+  },
+  "secret_key": "Ub=~sV,U1QXmvHObh_My6#6-O9>}zK{8",
+  "jwt": {
+    "exp": 18000
+  },
+  "ssh_global_keys": {
+    "private_key_path": "/Users/denis/code/golang_study/src/gocode/go10/day22/bingo_api_test/keys/id_rsa",
+    "public_key_path": "/Users/denis/code/golang_study/src/gocode/go10/day22/bingo_api_test/keys/id_rsa.pub"
+  }
+}
