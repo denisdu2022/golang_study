@@ -62,4 +62,6 @@ func main() {
 		zap.S().Panic("服务端启动失败: ", err.Error())
 	}
 
+	//update
+
 }

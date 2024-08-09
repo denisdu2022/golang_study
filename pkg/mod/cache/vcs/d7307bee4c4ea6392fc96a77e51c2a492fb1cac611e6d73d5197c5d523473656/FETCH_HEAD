@@ -1,0 +1,5 @@
+036812b2e83c0ddf193dd5a34e034151da389d09		branch 'internal-branch.go1.18-vendor' of https://go.googlesource.com/sync
+0976fa681c295de5355f7a4d968b56cb9da8a76b		branch 'internal-branch.go1.19-vendor' of https://go.googlesource.com/sync
+8fcdb60fdcc0539c5e357b2308249e4e752147f1		branch 'internal-branch.go1.20-vendor' of https://go.googlesource.com/sync
+8fcdb60fdcc0539c5e357b2308249e4e752147f1		branch 'master' of https://go.googlesource.com/sync
+8fcdb60fdcc0539c5e357b2308249e4e752147f1		tag 'v0.1.0' of https://go.googlesource.com/sync

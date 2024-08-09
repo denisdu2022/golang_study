@@ -1,0 +1,17 @@
+9e8e0b390897c84cad53ebe9ed2d1d331a5394d9		branch 'internal-branch.go1.16-vendor' of https://go.googlesource.com/crypto
+cf75a172585e01ce0bf0fac704ecd21d30af3fba		branch 'internal-branch.go1.17-vendor' of https://go.googlesource.com/crypto
+e495a2d5b3d3be43468d0ebb413f46eeaedf7eb3		branch 'internal-branch.go1.18-vendor' of https://go.googlesource.com/crypto
+403b01795ae8c2bc74ff210a1d6ce91e8dd5ea57		branch 'internal-branch.go1.19-vendor' of https://go.googlesource.com/crypto
+2c476679df9a5c6279ec05b48165f4bed48b792e		branch 'internal-branch.go1.20-vendor' of https://go.googlesource.com/crypto
+00fd4ff485c675984a5b4b7b4837e72dadbf5103		branch 'master' of https://go.googlesource.com/crypto
+8b5121be2f68d8fc40bb06467003bdde1040a094		branch 'release-branch.go1.13' of https://go.googlesource.com/crypto
+69ecbb4d6d5dab05e49161c6e77ea40a030884e1		branch 'release-branch.go1.14' of https://go.googlesource.com/crypto
+75b288015ac94e66e3d6715fb68a9b41bf046ec2		branch 'release-branch.go1.15' of https://go.googlesource.com/crypto
+642fcc37f5043eadb2509c84b2769e729e7d27ef		tag 'v0.1.0' of https://go.googlesource.com/crypto
+183a9b70cc805eca27c9474ce65820b468a28795		tag 'v0.2.0' of https://go.googlesource.com/crypto
+0ec7e8322c090be3a94a90823b9ae085541f5f1e		tag 'v0.3.0' of https://go.googlesource.com/crypto
+eb2c406296d40946e2c0c72a50d34527a3987fff		tag 'v0.4.0' of https://go.googlesource.com/crypto
+3d872d042823aed41f28af3b13beb27c0c9b1e35		tag 'v0.5.0' of https://go.googlesource.com/crypto
+a9f661cb6e1b78478731da332a7b82f1e2fd779c		tag 'v0.6.0' of https://go.googlesource.com/crypto
+776e461a4e6d8b372a43c72122c5c28cfc40dca2		tag 'v0.7.0' of https://go.googlesource.com/crypto
+00fd4ff485c675984a5b4b7b4837e72dadbf5103		tag 'v0.8.0' of https://go.googlesource.com/crypto

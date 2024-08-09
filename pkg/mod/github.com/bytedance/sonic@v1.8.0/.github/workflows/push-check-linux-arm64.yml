@@ -1,0 +1,34 @@
+name: Push Check Linux-ARM
+
+on: pull_request
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        go-version: [1.15.x, 1.20.x]
+        os: [arm]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Clear repository
+        run: sudo rm -fr $GITHUB_WORKSPACE && mkdir $GITHUB_WORKSPACE
+
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Compatibility Test - main
+        run: GOMAXPROCS=4 go test -v -gcflags=-d=checkptr=0 -race github.com/bytedance/sonic
+
+      - name: Compatibility Test - ast
+        run: GOMAXPROCS=4 go test -v -gcflags=-d=checkptr=0 -race github.com/bytedance/sonic/ast
