@@ -1,0 +1,4 @@
+fb04173bb95b3ed8b424bf0c9d89576784a18bc1	not-for-merge	branch 'dependabot/github_actions/goreleaser/goreleaser-action-4' of https://github.com/gin-contrib/multitemplate
+dacba248b0853b79bb3b7235b46c7b6486aeb41a	not-for-merge	branch 'dependabot/go_modules/github.com/gin-gonic/gin-1.9.0' of https://github.com/gin-contrib/multitemplate
+e136ea1128f71e7986a44a1ec3cc8c1a87a7fc30	not-for-merge	branch 'dependabot/go_modules/github.com/stretchr/testify-1.8.2' of https://github.com/gin-contrib/multitemplate
+45920c92c271e3b9e7c2c2da0c78be30a8b3c7ce	not-for-merge	branch 'master' of https://github.com/gin-contrib/multitemplate

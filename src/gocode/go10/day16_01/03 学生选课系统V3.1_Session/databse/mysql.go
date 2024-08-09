@@ -19,7 +19,7 @@ func MySqlInit() *gorm.DB {
 	//数据库初始化
 	//数据库连接信息
 	//dsn := "root:go20222023@tcp(127.0.0.1:3306)/css?charset=utf8mb4&parseTime=True&loc=Local"
-	dsn := "dev:CIAy2k0308@tcp(mysql-internet-cn-north-1-0ba7ed8557bd4afa.rds.jdcloud.com)/css?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:password@tcp(hostip)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
 
 	//创建日志对象
 	newLogger := logger.New(

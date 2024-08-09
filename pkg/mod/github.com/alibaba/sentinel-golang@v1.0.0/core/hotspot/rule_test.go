@@ -1,0 +1,76 @@
+package hotspot
+
+import (
+	"fmt"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
+
+func TestMetricType_String(t *testing.T) {
+	t.Run("TestMetricType_String", func(t *testing.T) {
+		assert.True(t, fmt.Sprintf("%+v", Concurrency) == "Concurrency")
+
+	})
+}
+
+func Test_Rule_String(t *testing.T) {
+	t.Run("Test_Rule_String_Normal", func(t *testing.T) {
+		specific := make(map[interface{}]int64)
+		specific["sss"] = 1
+		specific["1123"] = 3
+		r := &Rule{
+			ID:                "abc",
+			Resource:          "abc",
+			MetricType:        Concurrency,
+			ControlBehavior:   Reject,
+			ParamIndex:        0,
+			Threshold:         110.0,
+			MaxQueueingTimeMs: 5,
+			BurstCount:        10,
+			DurationInSec:     1,
+			ParamsMaxCapacity: 10000,
+			SpecificItems:     specific,
+		}
+		assert.True(t, fmt.Sprintf("%+v", []*Rule{r}) == "[{Id:abc, Resource:abc, MetricType:Concurrency, ControlBehavior:Reject, ParamIndex:0, Threshold:110, MaxQueueingTimeMs:5, BurstCount:10, DurationInSec:1, ParamsMaxCapacity:10000, SpecificItems:map[1123:3 sss:1]}]")
+	})
+}
+
+func Test_Rule_Equals(t *testing.T) {
+	t.Run("Test_Rule_Equals", func(t *testing.T) {
+		specific := make(map[interface{}]int64)
+		specific["sss"] = 1
+		specific[1123] = 3
+		r1 := &Rule{
+			ID:                "abc",
+			Resource:          "abc",
+			MetricType:        Concurrency,
+			ControlBehavior:   Reject,
+			ParamIndex:        0,
+			Threshold:         110.0,
+			MaxQueueingTimeMs: 5,
+			BurstCount:        10,
+			DurationInSec:     1,
+			ParamsMaxCapacity: 10000,
+			SpecificItems:     specific,
+		}
+
+		specific2 := make(map[interface{}]int64)
+		specific2["sss"] = 1
+		specific2[1123] = 3
+		r2 := &Rule{
+			ID:                "abc",
+			Resource:          "abc",
+			MetricType:        Concurrency,
+			ControlBehavior:   Reject,
+			ParamIndex:        0,
+			Threshold:         110.0,
+			MaxQueueingTimeMs: 5,
+			BurstCount:        10,
+			DurationInSec:     1,
+			ParamsMaxCapacity: 10000,
+			SpecificItems:     specific2,
+		}
+		assert.True(t, r1.Equals(r2))
+	})
+}

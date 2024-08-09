@@ -1,0 +1,13 @@
+a79de5458b56c188f4fc267a58014ac25fec956a		branch 'internal-branch.go1.17-vendor' of https://go.googlesource.com/term
+03fcf44c2211dcd5eb77510b5f7c1fb02d6ded50		branch 'internal-branch.go1.18-vendor' of https://go.googlesource.com/term
+e5f449aeb1717c7a4156811d5d65510fee9d1530		branch 'internal-branch.go1.19-vendor' of https://go.googlesource.com/term
+f72a2d8d642ddf1481474d80c4e12bb68d1702b9		branch 'internal-branch.go1.20-vendor' of https://go.googlesource.com/term
+7ae6be6d0150527c2c41e70586b9ade6a972a186		branch 'master' of https://go.googlesource.com/term
+c955d0b553c8bdbd6b706f42bc6fea84ea58a6e1		branch 'tmp.crypto-ssh-terminal' of https://go.googlesource.com/term
+7a66f970e0879c3baa7bc9fa168ebe5119c5f693		tag 'v0.1.0' of https://go.googlesource.com/term
+f72a2d8d642ddf1481474d80c4e12bb68d1702b9		tag 'v0.2.0' of https://go.googlesource.com/term
+97ca0e3821bf3a3cf6ea2441ece139e524802385		tag 'v0.3.0' of https://go.googlesource.com/term
+1efcd90d861e239a7719db7012b81621e6f7d297		tag 'v0.4.0' of https://go.googlesource.com/term
+d974fe83263b348b6fa9fb95bebc2ff93997880a		tag 'v0.5.0' of https://go.googlesource.com/term
+0edf009663f942c41572b65d537ee2636e92180c		tag 'v0.6.0' of https://go.googlesource.com/term
+7ae6be6d0150527c2c41e70586b9ade6a972a186		tag 'v0.7.0' of https://go.googlesource.com/term

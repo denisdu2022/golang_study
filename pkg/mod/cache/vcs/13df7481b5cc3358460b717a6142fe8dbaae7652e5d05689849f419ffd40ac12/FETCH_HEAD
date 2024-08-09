@@ -1,0 +1,10 @@
+776819e59ea65e3108190c01a845054947d28444	not-for-merge	branch 'dev.cmdgo' of https://go.googlesource.com/mod
+dbbbf8a3c6ea13deb539e0b1e6f56929c6bc5403	not-for-merge	branch 'internal-branch.go1.16-vendor' of https://go.googlesource.com/mod
+0f08993efd8a8ec67e75bcccf86b0e1569b0ab0a	not-for-merge	branch 'internal-branch.go1.17-vendor' of https://go.googlesource.com/mod
+3a5865c02020dc883ab0b88fe3185b05e57a84ea	not-for-merge	branch 'internal-branch.go1.18-vendor' of https://go.googlesource.com/mod
+86c51ed26bb44749b7d60a57bab0e7524656fe8a	not-for-merge	branch 'internal-branch.go1.19-vendor' of https://go.googlesource.com/mod
+7c05a442b7c1d1a107879b4a090bb5a38d3774a1	not-for-merge	branch 'internal-branch.go1.20-vendor' of https://go.googlesource.com/mod
+ad6fd61f94f8fdf6926f5dee6e45bdd13add2f9f	not-for-merge	branch 'master' of https://go.googlesource.com/mod
+ed3ec21bb8e252814c380df79a80f366440ddb2d	not-for-merge	branch 'release-branch.go1.14' of https://go.googlesource.com/mod
+859b3ef565e237f9f1a0fb6b55385c497545680d	not-for-merge	branch 'release-branch.go1.15' of https://go.googlesource.com/mod
+49f84bccfd3469cb3095201f7855641bcc8eb49a	not-for-merge	branch 'release-branch.go1.17' of https://go.googlesource.com/mod
